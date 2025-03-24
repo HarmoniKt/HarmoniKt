@@ -1,9 +1,34 @@
-# TODO LIST
+# HarmoniKt
 
-1. Rename the project in `settings.gradle.kts`
-1. Change the project name and description in the `publishOnCentral` block in `build.gradle.kts`
-1. Configure the repository to have the following variables set:
-  * ORG_GRADLE_PROJECT_signingKey
-  * ORG_GRADLE_PROJECT_signingPassword
-  * MAVEN_CENTRAL_USERNAME
-  * MAVEN_CENTRAL_PASSWORD
+## Microservices
+
+### mir-service
+
+| API Path    | Assigned |
+|-------------|----------|
+| /get-robots | ???      |
+| /goto       | ???      |
+
+### spot-service
+
+| API Path    | Assigned |
+|-------------|----------|
+| /get-robots | ???      |
+| /goto       | ???      |
+
+### robot-manager
+
+| API Path                  | Assigned |
+|---------------------------|----------|
+| mir-binding / get-robots  | ???      |
+| mir-binding / goto        | ???      |
+| spot-binding / get-robots | ???      |
+| spot-binding / goto       | ???      |
+
+### service-registry
+
+Assigned: ???
+
+### public-api
+
+Assigned: ???
