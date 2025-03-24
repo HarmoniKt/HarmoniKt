@@ -3,70 +3,52 @@ plugins {
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.qa)
-    alias(libs.plugins.publishOnCentral)
     alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.taskTree)
 }
 
-group = "org.danilopianini"
+group = "it.unibo.harmonikt"
 
-repositories {
-    mavenCentral()
-}
+val Provider<PluginDependency>.id: String get() = get().pluginId
 
-dependencies {
-    implementation(libs.kotlin.stdlib)
-    testImplementation(libs.bundles.kotlin.testing)
-}
-
-kotlin {
-    compilerOptions {
-        allWarningsAsErrors = true
-        freeCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn")
+allprojects {
+    repositories {
+        mavenCentral()
     }
-}
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        showStandardStreams = true
-        showCauses = true
-        showStackTraces = true
-        events(
-            *org.gradle.api.tasks.testing.logging.TestLogEvent
-                .values(),
-        )
-        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    with(rootProject.libs.plugins) {
+        apply(plugin = dokka.id)
+        apply(plugin = gitSemVer.id)
+        apply(plugin = kotlin.jvm.id)
+        apply(plugin = kotlin.qa.id)
+        apply(plugin = multiJvmTesting.id)
+        apply(plugin = taskTree.id)
     }
-}
 
-signing {
-    val signingKey: String? by project
-    val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKey, signingPassword)
-}
-
-publishOnCentral {
-    repoOwner = "DanySK"
-    projectLongName.set("Template Kotlin JVM Project")
-    projectDescription.set("A template repository for Kotlin JVM projects")
-    repository("https://maven.pkg.github.com/danysk/${rootProject.name}".lowercase()) {
-        user.set("DanySK")
-        password.set(System.getenv("GITHUB_TOKEN"))
+    dependencies {
+        implementation(libs.kotlin.stdlib)
+        implementation(libs.kotlin.reflect)
+        testImplementation(libs.bundles.kotlin.testing)
     }
-    publishing {
-        publications {
-            withType<MavenPublication> {
-                pom {
-                    developers {
-                        developer {
-                            name.set("Danilo Pianini")
-                            email.set("danilo.pianini@gmail.com")
-                            url.set("http://www.danilopianini.org/")
-                        }
-                    }
-                }
-            }
+
+    kotlin {
+        compilerOptions {
+            allWarningsAsErrors = true
+            freeCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn")
+        }
+    }
+
+    tasks.test {
+        useJUnitPlatform()
+        testLogging {
+            showStandardStreams = true
+            showCauses = true
+            showStackTraces = true
+            events(
+                *org.gradle.api.tasks.testing.logging.TestLogEvent
+                    .values(),
+            )
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
     }
 }
