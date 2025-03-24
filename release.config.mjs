@@ -1,15 +1,5 @@
-const publishCmd = `
-./gradlew uploadAll releaseStagingRepositoryOnMavenCentral || exit 1
-./gradlew publishAllToGithubRepository || true
-`
 import config from 'semantic-release-preconfigured-conventional-commits' with { type: "json" };
 config.plugins.push(
-    [
-        "@semantic-release/exec",
-        {
-            "publishCmd": publishCmd,
-        }
-    ],
     "@semantic-release/github",
     "@semantic-release/git",
 )
