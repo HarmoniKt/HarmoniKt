@@ -1,3 +1,5 @@
+package it.unibo.harmonikt
+
 /**
  * An hello world.
  */

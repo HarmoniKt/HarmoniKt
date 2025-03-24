@@ -1,16 +1,23 @@
 [versions]
 kotlin = "2.1.10"
 mockito = "5.16.1"
+ktor-version = "3.0.3"
 
 [libraries]
+eureka = { module = "com.netflix.eureka:eureka-client", version = "2.0.4" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-annotations-common = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlin" }
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-version" }
+ktor-server-swagger = { module = "io.ktor:ktor-server-swagger", version.ref = "ktor-version" }
+ktor-server-openapi = { module = "io.ktor:ktor-server-openapi", version.ref = "ktor-version" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-version" }
 
 [bundles]
 kotlin-testing = [ "kotlin-test", "kotlin-test-annotations-common", "mockito-core" ]
+ktor-server = [ "ktor-server-core", "ktor-server-swagger", "ktor-server-openapi", "ktor-server-netty", "eureka" ]
 
 [plugins]
 dokka = "org.jetbrains.dokka:2.0.0"

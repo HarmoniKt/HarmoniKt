@@ -26,9 +26,9 @@ allprojects {
     }
 
     dependencies {
-        implementation(libs.kotlin.stdlib)
-        implementation(libs.kotlin.reflect)
-        testImplementation(libs.bundles.kotlin.testing)
+        implementation(rootProject.libs.kotlin.stdlib)
+        implementation(rootProject.libs.kotlin.reflect)
+        testImplementation(rootProject.libs.bundles.kotlin.testing)
     }
 
     kotlin {
