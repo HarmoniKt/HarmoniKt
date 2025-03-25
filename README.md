@@ -4,31 +4,31 @@
 
 ### mir-service
 
-| API Path    | Assigned |
-|-------------|----------|
-| /get-robots | ???      |
-| /goto       | ???      |
+| API Path    | Assigned        |
+|-------------|-----------------|
+| /get-robots | angela, manuel  |
+| /goto       | nicolas, davide |
 
 ### spot-service
 
-| API Path    | Assigned |
-|-------------|----------|
-| /get-robots | ???      |
-| /goto       | ???      |
+| API Path    | Assigned        |
+|-------------|-----------------|
+| /get-robots | nicolas, manuel |
+| /goto       | angela, davide  |
 
-### robot-manager
+### robot-service
 
-| API Path                  | Assigned |
-|---------------------------|----------|
-| mir-binding / get-robots  | ???      |
-| mir-binding / goto        | ???      |
-| spot-binding / get-robots | ???      |
-| spot-binding / goto       | ???      |
+| API Path                        | Assigned        |
+|---------------------------------|-----------------|
+| mir-binding / position-service  | nicolas, angela |
+| mir-binding / action-service    | davide, manuel  |
+| spot-binding / position-service | angela, manuel  |
+| spot-binding / action-service   | nicolas, davide |
 
 ### service-registry
 
-Assigned: ???
+Assigned: nicolas
 
 ### public-api
 
-Assigned: ???
+Assigned: nicolas, manuel, davide, angela
