@@ -32,3 +32,7 @@ Assigned: nicolas
 ### public-api
 
 Assigned: nicolas, manuel, davide, angela
+
+# Architecture Diagram
+
+<img src="resources/harmonikt-architecture.svg">
