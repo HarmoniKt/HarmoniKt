@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.1.10"
 mockito = "5.16.1"
-ktor-version = "3.0.3"
+ktor-version = "3.1.2"
 
 [libraries]
 eureka = { module = "com.netflix.eureka:eureka-client", version = "2.0.4" }
