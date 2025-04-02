@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 mockito = "5.16.1"
 ktor-version = "3.0.3"
 
