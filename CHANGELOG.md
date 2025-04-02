@@ -1,3 +1,28 @@
+## 1.0.0 (2025-04-02)
+
+### Features
+
+* add architecture diagram ([53e2ab1](https://github.com/HarmoniKt/HarmoniKt/commit/53e2ab1119fa93aecb7cd25943d2791c8349ca7c))
+
+### Documentation
+
+* tenative project partition assignemnts ([065a608](https://github.com/HarmoniKt/HarmoniKt/commit/065a608c6675467879a1d73f2a7bfd748e515340))
+* work division ([767b246](https://github.com/HarmoniKt/HarmoniKt/commit/767b246343479c150835245c490e96eb0143acfb))
+
+### Build and continuous integration
+
+* basic build setup ([9974389](https://github.com/HarmoniKt/HarmoniKt/commit/997438918116279cdff95d3a36b621232b3046e5))
+* checkout with organization app permissions ([500d0d7](https://github.com/HarmoniKt/HarmoniKt/commit/500d0d7782817650499898498d482beae2a11cc0))
+* depends on model ([56481cc](https://github.com/HarmoniKt/HarmoniKt/commit/56481ccba40239b63018c600d01ecc06e45d0772))
+* prevent uploading artefacts to mavencentral ([80f4de7](https://github.com/HarmoniKt/HarmoniKt/commit/80f4de752ffea522543402e8b59eef8ae9595f8c))
+* remove mavencentral publishing ([3de228f](https://github.com/HarmoniKt/HarmoniKt/commit/3de228fe7164ed5f18a106b3bc1569ba6c9241f7))
+* set project name ([b08a41c](https://github.com/HarmoniKt/HarmoniKt/commit/b08a41c6b363b7286791818530d81e1d7eaedecd))
+* setup microservices projects ([68e77a1](https://github.com/HarmoniKt/HarmoniKt/commit/68e77a198156c93c837beca190211a05c40ae8e9))
+
+### General maintenance
+
+* add architecture diagram ([d13aa36](https://github.com/HarmoniKt/HarmoniKt/commit/d13aa369f7c784ee6de383bcd823d2ff56f6afde))
+
 ## [0.1.28](https://github.com/DanySK/Template-for-Kotlin-JVM-Projects/compare/0.1.27...0.1.28) (2025-01-27)
 
 ### Dependency updates
