@@ -1,6 +1,7 @@
 [versions]
 kotlin = "2.1.10"
 mockito = "5.16.1"
+kotlinx-serialization = "1.8.1"
 ktor-version = "3.0.3"
 
 [libraries]
@@ -10,6 +11,9 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref =
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-annotations-common = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlin" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-version" }
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-version" }
 ktor-server-swagger = { module = "io.ktor:ktor-server-swagger", version.ref = "ktor-version" }
 ktor-server-openapi = { module = "io.ktor:ktor-server-openapi", version.ref = "ktor-version" }
@@ -17,7 +21,7 @@ ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-
 
 [bundles]
 kotlin-testing = [ "kotlin-test", "kotlin-test-annotations-common", "mockito-core" ]
-ktor-server = [ "ktor-server-core", "ktor-server-swagger", "ktor-server-openapi", "ktor-server-netty", "eureka" ]
+ktor-server = [ "ktor-server-core", "ktor-server-swagger", "ktor-server-openapi", "ktor-server-netty", "eureka", "ktor-content-negotiation", "ktor-serialization" ]
 
 [plugins]
 dokka = "org.jetbrains.dokka:2.0.0"
@@ -25,4 +29,5 @@ gitSemVer = "org.danilopianini.git-sensitive-semantic-versioning:4.0.2"
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-qa = "org.danilopianini.gradle-kotlin-qa:0.78.0"
 multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:3.2.3"
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 taskTree = "com.dorongold.task-tree:4.0.1"

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.multiJvmTesting)
+    alias(libs.plugins.serialization)
     alias(libs.plugins.taskTree)
 }
 
@@ -22,12 +23,14 @@ allprojects {
         apply(plugin = kotlin.jvm.id)
         apply(plugin = kotlin.qa.id)
         apply(plugin = multiJvmTesting.id)
+        apply(plugin = serialization.id)
         apply(plugin = taskTree.id)
     }
 
     dependencies {
         implementation(rootProject.libs.kotlin.stdlib)
         implementation(rootProject.libs.kotlin.reflect)
+        implementation(rootProject.libs.kotlinx.serialization.json)
         testImplementation(rootProject.libs.bundles.kotlin.testing)
     }
 
@@ -35,6 +38,7 @@ allprojects {
         compilerOptions {
             allWarningsAsErrors = true
             freeCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn")
+            optIn.add("kotlin.uuid.ExperimentalUuidApi")
         }
     }
 
