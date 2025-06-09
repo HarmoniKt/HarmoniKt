@@ -12,8 +12,11 @@ mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-annotations-common = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlin" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor-version" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
+ktor-request-validation = { module = "io.ktor:ktor-server-request-validation", version.ref = "ktor-version" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-version" }
+ktor-service = { module = "io.ktor:ktor-server-resources", version.ref = "ktor-version" }
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-version" }
 ktor-server-swagger = { module = "io.ktor:ktor-server-swagger", version.ref = "ktor-version" }
 ktor-server-openapi = { module = "io.ktor:ktor-server-openapi", version.ref = "ktor-version" }
@@ -21,7 +24,18 @@ ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-
 
 [bundles]
 kotlin-testing = [ "kotlin-test", "kotlin-test-annotations-common", "mockito-core" ]
-ktor-server = [ "ktor-server-core", "ktor-server-swagger", "ktor-server-openapi", "ktor-server-netty", "eureka", "ktor-content-negotiation", "ktor-serialization" ]
+ktor-server = [
+    "ktor-server-core",
+    "ktor-server-swagger",
+    "ktor-server-openapi",
+    "ktor-server-netty",
+    "eureka",
+    "ktor-client-content-negotiation",
+    "ktor-server-content-negotiation",
+    "ktor-serialization",
+    "ktor-service",
+    "ktor-request-validation"
+]
 
 [plugins]
 dokka = "org.jetbrains.dokka:2.0.0"
