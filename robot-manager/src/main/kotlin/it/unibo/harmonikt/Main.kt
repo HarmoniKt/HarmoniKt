@@ -1,5 +1,7 @@
 package it.unibo.harmonikt
 
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.apache.Apache
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
@@ -17,6 +19,7 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 import it.unibo.harmonikt.resources.Actions
 import it.unibo.harmonikt.resources.PointOfInterests
+import it.unibo.harmonikt.utils.ConsulPlugin
 
 /**
  * Robot manager service entrypoint.
@@ -34,6 +37,10 @@ private fun Application.module() {
     install(Resources)
     install(ContentNegotiation) { json() }
     install(RequestValidation)
+
+    val client = HttpClient(Apache) {
+        install(ConsulPlugin)
+    }
 
     routing {
         get("/") {

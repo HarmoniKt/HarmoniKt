@@ -28,6 +28,7 @@ allprojects {
     }
 
     dependencies {
+        implementation(rootProject.libs.consul.client)
         implementation(rootProject.libs.kotlin.stdlib)
         implementation(rootProject.libs.kotlin.reflect)
         implementation(rootProject.libs.kotlinx.serialization.json)

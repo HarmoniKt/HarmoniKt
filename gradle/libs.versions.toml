@@ -1,10 +1,12 @@
 [versions]
+consul-client = "1.4.0"
 kotlin = "2.1.10"
 mockito = "5.16.1"
 kotlinx-serialization = "1.8.1"
 ktor-version = "3.0.3"
 
 [libraries]
+consul-client = { module = "com.orbitz.consul:consul-client", version.ref = "consul-client" }
 eureka = { module = "com.netflix.eureka:eureka-client", version = "2.0.4" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
@@ -12,6 +14,8 @@ mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-annotations-common = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlin" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-version" }
+ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor-version" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor-version" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
 ktor-request-validation = { module = "io.ktor:ktor-server-request-validation", version.ref = "ktor-version" }
@@ -34,7 +38,9 @@ ktor-server = [
     "ktor-server-content-negotiation",
     "ktor-serialization",
     "ktor-service",
-    "ktor-request-validation"
+    "ktor-request-validation",
+    "ktor-client-apache",
+    "ktor-client-core"
 ]
 
 [plugins]
