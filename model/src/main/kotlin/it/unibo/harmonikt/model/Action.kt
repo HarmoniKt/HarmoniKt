@@ -8,5 +8,5 @@ sealed interface Action {
 //
 //    data class DiscreteAction(val temp: Int) : Action
 
-    data class MoveToTarget(val target: Marker) : Action
+    data class MoveToTarget(val target: PointOfInterest) : Action
 }
