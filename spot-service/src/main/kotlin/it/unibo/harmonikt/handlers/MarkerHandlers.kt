@@ -15,6 +15,7 @@ object MarkerHandlers {
         val allMarkers = repository.getMarkers()
         call.respond(HttpStatusCode.OK, allMarkers)
     }
+
     suspend fun RoutingContext.handleCreateMarkers(repository: SpotMarkerRepository) {
         try {
             val markerToRegister = call.receive<Marker.SpotMarker>()
@@ -24,6 +25,7 @@ object MarkerHandlers {
             call.respond(HttpStatusCode.BadRequest, "Invalid marker data: ${e.message}")
         }
     }
+
     suspend fun RoutingContext.handleDeleteMarkers(repository: SpotMarkerRepository, id: Uuid) {
         // This handler is a placeholder for future implementation
         if (repository.deleteMarker(id)) {

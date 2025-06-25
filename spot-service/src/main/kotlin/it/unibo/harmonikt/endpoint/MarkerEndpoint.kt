@@ -14,7 +14,7 @@ import kotlin.uuid.Uuid
 
 fun Application.configureMarkerEndpoint(repository: SpotMarkerRepository) {
     routing {
-        route("/marker") {
+        route("/markers") {
             get { handleGetMarkers(repository) }
             post { handleCreateMarkers(repository) }
             delete("{id}") {
