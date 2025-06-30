@@ -4,7 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.server.resources.get
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
-import io.ktor.server.routing.post
+import io.ktor.server.resources.post
 import it.unibo.harmonikt.repository.ActionRepository
 import it.unibo.harmonikt.resources.Actions
 

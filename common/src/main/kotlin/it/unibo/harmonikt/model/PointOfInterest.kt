@@ -12,5 +12,5 @@ data class PointOfInterest(
      * The list of markers associated with this point of interest.
      * Different robot types may use different marker types to identify the same location.
      */
-    val associatedMarkers: List<Marker>
+    val associatedMarkers: List<Marker>,
 )

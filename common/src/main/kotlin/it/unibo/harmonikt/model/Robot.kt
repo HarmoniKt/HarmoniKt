@@ -45,7 +45,7 @@ value class BatteryLevel(
     /**
      * The battery level percentage value (0.0-100.0).
      */
-    val value: Double
+    val value: Double,
 ) {
     init {
         require(value in 0.0..100.0) { "Battery level must be between 0 and 100.0" }
@@ -62,7 +62,7 @@ value class CanonicalName(
     /**
      * The string representation of the robot's name.
      */
-    val name: String
+    val name: String,
 )
 
 /**
@@ -74,12 +74,12 @@ data class RobotPosition(
     /**
      * The x-coordinate of the robot's position.
      */
-    val x: Int, 
+    val x: Int,
 
     /**
      * The y-coordinate of the robot's position.
      */
-    val y: Int
+    val y: Int,
 )
 
 /**

@@ -1,72 +1,36 @@
 package it.unibo.harmonikt.handlers
 
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.call
-import io.ktor.server.plugins.CannotTransformContentToTypeException
-import io.ktor.server.request.receive
-import io.ktor.server.response.respond
-import io.ktor.server.routing.RoutingContext
-import it.unibo.harmonikt.repository.SpotMarkerRepository
+import io.ktor.server.resources.get
+import io.ktor.server.resources.post
+import io.ktor.server.resources.delete
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.repository.SpotRobotRepository
-import kotlin.uuid.Uuid
+import it.unibo.harmonikt.resources.SpotRobots
 
+/**
+ * Object containing handler functions for robot-related HTTP endpoints.
+ */
 object RobotHandlers {
-    suspend fun RoutingContext.handleGetRobots(repository: SpotRobotRepository) {
-        val allRobots = repository.getRobots()
-        call.respond(HttpStatusCode.OK, allRobots)
-    }
-
-    suspend fun RoutingContext.handleGetRobotById(repository: SpotRobotRepository, id: Uuid) {
-        val robot = repository.getRobotById(id)
-        if (robot != null) {
-            call.respond(HttpStatusCode.OK, robot)
-        } else {
-            call.respond(HttpStatusCode.NotFound, "Robot with id $id not found")
+    /**
+     * Sets up the routing for robot-related endpoints.
+     */
+    fun Routing.setupRobotHandlers(repository: SpotRobotRepository) {
+        get<SpotRobots> { robots ->
+            call.respondText("Robots resource accessed: $robots")
         }
-    }
-
-    suspend fun RoutingContext.handleGetRobotPosition(repository: SpotRobotRepository, id: Uuid) {
-        val robot = repository.getRobotById(id)
-        if (robot != null) {
-            call.respond(HttpStatusCode.OK, robot.currentPosition)
-        } else {
-            call.respond(HttpStatusCode.NotFound, "Robot with id $id not found")
+        post<SpotRobots> { robots ->
+            call.respondText("Robots resource created with POST: $robots")
         }
-    }
-
-    suspend fun RoutingContext.handleMoveRobot(
-        robotRepository: SpotRobotRepository,
-        markerRepository: SpotMarkerRepository,
-        robotId: Uuid,
-    ) {
-        try {
-            // Define a data class for the move request
-            data class MoveRequest(val targetMarkerId: Uuid)
-
-            val moveRequest = call.receive<MoveRequest>()
-            val robot = robotRepository.getRobotById(robotId)
-            val marker = markerRepository.getMarkerById(moveRequest.targetMarkerId)
-
-            if (robot == null) {
-                call.respond(HttpStatusCode.NotFound, "Robot with id $robotId not found")
-                return
-            }
-
-            if (marker == null) {
-                call.respond(HttpStatusCode.NotFound, "Marker with id ${moveRequest.targetMarkerId} not found")
-                return
-            }
-
-            // In a real implementation, this would send a command to the robot
-            // For now, we'll just update the robot's state to ON_MISSION
-            robotRepository.updateRobotState(robotId, it.unibo.harmonikt.model.RobotState.ON_MISSION)
-
-            call.respond(
-                HttpStatusCode.Accepted,
-                "Move command accepted for robot $robotId to marker ${moveRequest.targetMarkerId}",
-            )
-        } catch (e: CannotTransformContentToTypeException) {
-            call.respond(HttpStatusCode.BadRequest, "Invalid move request: ${e.message}")
+        delete<SpotRobots.Id> { robotId ->
+            call.respondText("Robot resource deleted with ID: ${robotId.id}", status = HttpStatusCode.NoContent)
+        }
+        get<SpotRobots.Id.Position> { robotPosition ->
+            call.respondText("Robot position accessed for ID: ${robotPosition.parent.id}")
+        }
+        post<SpotRobots.Id.Move> { moveRequest ->
+            call.respondText("Robot move command received for ID: ${moveRequest.parent.id}")
         }
     }
 }

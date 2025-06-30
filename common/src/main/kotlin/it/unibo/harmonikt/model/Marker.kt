@@ -24,7 +24,7 @@ sealed interface Marker {
         /**
          * String identifier used by MIR robots to recognize this marker.
          */
-        val identifier: String
+        val identifier: String,
     ) : Marker
 
     /**
@@ -41,6 +41,6 @@ sealed interface Marker {
         /**
          * Waypoint string used by Spot robots to recognize this marker.
          */
-        val waypoint: String
+        val waypoint: String,
     ) : Marker
 }

@@ -11,8 +11,8 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import it.unibo.harmonikt.endpoint.configureMarkerEndpoint
-import it.unibo.harmonikt.endpoint.configureRobotEndpoint
+import it.unibo.harmonikt.handlers.MarkerHandlers.setupMarkerHandlers
+import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repository.FakeSpotMarkerRepository
 import it.unibo.harmonikt.repository.FakeSpotRobotRepository
 import it.unibo.harmonikt.utils.ConsulPlugin
@@ -49,15 +49,13 @@ private fun Application.module() {
     val markerRepository = FakeSpotMarkerRepository()
     val robotRepository = FakeSpotRobotRepository()
 
-    // Configure API endpoints
-    configureMarkerEndpoint(markerRepository)
-    configureRobotEndpoint(robotRepository, markerRepository)
-
     // Set up basic routing
     routing {
         // Health check endpoint
         get("/") {
             call.respondText("Hello, world from Spot Service!")
         }
+        setupRobotHandlers(robotRepository)
+        setupMarkerHandlers(markerRepository)
     }
 }

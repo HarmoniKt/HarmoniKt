@@ -30,6 +30,6 @@ sealed interface Action {
         /**
          * The destination point that the robot should navigate to.
          */
-        val target: PointOfInterest
+        val target: PointOfInterest,
     ) : Action
 }

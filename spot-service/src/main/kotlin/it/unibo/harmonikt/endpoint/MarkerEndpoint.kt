@@ -22,13 +22,13 @@ fun Application.configureMarkerEndpoint(repository: SpotMarkerRepository) {
     routing {
         route("/markers") {
             // GET /markers - Retrieve all markers
-            get { 
-                handleGetMarkers(repository) 
+            get {
+                handleGetMarkers(repository)
             }
 
             // POST /markers - Create a new marker
-            post { 
-                handleCreateMarkers(repository) 
+            post {
+                handleCreateMarkers(repository)
             }
 
             // DELETE /markers/{id} - Delete a marker by ID

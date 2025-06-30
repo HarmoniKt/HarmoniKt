@@ -15,7 +15,7 @@ object Handlers {
     /**
      * Handler for GET /marker endpoint.
      * Retrieves all MIR markers in the system.
-     * 
+     *
      * Currently a placeholder that returns a NotImplemented status.
      */
     val handleGetMarkers: suspend RoutingContext.() -> Unit = {
@@ -26,7 +26,7 @@ object Handlers {
     /**
      * Handler for POST /marker endpoint.
      * Creates a new MIR marker in the system.
-     * 
+     *
      * @throws CannotTransformContentToTypeException if the request body cannot be parsed as a MirMarker
      */
     val handleCreateMarkers: suspend RoutingContext.() -> Unit = {
@@ -41,7 +41,7 @@ object Handlers {
     /**
      * Handler for DELETE /marker endpoint.
      * Deletes a MIR marker from the system.
-     * 
+     *
      * Currently a placeholder that returns a NotImplemented status.
      */
     val handleDeleteMarkers: suspend RoutingContext.() -> Unit = {
