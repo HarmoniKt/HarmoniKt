@@ -10,7 +10,6 @@ import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.requestvalidation.RequestValidation
 import io.ktor.server.resources.Resources
-import io.ktor.server.resources.get
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
@@ -37,9 +36,9 @@ private fun Application.module() {
     install(ContentNegotiation) { json() }
     install(RequestValidation)
 
-//    val client = HttpClient(Apache) {
-//        install(ConsulPlugin)
-//    }
+    val client = HttpClient(Apache) {
+        install(ConsulPlugin)
+    }
 
     val actionRepository = ActionRepositoryRobotManager()
     val pointOfInterestRepository = PointOfInterestRepositoryRobotManager()
@@ -49,7 +48,7 @@ private fun Application.module() {
             call.respondText("Hello, from Robot Manager!")
         }
 
-        setupActionsHandlers(actionRepository)
+        setupActionsHandlers(actionRepository, client)
         pointOfInterestsHandlers(pointOfInterestRepository)
     }
 }

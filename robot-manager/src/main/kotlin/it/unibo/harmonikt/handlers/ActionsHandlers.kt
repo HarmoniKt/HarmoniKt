@@ -1,5 +1,6 @@
 package it.unibo.harmonikt.handlers
 
+import io.ktor.client.HttpClient
 import io.ktor.server.resources.get
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
@@ -16,7 +17,7 @@ object ActionsHandlers {
      *
      * @param repository The ActionRepository instance to handle actions data.
      */
-    fun Routing.setupActionsHandlers(repository: ActionRepository) {
+    fun Routing.setupActionsHandlers(repository: ActionRepository, client: HttpClient) {
         get<Actions> { actions ->
             repository.equals(10)
             call.respondText("Actions resource accessed: $actions")
