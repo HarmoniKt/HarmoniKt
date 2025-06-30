@@ -15,6 +15,8 @@ import it.unibo.harmonikt.Handlers.handleGetMarkers
 
 /**
  * MIR service entrypoint.
+ * This function starts the MIR service web server on port 8080, making it accessible from any network interface.
+ * The server provides REST API endpoints for managing MIR robot markers.
  */
 fun main() {
     embeddedServer(
@@ -25,13 +27,23 @@ fun main() {
     ).start(wait = true)
 }
 
+/**
+ * Configures the Ktor application module for the MIR service.
+ * Sets up routing for the various API endpoints provided by the service.
+ */
 private fun Application.module() {
     routing {
+        // Marker management endpoints
         route("/marker") {
+            // Get all markers
             get(handleGetMarkers)
+            // Create a new marker
             post(handleCreateMarkers)
+            // Delete a marker
             delete(handleDeleteMarkers)
         }
+
+        // Health check endpoint
         get("/") {
             call.respondText("Hello, world from MIR Service!")
         }

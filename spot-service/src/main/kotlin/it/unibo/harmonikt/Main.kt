@@ -19,6 +19,8 @@ import it.unibo.harmonikt.utils.ConsulPlugin
 
 /**
  * Spot service entrypoint.
+ * This function starts the Spot service web server on port 8080, making it accessible from any network interface.
+ * The server provides REST API endpoints for managing Spot robot markers and robots.
  */
 fun main() {
     embeddedServer(
@@ -29,20 +31,31 @@ fun main() {
     ).start(wait = true)
 }
 
+/**
+ * Configures the Ktor application module for the Spot service.
+ * Sets up content negotiation, HTTP client with Consul service discovery,
+ * repositories, and routing for the various API endpoints provided by the service.
+ */
 private fun Application.module() {
+    // Install JSON content negotiation for request/response serialization
     install(ContentNegotiation) { json() }
 
+    // Create HTTP client with Consul service discovery plugin
     val client = HttpClient(Apache) {
         install(ConsulPlugin)
     }
 
+    // Initialize repositories
     val markerRepository = FakeSpotMarkerRepository()
     val robotRepository = FakeSpotRobotRepository()
 
+    // Configure API endpoints
     configureMarkerEndpoint(markerRepository)
     configureRobotEndpoint(robotRepository, markerRepository)
 
+    // Set up basic routing
     routing {
+        // Health check endpoint
         get("/") {
             call.respondText("Hello, world from Spot Service!")
         }

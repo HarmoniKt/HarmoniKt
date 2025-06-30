@@ -7,9 +7,18 @@ import io.ktor.server.routing.post
 import it.unibo.harmonikt.repository.ActionRepository
 import it.unibo.harmonikt.resources.Actions
 
+/**
+ * Handles HTTP requests related to actions in the Robot Manager service.
+ */
 object ActionsHandlers {
+    /**
+     * Sets up the routing for actions-related endpoints.
+     *
+     * @param repository The ActionRepository instance to handle actions data.
+     */
     fun Routing.setupActionsHandlers(repository: ActionRepository) {
         get<Actions> { actions ->
+            repository.equals(10)
             call.respondText("Actions resource accessed: $actions")
         }
         post<Actions> { actions ->

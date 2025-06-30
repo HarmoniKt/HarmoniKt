@@ -25,7 +25,7 @@ rootProject.name = "HarmoniKt"
 include(
     ":group-mission-manager",
     ":map-manager",
-    ":model",
+    ":common",
     ":robot-manager",
     ":mir-service",
     ":spot-service",

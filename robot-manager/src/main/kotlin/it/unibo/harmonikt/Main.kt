@@ -37,9 +37,9 @@ private fun Application.module() {
     install(ContentNegotiation) { json() }
     install(RequestValidation)
 
-    val client = HttpClient(Apache) {
-        install(ConsulPlugin)
-    }
+//    val client = HttpClient(Apache) {
+//        install(ConsulPlugin)
+//    }
 
     val actionRepository = ActionRepositoryRobotManager()
     val pointOfInterestRepository = PointOfInterestRepositoryRobotManager()

@@ -1,4 +1,4 @@
 dependencies {
     implementation(rootProject.libs.bundles.ktor.server)
-    implementation(project(":model"))
+    implementation(project(":common"))
 }

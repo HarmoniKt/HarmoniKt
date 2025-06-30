@@ -28,9 +28,9 @@ fun main() {
 private fun Application.module() {
     install(ContentNegotiation) { json() }
 
-    val client = HttpClient(Apache) {
-        install(ConsulPlugin)
-    }
+//    val client = HttpClient(Apache) {
+//        install(ConsulPlugin)
+//    }
 
     routing {
         get("/") {
