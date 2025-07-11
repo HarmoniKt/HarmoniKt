@@ -7,6 +7,7 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.RoutingContext
 import it.unibo.harmonikt.model.Marker.MirMarker
 import it.unibo.harmonikt.MirRegistry
+import it.unibo.harmonikt.model.RobotState
 
 /**
  * Object containing handler functions for MIR service API endpoints.
@@ -80,8 +81,11 @@ object Handlers {
      * Currently, a placeholder that returns a NotImplemented status.
      */
     val handleGetAvailableRobots: suspend RoutingContext.() -> Unit = {
-        // This handler is a placeholder for future implementation
-        call.respond(HttpStatusCode.NotImplemented, "Delete markers functionality is not implemented yet.")
+        val robots = MirRegistry.availableRobots.filter { it.currentState == RobotState.IDLE }
+        when {
+            robots.isNotEmpty() -> call.respond(robots)
+            else -> call.respond(HttpStatusCode.NoContent, "No available robots found.")
+        }
     }
 
     /**
