@@ -10,36 +10,30 @@ import it.unibo.harmonikt.model.RobotState
 import kotlin.uuid.Uuid
 
 /**
- * Repository interface for managing Robot entities.
+ * Repository interface for managing MirRobot entities.
+ * This interface extends the generic RobotRepository to handle Mir-specific robots.
  */
-interface SpotRobotRepository : RobotRepository
+interface MirRobotRepository : RobotRepository
 
 /**
- * Fake implementation of SpotRobotRepository for testing purposes.
+ * Fake implementation of MirRobotRepository for testing purposes.
  * Stores robots in memory.
  */
-class FakeSpotRobotRepository : SpotRobotRepository {
+class FakeMirRobotRepository : MirRobotRepository {
     private val robots = mutableListOf(
         Robot(
             id = Uuid.random(),
-            name = CanonicalName("Spot 1"),
-            batteryLevel = BatteryLevel(85.0),
-            currentPosition = RobotPosition(10, 20),
+            name = CanonicalName("Mir 1"),
+            batteryLevel = BatteryLevel(90.0),
+            currentPosition = RobotPosition(15, 25),
             currentState = RobotState.IDLE,
         ),
         Robot(
             id = Uuid.random(),
-            name = CanonicalName("Spot 2"),
-            batteryLevel = BatteryLevel(70.0),
-            currentPosition = RobotPosition(30, 40),
+            name = CanonicalName("Mir 2"),
+            batteryLevel = BatteryLevel(60.0),
+            currentPosition = RobotPosition(35, 45),
             currentState = RobotState.ON_MISSION,
-        ),
-        Robot(
-            id = Uuid.random(),
-            name = CanonicalName("Spot 3"),
-            batteryLevel = BatteryLevel(25.0),
-            currentPosition = RobotPosition(50, 60),
-            currentState = RobotState.RECHARGING,
         ),
     )
 

@@ -29,9 +29,9 @@ interface MarkerRepository<M : Marker> {
     /**
      * Creates a new marker in the repository.
      *
-     * @param spotMarker The marker to create.
+     * @param marker The marker to create.
      */
-    fun createMarker(spotMarker: M)
+    fun createMarker(marker: M)
 
     /**
      * Deletes a marker from the repository.
