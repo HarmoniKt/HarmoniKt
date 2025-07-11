@@ -11,7 +11,11 @@ import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 import it.unibo.harmonikt.Handlers.handleCreateMarkers
 import it.unibo.harmonikt.Handlers.handleDeleteMarkers
+import it.unibo.harmonikt.Handlers.handleGetAllRobots
+import it.unibo.harmonikt.Handlers.handleGetAvailableRobots
 import it.unibo.harmonikt.Handlers.handleGetMarkers
+import it.unibo.harmonikt.Handlers.handleRegisterRobot
+import it.unibo.harmonikt.Handlers.handleUnregisterRobot
 
 /**
  * MIR service entrypoint.
@@ -41,6 +45,14 @@ private fun Application.module() {
             post(handleCreateMarkers)
             // Delete a marker
             delete(handleDeleteMarkers)
+        }
+
+        // Mir management endpoints
+        route("/robot"){
+            post(handleRegisterRobot)
+            get(handleGetAllRobots)
+            get("available", handleGetAvailableRobots)
+            delete("{id}", handleUnregisterRobot)
         }
 
         // Health check endpoint
