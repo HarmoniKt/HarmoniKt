@@ -6,6 +6,7 @@ import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.RoutingContext
 import it.unibo.harmonikt.model.Marker.MirMarker
+import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotState
 import kotlin.uuid.Uuid
 
@@ -54,14 +55,12 @@ object Handlers {
     /**
      * Handler for POST /robot endpoint.
      * Register a new MIR Robot in the system.
-     *
-     * Currently, a placeholder that returns a NotImplemented status.
      */
     val handleRegisterRobot: suspend RoutingContext.() -> Unit = {
-        // This handler is a placeholder for future implementation
-        call.respond(HttpStatusCode.NotImplemented, "Delete markers functionality is not implemented yet.")
+        val robot = call.receive<Robot>()
+        MirRegistry.registerRobot(robot)
+        call.respond(HttpStatusCode.OK)
     }
-
 
     /**
      * Handler for Delete /robot endpoint.
