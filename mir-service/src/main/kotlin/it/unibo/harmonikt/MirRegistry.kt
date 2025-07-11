@@ -1,6 +1,7 @@
 package it.unibo.harmonikt
 
 import it.unibo.harmonikt.model.Robot
+import kotlin.uuid.Uuid
 
 object MirRegistry {
 
@@ -13,8 +14,8 @@ object MirRegistry {
         robots = robots + robot
     }
 
-    fun unregisterRobot(robot: Robot) {
-        robots = robots - robot
+    fun unregisterRobot(id: Uuid) {
+        robots = robots.filter { it.id != id }
     }
 
     fun clear(){
