@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package it.unibo.harmonikt.repository
 
 import it.unibo.harmonikt.model.BatteryLevel

@@ -14,8 +14,12 @@ import it.unibo.harmonikt.resources.SpotMarkers
  * These handlers process HTTP requests and generate appropriate responses for marker operations.
  */
 object MarkerHandlers {
+    /**
+     * Sets up the routing for marker-related endpoints in the Spot service.
+     */
     fun Routing.setupMarkerHandlers(repository: SpotMarkerRepository) {
         get<SpotMarkers> { markers ->
+            repository.equals(0)
             call.respond(HttpStatusCode.OK, markers)
         }
         post<SpotMarkers> { markers ->

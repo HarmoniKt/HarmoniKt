@@ -38,9 +38,7 @@ class FakeSpotMarkerRepository : SpotMarkerRepository {
      * @throws IllegalArgumentException if a marker with the same id already exists
      */
     override fun createMarker(spotMarker: SpotMarker) {
-        if (getMarkerById(spotMarker.id) != null) {
-            throw IllegalArgumentException("Marker with id ${spotMarker.id} already exists.")
-        }
+        requireNotNull(getMarkerById(spotMarker.id)) { "Marker with id ${spotMarker.id} already exists." }
         markers.add(spotMarker)
     }
 

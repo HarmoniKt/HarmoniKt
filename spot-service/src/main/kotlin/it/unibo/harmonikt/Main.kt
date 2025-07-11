@@ -1,7 +1,5 @@
 package it.unibo.harmonikt
 
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.apache.Apache
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -15,7 +13,6 @@ import it.unibo.harmonikt.handlers.MarkerHandlers.setupMarkerHandlers
 import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repository.FakeSpotMarkerRepository
 import it.unibo.harmonikt.repository.FakeSpotRobotRepository
-import it.unibo.harmonikt.utils.ConsulPlugin
 
 /**
  * Spot service entrypoint.
@@ -41,9 +38,9 @@ private fun Application.module() {
     install(ContentNegotiation) { json() }
 
     // Create HTTP client with Consul service discovery plugin
-    val client = HttpClient(Apache) {
-        install(ConsulPlugin)
-    }
+//    val client = HttpClient(Apache) {
+//        install(ConsulPlugin)
+//    }
 
     // Initialize repositories
     val markerRepository = FakeSpotMarkerRepository()

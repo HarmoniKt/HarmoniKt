@@ -1,9 +1,9 @@
 package it.unibo.harmonikt.handlers
 
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
 import io.ktor.server.resources.post
-import io.ktor.server.resources.delete
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.repository.SpotRobotRepository
@@ -18,6 +18,7 @@ object RobotHandlers {
      */
     fun Routing.setupRobotHandlers(repository: SpotRobotRepository) {
         get<SpotRobots> { robots ->
+            repository.equals(10)
             call.respondText("Robots resource accessed: $robots")
         }
         post<SpotRobots> { robots ->

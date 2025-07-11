@@ -20,6 +20,7 @@ object PointOfInterestsHandlers {
      */
     fun Routing.pointOfInterestsHandlers(repository: PointOfInterestRepository) {
         get<PointOfInterests> { poi ->
+            repository.equals(10)
             call.respondText("Point of Interests resource accessed: $poi")
         }
         post<PointOfInterests> { point ->
