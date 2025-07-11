@@ -1,3 +1,20 @@
+## [1.3.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.2.0...1.3.0) (2025-07-11)
+
+### Features
+
+* add content negotiation for json ([4f37b0c](https://github.com/HarmoniKt/HarmoniKt/commit/4f37b0c9468b58b9d143023609cac99f998d8c6b))
+* add routes for robots handling ([bec07e0](https://github.com/HarmoniKt/HarmoniKt/commit/bec07e0203951ca3ab3a3000e8259bce31aec668))
+* implement get all robots ([6b047d5](https://github.com/HarmoniKt/HarmoniKt/commit/6b047d5cda32d7c0194e0d935b7f9856d5c593f9))
+* implement get available robots ([35de04d](https://github.com/HarmoniKt/HarmoniKt/commit/35de04d956cde35916a20a37b3979a545e91e12a))
+* implement Mir Registry ([10ae51f](https://github.com/HarmoniKt/HarmoniKt/commit/10ae51f4eb85e95ead637773960e25962a1b2227))
+* implement register robot ([d8e5853](https://github.com/HarmoniKt/HarmoniKt/commit/d8e5853be88762add39f02327e5705e7276962f2))
+* implement unregister robot ([9a1134a](https://github.com/HarmoniKt/HarmoniKt/commit/9a1134a8818fbeb35158951ba442de6d478ddebd))
+* setup handlers for mir service ([7117b2f](https://github.com/HarmoniKt/HarmoniKt/commit/7117b2fb0ab4f27b4d4a2132ba0c7eb6c3f2a43d))
+
+### Dependency updates
+
+* **deps:** add dependency for common subproject ([ebd0dc8](https://github.com/HarmoniKt/HarmoniKt/commit/ebd0dc8ef20e5e5256d790cefc4357553b220869))
+
 ## [1.2.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.1.0...1.2.0) (2025-07-11)
 
 ### Features
