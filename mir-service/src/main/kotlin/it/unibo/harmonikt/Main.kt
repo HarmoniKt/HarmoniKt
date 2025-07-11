@@ -1,6 +1,9 @@
 package it.unibo.harmonikt
 
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
+import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.response.respondText
@@ -36,6 +39,11 @@ fun main() {
  * Sets up routing for the various API endpoints provided by the service.
  */
 private fun Application.module() {
+
+    install(ContentNegotiation) {
+        json()
+    }
+
     routing {
         // Marker management endpoints
         route("/marker") {
