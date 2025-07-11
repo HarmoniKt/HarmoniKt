@@ -88,11 +88,13 @@ object Handlers {
      * Handler for GET /robot endpoint.
      * Get all the robots, including the ones in a mission.
      *
-     * Currently, a placeholder that returns a NotImplemented status.
      */
     val handleGetAllRobots: suspend RoutingContext.() -> Unit = {
-        // This handler is a placeholder for future implementation
-        call.respond(HttpStatusCode.NotImplemented, "Delete markers functionality is not implemented yet.")
+        val robots = MirRegistry.availableRobots
+        when {
+            robots.isNotEmpty() -> call.respond(HttpStatusCode.OK, robots)
+            else -> call.respond(HttpStatusCode.NoContent)
+        }
     }
 
 }
