@@ -2,6 +2,8 @@ package it.unibo.harmonikt
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.apache.Apache
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -45,7 +47,13 @@ private fun Application.module() {
 
     routing {
         get("/") {
-            call.respondText("Hello, from Robot Manager!")
+            val mirContent = client.get("http://mir-service:8080/")
+            val spotContent = client.get("http://spot-service:8080/")
+            call.respondText(
+                "This is the Robot Manager service! And can reach:\n" +
+                    "MIR Service Response: ${mirContent.bodyAsText()}\n" +
+                    "Spot Service Response: ${spotContent.bodyAsText()}",
+            )
         }
 
         setupActionsHandlers(actionRepository, client)
