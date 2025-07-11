@@ -1,3 +1,34 @@
+## [1.1.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.0.0...1.1.0) (2025-07-11)
+
+### Features
+
+* add consul interceptor ([1e5b4f4](https://github.com/HarmoniKt/HarmoniKt/commit/1e5b4f4c248d1d048f32c5c76ca7ff2906f049ca))
+* add draft for action ([e066156](https://github.com/HarmoniKt/HarmoniKt/commit/e06615674baed7aec1ee9a1d254240cb3074c321))
+* add marker definition ([9c6e286](https://github.com/HarmoniKt/HarmoniKt/commit/9c6e28697e0ad82ac9a555829dc48d6f925ce324))
+* add point of interest ([27eda85](https://github.com/HarmoniKt/HarmoniKt/commit/27eda854b6ef8db8a68ba0f93678b029f408aca8))
+* add resource API for spot service ([645b465](https://github.com/HarmoniKt/HarmoniKt/commit/645b4652954fe9be802f8e67c4499f20f99fc3a4))
+* add robot interface ([4fefb93](https://github.com/HarmoniKt/HarmoniKt/commit/4fefb938b0641d34ad49b4355388af9444ab0ff0))
+* implement handlers and endpoint for markers ([f5d07ae](https://github.com/HarmoniKt/HarmoniKt/commit/f5d07ae1169966e8dbd9242b27cc5ae955399897))
+* setup actions, robots and pois ([e9bf4e8](https://github.com/HarmoniKt/HarmoniKt/commit/e9bf4e8f8973de3fd735abec64baf77f182566ef))
+* setup containerization ([0ba603b](https://github.com/HarmoniKt/HarmoniKt/commit/0ba603b149c307d49da22dc5275ef1dd115c2c11))
+
+### Documentation
+
+* add missing kdoc ([3fd7838](https://github.com/HarmoniKt/HarmoniKt/commit/3fd783870f85835609ecff64881091e91f3cf4d6))
+* add missing KDoc ([9349e29](https://github.com/HarmoniKt/HarmoniKt/commit/9349e29559c65913a5bfacafccd6aff8769fc032))
+
+### Build and continuous integration
+
+* manage deps ([7837f40](https://github.com/HarmoniKt/HarmoniKt/commit/7837f40c502b1218d3b4dbff8655b254e4702ab7))
+
+### Refactoring
+
+* move into common project consul plugin ([44b5b42](https://github.com/HarmoniKt/HarmoniKt/commit/44b5b42c51a55b346b97038774d907ff4d3b9beb))
+* remove duplicate ([f1ac70a](https://github.com/HarmoniKt/HarmoniKt/commit/f1ac70aa6a312fcf3bcb8e347d0cd2406fbe8e2a))
+* remove useless class ([6df238f](https://github.com/HarmoniKt/HarmoniKt/commit/6df238fbae1e65e1425b31a40540b5d24cd343f1))
+* renove endpoint no longer used ([588e9b4](https://github.com/HarmoniKt/HarmoniKt/commit/588e9b4e8f433cb60037ee2193052ee03e0df4b1))
+* some refactor and repository ([d83159f](https://github.com/HarmoniKt/HarmoniKt/commit/d83159f56f610e37f23b6ade105ebed72768fe48))
+
 ## 1.0.0 (2025-04-02)
 
 ### Features
