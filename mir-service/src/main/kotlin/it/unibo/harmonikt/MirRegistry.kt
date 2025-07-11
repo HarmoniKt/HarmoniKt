@@ -6,7 +6,7 @@ object MirRegistry {
 
     private var robots =  listOf<Robot>()
 
-    val availableRobots: List<Robot>
+    val registeredRobots: List<Robot>
         get() = robots
 
     fun registerRobot(robot: Robot) {

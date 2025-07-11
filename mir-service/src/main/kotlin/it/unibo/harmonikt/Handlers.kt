@@ -6,7 +6,6 @@ import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.RoutingContext
 import it.unibo.harmonikt.model.Marker.MirMarker
-import it.unibo.harmonikt.MirRegistry
 import it.unibo.harmonikt.model.RobotState
 
 /**
@@ -81,7 +80,7 @@ object Handlers {
      * Currently, a placeholder that returns a NotImplemented status.
      */
     val handleGetAvailableRobots: suspend RoutingContext.() -> Unit = {
-        val robots = MirRegistry.availableRobots.filter { it.currentState == RobotState.IDLE }
+        val robots = MirRegistry.registeredRobots.filter { it.currentState == RobotState.IDLE }
         when {
             robots.isNotEmpty() -> call.respond(robots)
             else -> call.respond(HttpStatusCode.NoContent, "No available robots found.")
@@ -94,7 +93,7 @@ object Handlers {
      *
      */
     val handleGetAllRobots: suspend RoutingContext.() -> Unit = {
-        val robots = MirRegistry.availableRobots
+        val robots = MirRegistry.registeredRobots
         when {
             robots.isNotEmpty() -> call.respond(HttpStatusCode.OK, robots)
             else -> call.respond(HttpStatusCode.NoContent)
