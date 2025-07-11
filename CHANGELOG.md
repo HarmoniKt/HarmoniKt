@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.1.0...1.2.0) (2025-07-11)
+
+### Features
+
+* query mir and spot from robot-manager ([8b55108](https://github.com/HarmoniKt/HarmoniKt/commit/8b55108ef1e32ab74cf1f2bdbac193cf678ad21f))
+
+### Build and continuous integration
+
+* **docker:** enable and fix docker compose ([80c3f78](https://github.com/HarmoniKt/HarmoniKt/commit/80c3f789c252e6afa2ff0d119b3342eb0d3b28ca))
+
 ## [1.1.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.0.0...1.1.0) (2025-07-11)
 
 ### Features
