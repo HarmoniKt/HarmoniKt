@@ -6,6 +6,7 @@ import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.resources.Resources
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
@@ -35,6 +36,7 @@ fun main() {
  */
 private fun Application.module() {
     // Install JSON content negotiation for request/response serialization
+    install(Resources)
     install(ContentNegotiation) { json() }
 
     // Create HTTP client with Consul service discovery plugin
