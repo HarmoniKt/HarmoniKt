@@ -1,9 +1,9 @@
 package it.unibo.harmonikt.repository
 
 import it.unibo.harmonikt.model.Robot
+import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
-import kotlin.uuid.Uuid
 
 /**
  * Repository interface for managing Robot entities.
@@ -13,14 +13,14 @@ interface RobotRepository {
     /**
      * Returns the list of all robots.
      */
-    fun getRobots(): List<Robot>
+    fun getRobots(): List<RobotId>
 
     /**
      * Returns the robot with the given id, or null if not found.
      *
      * @param id the unique identifier of the robot
      */
-    fun getRobotById(id: Uuid): Robot?
+    fun getRobotById(id: RobotId): Robot?
 
     /**
      * Updates the position of the robot with the given id.
@@ -29,7 +29,7 @@ interface RobotRepository {
      * @param position the new position to set
      * @return true if the update was successful, false otherwise
      */
-    fun updateRobotPosition(id: Uuid, position: RobotPosition): Boolean
+    fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean
 
     /**
      * Updates the state of the robot with the given id.
@@ -38,5 +38,5 @@ interface RobotRepository {
      * @param state the new state to set
      * @return true if the update was successful, false otherwise
      */
-    fun updateRobotState(id: Uuid, state: RobotState): Boolean
+    fun updateRobotState(id: RobotId, state: RobotState): Boolean
 }
