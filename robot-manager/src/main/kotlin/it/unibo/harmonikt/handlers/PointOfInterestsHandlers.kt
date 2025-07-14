@@ -1,5 +1,6 @@
 package it.unibo.harmonikt.handlers
 
+import io.ktor.client.HttpClient
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
@@ -13,12 +14,19 @@ import it.unibo.harmonikt.resources.PointOfInterests
  * Handles HTTP requests related to points of interest in the Robot Manager service.
  */
 object PointOfInterestsHandlers {
+
     /**
-     * Sets up the routing for points of interest-related endpoints.
+     * Configures and sets up HTTP routing for handling point of interest (POI)-related requests.
      *
-     * @param repository The PointOfInterestRepository instance to handle points of interest data.
+     * This function defines endpoints for accessing, creating, and deleting points of interest
+     * in the system. These routes enable interaction with the points of interest through GET, POST,
+     * and DELETE HTTP methods.
+     *
+     * @param repository The instance of the PointOfInterestRepository interface, which provides methods
+     *                   for managing points of interest data.
+     * @param client The HttpClient to use for making external HTTP requests needed within the handlers.
      */
-    fun Routing.pointOfInterestsHandlers(repository: PointOfInterestRepository) {
+    fun Routing.pointOfInterestsHandlers(repository: PointOfInterestRepository, client: HttpClient) {
         get<PointOfInterests> { poi ->
             repository.equals(10)
             call.respondText("Point of Interests resource accessed: $poi")
