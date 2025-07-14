@@ -15,10 +15,13 @@ import io.ktor.server.resources.Resources
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import it.unibo.harmonikt.api.RobotAPIImpl
 import it.unibo.harmonikt.handlers.ActionsHandlers.setupActionsHandlers
 import it.unibo.harmonikt.handlers.PointOfInterestsHandlers.pointOfInterestsHandlers
+import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repositories.ActionRepositoryRobotManager
 import it.unibo.harmonikt.repositories.PointOfInterestRepositoryRobotManager
+import it.unibo.harmonikt.repositories.RobotRepositoryRobotManager
 import it.unibo.harmonikt.utils.ConsulPlugin
 
 /**
@@ -44,6 +47,8 @@ private fun Application.module() {
 
     val actionRepository = ActionRepositoryRobotManager()
     val pointOfInterestRepository = PointOfInterestRepositoryRobotManager()
+    val robotRepository = RobotRepositoryRobotManager()
+    val robotApi = RobotAPIImpl(robotRepository, actionRepository)
 
     routing {
         get("/") {
@@ -57,6 +62,7 @@ private fun Application.module() {
         }
 
         setupActionsHandlers(actionRepository, client)
-        pointOfInterestsHandlers(pointOfInterestRepository)
+        pointOfInterestsHandlers(pointOfInterestRepository, client)
+        setupRobotHandlers(robotApi, client)
     }
 }
