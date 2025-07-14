@@ -1,12 +1,13 @@
 package it.unibo.harmonikt.repository
 
-import it.unibo.harmonikt.model.Marker
+import it.unibo.harmonikt.model.Marker.MirMarker
+import kotlin.uuid.Uuid
 
 /**
  * Repository interface for managing MirMarker entities.
  * This interface extends the generic MarkerRepository to handle Mir-specific markers.
  */
-interface MirMarkerRepository : MarkerRepository<Marker.MirMarker>
+interface MirMarkerRepository : MarkerRepository<MirMarker>
 
 /**
  * Fake implementation of MirMarkerRepository for testing purposes.
@@ -14,19 +15,19 @@ interface MirMarkerRepository : MarkerRepository<Marker.MirMarker>
  */
 class FakeMirMarkerRepository : MirMarkerRepository {
     private val markers = mutableListOf(
-        Marker.MirMarker(id = kotlin.uuid.Uuid.random(), identifier = "Waypoint 1"),
-        Marker.MirMarker(id = kotlin.uuid.Uuid.random(), identifier = "Waypoint 2"),
-        Marker.MirMarker(id = kotlin.uuid.Uuid.random(), identifier = "Waypoint 3"),
+        MirMarker(id = Uuid.random(), identifier = "Waypoint 1"),
+        MirMarker(id = Uuid.random(), identifier = "Waypoint 2"),
+        MirMarker(id = Uuid.random(), identifier = "Waypoint 3"),
     )
 
-    override fun getMarkers(): List<Marker.MirMarker> = markers
+    override fun getMarkers(): List<MirMarker> = markers
 
-    override fun getMarkerById(id: kotlin.uuid.Uuid): Marker.MirMarker? = markers.find { it.id == id }
+    override fun getMarkerById(id: Uuid): MirMarker? = markers.find { it.id == id }
 
-    override fun createMarker(marker: Marker.MirMarker) {
+    override fun createMarker(marker: MirMarker) {
         requireNotNull(getMarkerById(marker.id)) { "Marker with id ${marker.id} already exists." }
         markers.add(marker)
     }
 
-    override fun deleteMarker(id: kotlin.uuid.Uuid): Boolean = markers.removeIf { it.id == id }
+    override fun deleteMarker(id: Uuid): Boolean = markers.removeIf { it.id == id }
 }
