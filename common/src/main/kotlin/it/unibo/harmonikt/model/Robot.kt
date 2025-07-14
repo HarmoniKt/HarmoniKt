@@ -4,6 +4,41 @@ import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
 /**
+ * Type alias for representing a unique robot identifier.
+ * This alias is used across the system to uniquely identify individual robots.
+ */
+typealias RobotId = Uuid
+
+/**
+ * Represents the type of robot within the system.
+ * Determines the category or model of the robot and guides its specific functionalities,
+ * such as marker type interpretation or action compatibility.
+ *
+ * @property MIR Refers to MIR robots, typically used for tasks
+ *  requiring precise navigation or environmental interaction.
+ * @property SPOT Refers to Spot robots, often used for agile,
+ *  dynamic operations or tasks requiring mobility in complex terrains.
+ */
+enum class RobotType {
+    /**
+     * Represents the MIR robot type.
+     * MIR robots are designed for tasks requiring precise navigation or interaction with the environment.
+     *
+     * They are associated with MIR-specific markers and typically utilize `MirMarker` to identify
+     * locations or points of interest in a given environment.
+     */
+    MIR,
+
+    /**
+     * Represents the Spot robot type.
+     * Spot robots are designed to operate in dynamic environments requiring high mobility and agility.
+     * They typically utilize `SpotMarker` for recognizing points of interest or waypoints in their environment.
+     * This type is used to categorize robots for their specific capabilities and actions within the system.
+     */
+    SPOT,
+}
+
+/**
  * Represents a robot in the system.
  * This class is used at the `robot service` level to model robot entities.
  */
@@ -12,7 +47,7 @@ data class Robot(
     /**
      * Unique identifier for the robot.
      */
-    val id: Uuid,
+    val id: RobotId,
 
     /**
      * Canonical name of the robot.
@@ -33,6 +68,11 @@ data class Robot(
      * Current operational state of the robot.
      */
     val currentState: RobotState,
+
+    /**
+     * The type of robot, indicating its model or category (e.g., MIR, SPOT).
+     */
+    val type: RobotType,
 )
 
 /**
