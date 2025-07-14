@@ -1,0 +1,205 @@
+openapi: 3.0.1
+info:
+  title: Robot Management API
+  version: 1.0.0
+  description: API to manage active robots, actions, and points of interest (POIs).
+
+servers:
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /robots:
+    get:
+      summary: Retrieve all active robots
+      responses:
+        '200':
+          description: List of robots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Robot'
+    post:
+      summary: Add a new robot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RobotCreate'
+      responses:
+        '201':
+          description: Robot created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Robot'
+
+  /robots/{robotId}:
+    parameters:
+      - name: robotId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Retrieve information about a robot
+      responses:
+        '200':
+          description: Robot details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Robot'
+        '404':
+          description: Robot not found
+    delete:
+      summary: Remove a robot
+      responses:
+        '204':
+          description: Robot deleted
+
+  /robots/{robotId}/actions:
+    parameters:
+      - name: robotId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    post:
+      summary: Create a new action for a robot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionCreate'
+      responses:
+        '201':
+          description: Action created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Action'
+
+  /pois:
+    get:
+      summary: Retrieve all POIs in the system
+      responses:
+        '200':
+          description: List of POIs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Poi'
+    post:
+      summary: Add a new POI
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoiCreate'
+      responses:
+        '201':
+          description: POI created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poi'
+    delete:
+      summary: Delete a POI
+      responses:
+        '204':
+          description: POI deleted
+
+components:
+  schemas:
+    Robot:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [MIR, SPOT]
+        name:
+          type: string
+      required: [id, type, name]
+
+    RobotCreate:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [MIR, SPOT]
+        name:
+          type: string
+      required: [type, name]
+
+    Action:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        robotId:
+          type: string
+          format: uuid
+        command:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      required: [id, robotId, command, timestamp]
+
+    ActionCreate:
+      type: object
+      properties:
+        command:
+          type: string
+      required: [command]
+
+    Poi:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        lat:
+          type: number
+          format: float
+        lon:
+          type: number
+          format: float
+      required: [id, name, lat, lon]
+
+    PoiCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        lat:
+          type: number
+          format: float
+        lon:
+          type: number
+          format: float
+      required: [name, lat, lon]
+
+    PoiKey:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required: [id]
