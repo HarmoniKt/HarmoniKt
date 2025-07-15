@@ -8,9 +8,19 @@ servers:
   - url: https://api.example.com
     description: Production server
 
+tags:
+  - name: robots
+    description: Operations related to robot management
+  - name: actions
+    description: Operations related to robot actions
+  - name: pois
+    description: Operations related to points of interest (POIs)
+
 paths:
   /robots:
     get:
+      tags:
+        - robots
       summary: Retrieve all active robots
       responses:
         '200':
@@ -22,6 +32,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Robot'
     post:
+      tags:
+        - robots
       summary: Add a new robot
       requestBody:
         required: true
@@ -46,6 +58,8 @@ paths:
           type: string
           format: uuid
     get:
+      tags:
+        - robots
       summary: Retrieve information about a robot
       responses:
         '200':
@@ -57,6 +71,8 @@ paths:
         '404':
           description: Robot not found
     delete:
+      tags:
+        - robots
       summary: Remove a robot
       responses:
         '204':
@@ -71,6 +87,8 @@ paths:
           type: string
           format: uuid
     post:
+      tags:
+        - actions
       summary: Create a new action for a robot
       requestBody:
         required: true
@@ -88,6 +106,8 @@ paths:
 
   /pois:
     get:
+      tags:
+        - pois
       summary: Retrieve all POIs in the system
       responses:
         '200':
@@ -99,6 +119,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Poi'
     post:
+      tags:
+        - pois
       summary: Add a new POI
       requestBody:
         required: true
@@ -114,6 +136,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Poi'
     delete:
+      tags:
+        - pois
       summary: Delete a POI
       responses:
         '204':
