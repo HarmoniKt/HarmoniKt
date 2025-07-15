@@ -1,3 +1,17 @@
+## [1.4.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.4.0...1.4.1) (2025-07-15)
+
+### Dependency updates
+
+* **deps:** add fastapi deps ([1cde243](https://github.com/HarmoniKt/HarmoniKt/commit/1cde24349e104a6a4ceabda1b08bde2b82c21de9))
+
+### Bug Fixes
+
+* divide specs into categories ([b2079ad](https://github.com/HarmoniKt/HarmoniKt/commit/b2079ad38e67fa8675657d1bdc05c7d6963b6d3b))
+
+### General maintenance
+
+* setup spot service ([5c87225](https://github.com/HarmoniKt/HarmoniKt/commit/5c872259c7a41314702e366f8786d0c55b5c3e6f))
+
 ## [1.4.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.3.0...1.4.0) (2025-07-15)
 
 ### Features
