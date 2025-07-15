@@ -1,3 +1,14 @@
+## [1.5.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.4.1...1.5.0) (2025-07-15)
+
+### Features
+
+* setup service skeleton ([4c05bad](https://github.com/HarmoniKt/HarmoniKt/commit/4c05bada890e1e3fd2efee886cc5a11b1db78f29))
+
+### General maintenance
+
+* add app package ([f8e819c](https://github.com/HarmoniKt/HarmoniKt/commit/f8e819c95a3d305b548a9a2c4951f6b9fb6c7ed6))
+* update gitignore ([80a81c6](https://github.com/HarmoniKt/HarmoniKt/commit/80a81c6caa77479efa6bef056c6becb39bb3e781))
+
 ## [1.4.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.4.0...1.4.1) (2025-07-15)
 
 ### Dependency updates
