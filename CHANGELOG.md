@@ -1,3 +1,23 @@
+## [1.4.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.3.0...1.4.0) (2025-07-15)
+
+### Features
+
+* add handlers ([e6573cb](https://github.com/HarmoniKt/HarmoniKt/commit/e6573cbdf689c26063c4d2f019cbcc40cfd1ae4d))
+* add robot api ([0cc7068](https://github.com/HarmoniKt/HarmoniKt/commit/0cc7068ea9c0549da77d9bfd0920e0759ba1fe0b))
+* add robot handler ([9cfa254](https://github.com/HarmoniKt/HarmoniKt/commit/9cfa2543883338783ca26f95caec6d86eeff9ad3))
+* add robot repository manager ([8aff0cc](https://github.com/HarmoniKt/HarmoniKt/commit/8aff0cc29c08e946b3d74847aae6cbcc2201f254))
+* add robot structure ([dd6476a](https://github.com/HarmoniKt/HarmoniKt/commit/dd6476a656ac2d4272c89bab600ae9f81db4e9bf))
+* add robot type ([0387eb5](https://github.com/HarmoniKt/HarmoniKt/commit/0387eb536cf8fe22537615d3dba026ff90e0be1c))
+* add swagger specification ([cf31b59](https://github.com/HarmoniKt/HarmoniKt/commit/cf31b59b71305b3e0ccdb0d7f37756ca5f9d16b9))
+* enable logging and fix dicovery-service ([5850d3e](https://github.com/HarmoniKt/HarmoniKt/commit/5850d3e57c9df29b3c1a75adb3f288385268f16a))
+
+### Refactoring
+
+* add hhtp client ([2ef2354](https://github.com/HarmoniKt/HarmoniKt/commit/2ef23541f240fe2aca89443da44166b9f78776fc))
+* add imports ([09af05a](https://github.com/HarmoniKt/HarmoniKt/commit/09af05a79e3df930ea6341a53f96ec77309d4598))
+* uuid into robotid ([5c16ef2](https://github.com/HarmoniKt/HarmoniKt/commit/5c16ef2a850c72d28ab264bf76fc720e3e9a2aa0))
+* uuid into robotid ([52fc097](https://github.com/HarmoniKt/HarmoniKt/commit/52fc0979238f9dc2159716d574299b026eea258a))
+
 ## [1.3.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.2.0...1.3.0) (2025-07-11)
 
 ### Features
