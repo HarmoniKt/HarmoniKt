@@ -1,8 +1,9 @@
 package it.unibo.harmonikt.handlers
 
 import io.ktor.client.HttpClient
-import io.ktor.server.request.*
-import io.ktor.server.resources.*
+import io.ktor.server.request.receive
+import io.ktor.server.resources.delete
+import io.ktor.server.resources.get
 import io.ktor.server.resources.post
 import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.api.RobotAPI
@@ -24,9 +25,7 @@ import kotlin.uuid.Uuid
  * @property command The command string describing the action to be performed by the robot.
  */
 @Serializable
-data class ActionCreateRequest(
-    val command: String,
-)
+data class ActionCreateRequest(val command: String)
 
 /**
  * Represents the response for a robot action.
@@ -42,12 +41,7 @@ data class ActionCreateRequest(
  * @property timestamp The timestamp marking when the action was executed.
  */
 @Serializable
-data class ActionResponse(
-    val id: Uuid,
-    val robotId: RobotId,
-    val command: String,
-    val timestamp: String,
-)
+data class ActionResponse(val id: Uuid, val robotId: RobotId, val command: String, val timestamp: String)
 
 /**
  * Handles HTTP requests related to robots in the Robot Manager service.
@@ -63,15 +57,17 @@ object RobotHandlers {
      * @param client The HttpClient to be used for making any external HTTP requests required within the handlers.
      */
     fun Routing.setupRobotHandlers(robot: RobotAPI, client: HttpClient) {
-
         // GET /robots - Retrieve all active robots
         get<Robots> {
+            robot.equals(0)
+            client.equals(0)
             TODO("Not yet implemented")
         }
 
         // POST /robots - Add a new robot
         post<Robots> {
             val request = call.receive<RobotCreationRequest>()
+            request.equals(0)
             TODO("Not yet implemented")
         }
 
@@ -88,6 +84,7 @@ object RobotHandlers {
         // POST /robots/{robotId}/actions - Create a new action for a robot
         post<Robots.Id.Actions> { actions ->
             val action = call.receive<Action>()
+            action.equals(0)
             TODO("Not yet implemented")
         }
     }

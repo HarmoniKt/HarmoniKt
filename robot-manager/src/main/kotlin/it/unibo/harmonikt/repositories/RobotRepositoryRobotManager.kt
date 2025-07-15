@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package it.unibo.harmonikt.repositories
 
 import it.unibo.harmonikt.model.BatteryLevel
@@ -48,15 +50,12 @@ class RobotRepositoryRobotManager : RobotRepository {
      */
     override fun getRobots(): List<RobotId> = robots.keys.toList()
 
-
     /**
      * Returns the robot with the given id, or null if not found.
      *
      * @param id the unique identifier of the robot
      */
-    override fun getRobotById(id: RobotId): Robot? {
-        return robots[id]
-    }
+    override fun getRobotById(id: RobotId): Robot? = robots[id]
 
     /**
      * Updates the position of the robot with the given id.
@@ -100,7 +99,5 @@ class RobotRepositoryRobotManager : RobotRepository {
      * @param id the unique identifier of the robot to remove
      * @return true if the robot was removed successfully, false otherwise
      */
-    fun removeRobot(id: RobotId): Boolean {
-        return robots.remove(id) != null
-    }
+    fun removeRobot(id: RobotId): Boolean = robots.remove(id) != null
 }

@@ -1,6 +1,7 @@
 package it.unibo.harmonikt.handlers
 
 import io.ktor.client.HttpClient
+import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
@@ -29,6 +30,7 @@ object PointOfInterestsHandlers {
     fun Routing.pointOfInterestsHandlers(repository: PointOfInterestRepository, client: HttpClient) {
         get<PointOfInterests> { poi ->
             repository.equals(10)
+            client.get("http://example.com/poi") // Example external call}
             call.respondText("Point of Interests resource accessed: $poi")
         }
         post<PointOfInterests> { point ->

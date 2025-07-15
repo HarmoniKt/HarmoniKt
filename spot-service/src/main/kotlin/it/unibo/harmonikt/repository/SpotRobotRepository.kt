@@ -36,7 +36,7 @@ class FakeSpotRobotRepository : SpotRobotRepository {
             batteryLevel = BatteryLevel(70.0),
             currentPosition = RobotPosition(30, 40),
             currentState = RobotState.ON_MISSION,
-            type = RobotType.SPOT
+            type = RobotType.SPOT,
         ),
         Robot(
             id = Uuid.random(),

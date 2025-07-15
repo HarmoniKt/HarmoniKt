@@ -34,6 +34,7 @@ allprojects {
         implementation(rootProject.libs.kotlin.stdlib)
         implementation(rootProject.libs.kotlin.reflect)
         implementation(rootProject.libs.kotlinx.serialization.json)
+        implementation(rootProject.libs.bundles.logging)
         testImplementation(rootProject.libs.bundles.kotlin.testing)
     }
 

@@ -4,6 +4,8 @@ kotlin = "2.1.10"
 mockito = "5.16.1"
 kotlinx-serialization = "1.8.1"
 ktor-version = "3.0.3"
+logback-version = "1.5.3"
+slf4j-version = "2.0.12"
 
 [libraries]
 consul-client = { module = "com.orbitz.consul:consul-client", version.ref = "consul-client" }
@@ -25,9 +27,13 @@ ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-ve
 ktor-server-swagger = { module = "io.ktor:ktor-server-swagger", version.ref = "ktor-version" }
 ktor-server-openapi = { module = "io.ktor:ktor-server-openapi", version.ref = "ktor-version" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-version" }
+ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor-version" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j-version" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-version" }
 
 [bundles]
 kotlin-testing = [ "kotlin-test", "kotlin-test-annotations-common", "mockito-core" ]
+logging = [ "slf4j-api", "logback-classic" ]
 ktor-server = [
     "ktor-server-core",
     "ktor-server-swagger",
@@ -40,7 +46,8 @@ ktor-server = [
     "ktor-service",
     "ktor-request-validation",
     "ktor-client-apache",
-    "ktor-client-core"
+    "ktor-client-core",
+    "ktor-server-call-logging"
 ]
 
 [plugins]

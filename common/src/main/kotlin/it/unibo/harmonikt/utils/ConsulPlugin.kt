@@ -5,6 +5,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpClientPlugin
 import io.ktor.client.request.HttpRequestPipeline
 import io.ktor.util.AttributeKey
+import org.slf4j.LoggerFactory
 
 /**
  * A Ktor HTTP client plugin that integrates with Consul for service discovery.
@@ -39,6 +40,11 @@ class ConsulPlugin(private var consulUrl: String) {
      */
     companion object Plugin : HttpClientPlugin<Config, ConsulPlugin> {
         /**
+         * Logger for the ConsulPlugin.
+         */
+        private val logger = LoggerFactory.getLogger(ConsulPlugin::class.java)
+
+        /**
          * Index for round-robin load balancing among service instances.
          */
         private var currentNodeIndex: Int = 0
@@ -65,6 +71,7 @@ class ConsulPlugin(private var consulUrl: String) {
          * @param scope The HTTP client to install the plugin into.
          */
         override fun install(plugin: ConsulPlugin, scope: HttpClient) {
+            logger.info("Installing ConsulPlugin with Consul URL: ${plugin.consulUrl}")
             scope.requestPipeline.intercept(HttpRequestPipeline.Render) {
                 // Create a Consul client and query for healthy service instances
                 val consulClient = Consul.builder().withUrl(plugin.consulUrl).build()
@@ -78,7 +85,11 @@ class ConsulPlugin(private var consulUrl: String) {
                     context.url.port = selectedNode.service.port
                     // Update the index for the next request (round-robin)
                     currentNodeIndex = (currentNodeIndex + 1) % nodes.size
-                    println("Calling ${selectedNode.service.id}: ${context.url}")
+                    logger.info("Calling service: ${selectedNode.service.id} at ${context.url}")
+                } else {
+                    // If no healthy nodes are found, log an error
+                    logger.error("No healthy service instances found for ${context.url.host}")
+//                    error("No healthy service instances available")
                 }
             }
         }
