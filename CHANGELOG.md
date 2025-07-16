@@ -1,3 +1,9 @@
+## [1.7.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.7.0...1.7.1) (2025-07-16)
+
+### Bug Fixes
+
+* deployment and logging ([402444f](https://github.com/HarmoniKt/HarmoniKt/commit/402444ffdb92d693a4e2ba1fa0a29bbcb7d65e85))
+
 ## [1.7.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.6.0...1.7.0) (2025-07-16)
 
 ### Features
