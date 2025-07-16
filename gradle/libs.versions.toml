@@ -24,6 +24,7 @@ ktor-request-validation = { module = "io.ktor:ktor-server-request-validation", v
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-version" }
 ktor-service = { module = "io.ktor:ktor-server-resources", version.ref = "ktor-version" }
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-version" }
+ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor-version" }
 ktor-server-swagger = { module = "io.ktor:ktor-server-swagger", version.ref = "ktor-version" }
 ktor-server-openapi = { module = "io.ktor:ktor-server-openapi", version.ref = "ktor-version" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-version" }
@@ -36,6 +37,7 @@ kotlin-testing = [ "kotlin-test", "kotlin-test-annotations-common", "mockito-cor
 logging = [ "slf4j-api", "logback-classic" ]
 ktor-server = [
     "ktor-server-core",
+    "ktor-server-cors",
     "ktor-server-swagger",
     "ktor-server-openapi",
     "ktor-server-netty",

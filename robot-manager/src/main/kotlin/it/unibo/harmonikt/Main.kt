@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.apache.Apache
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
@@ -12,7 +13,9 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.calllogging.CallLogging
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.plugins.requestvalidation.RequestValidation
+import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.resources.Resources
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
@@ -64,6 +67,10 @@ private fun Application.module() {
         level = Level.INFO
         // Log all requests
     }
+    install(CORS) {
+        anyHost()
+        allowHeader(HttpHeaders.ContentType)
+    }
 
     val client = HttpClient(Apache) {
         install(ConsulPlugin)
@@ -75,6 +82,7 @@ private fun Application.module() {
     val robotApi = RobotAPIImpl(robotRepository, actionRepository)
 
     routing {
+        swaggerUI(path = "/swagger", swaggerFile = "openapi/harmonikt.yml") {}
         get("/hello") {
             val mirContent = client.get("http://mir-service/")
             val spotContent = client.get("http://spot-service/")
