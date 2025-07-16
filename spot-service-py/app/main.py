@@ -1,9 +1,16 @@
 import os
 import socket
 import requests
-from pydantic import BaseModel, Field
 import logging
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
+
+# Import models and repositories
+from .repositories.spot_marker_repository import FakeSpotMarkerRepository
+from .repositories.spot_robot_repository import FakeSpotRobotRepository
+
+# Import handlers
+from .handlers.robot_handlers import setup_robot_handlers
+from .handlers.marker_handlers import setup_marker_handlers
 
 logging.basicConfig(
     level=logging.INFO,
@@ -11,11 +18,6 @@ logging.basicConfig(
 )
 
 app = FastAPI(title="Spot Service", version="1.0.0")
-
-import os
-import socket
-import requests
-
 
 def register_consul_service(
     consul_url: str | None = None,
@@ -25,7 +27,6 @@ def register_consul_service(
     service_id: str | None = None,
     token: str | None = None,
 ):
-
     consul_url = consul_url or os.getenv("CONSUL_URL", "http://localhost:8500")
     address = address or socket.gethostname()
     service_id = service_id or f"{service_name}-{address}-{port}"
@@ -54,6 +55,19 @@ def register_consul_service(
 resp = register_consul_service()
 logging.info("Registered to Consul: %s", resp.status_code)
 
-@app.get('/robots')
-async def get_robots():
-    return {'msg': 'It works!'}
+# Initialize repositories
+marker_repository = FakeSpotMarkerRepository()
+robot_repository = FakeSpotRobotRepository()
+
+# Health check endpoint
+@app.get("/")
+async def health_check():
+    return {"message": "Hello, world from Spot Service!"}
+
+# Set up the handlers with the repositories
+robot_router = setup_robot_handlers(robot_repository)
+marker_router = setup_marker_handlers(marker_repository)
+
+# Include the routers in the FastAPI app
+app.include_router(robot_router)
+app.include_router(marker_router)
