@@ -1,3 +1,14 @@
+## [1.7.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.6.0...1.7.0) (2025-07-16)
+
+### Features
+
+* add dockerfile and registration to consul ([b961aa7](https://github.com/HarmoniKt/HarmoniKt/commit/b961aa793f2b891d5d3808da79b73b47bae6f676))
+
+### Bug Fixes
+
+* fix spot service name in hello route ([d572d41](https://github.com/HarmoniKt/HarmoniKt/commit/d572d410244379e2fbabe2f07d786fea155c0e1b))
+* switch from spot-service to spot-service-py ([c738e70](https://github.com/HarmoniKt/HarmoniKt/commit/c738e70b488b16ba3e68241a9b21c5365dd24b92))
+
 ## [1.6.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.5.0...1.6.0) (2025-07-16)
 
 ### Features
