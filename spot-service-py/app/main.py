@@ -2,7 +2,14 @@ import os
 import socket
 import requests
 from pydantic import BaseModel, Field
+import logging
 from fastapi import FastAPI, HTTPException
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s:%(message)s",
+)
+
 app = FastAPI(title="Spot Service", version="1.0.0")
 
 import os
@@ -45,7 +52,7 @@ def register_consul_service(
 
 
 resp = register_consul_service()
-print("Registered to Consul:", resp.status_code)
+logging.info("Registered to Consul: %s", resp.status_code)
 
 @app.get('/robots')
 async def get_robots():

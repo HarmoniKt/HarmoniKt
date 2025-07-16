@@ -64,8 +64,8 @@ services:
 
   spot-service-py:
     build:
-      context: .
-      dockerfile: spot-service-py/Dockerfile
+      context: spot-service-py
+      dockerfile: Dockerfile
     ports:
       - "8084:8000"
     environment:
