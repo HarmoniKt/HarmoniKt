@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.5.0...1.6.0) (2025-07-16)
+
+### Features
+
+* add swagger ui for robot manager ([dd23b2d](https://github.com/HarmoniKt/HarmoniKt/commit/dd23b2d43c804f7b63b19066ba6fbaf50ceec7e2))
+
 ## [1.5.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.4.1...1.5.0) (2025-07-15)
 
 ### Features
