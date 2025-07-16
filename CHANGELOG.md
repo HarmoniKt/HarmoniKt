@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.7.1...1.8.0) (2025-07-16)
+
+### Features
+
+* porting kotlin structure in python ([1328aa3](https://github.com/HarmoniKt/HarmoniKt/commit/1328aa3e7e79f7e493623c39030f7dd54c3bd85f))
+
 ## [1.7.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.7.0...1.7.1) (2025-07-16)
 
 ### Bug Fixes
