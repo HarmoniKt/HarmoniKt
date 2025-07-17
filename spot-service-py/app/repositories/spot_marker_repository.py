@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 from uuid import UUID, uuid4
 
-from ..models import SpotMarker
+from app.models import SpotMarker
 
 class MarkerRepository(ABC):
     """

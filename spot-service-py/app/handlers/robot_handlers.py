@@ -9,8 +9,8 @@ from fastapi import APIRouter, HTTPException
 from typing import List
 from uuid import UUID
 
-from ..repositories.spot_robot_repository import RobotRepository
-from ..models import Robot, RobotPosition, RobotState, SpotMarker
+from app.repositories.spot_robot_repository import RobotRepository
+from app.models import Robot, RobotPosition, RobotState, SpotMarker
 
 # Create a router for robot endpoints
 router = APIRouter()

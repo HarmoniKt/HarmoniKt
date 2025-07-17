@@ -10,8 +10,8 @@ from typing import List
 from uuid import UUID
 import logging
 
-from ..repositories.spot_marker_repository import MarkerRepository
-from ..models import SpotMarker
+from app.repositories.spot_marker_repository import MarkerRepository
+from app.models import SpotMarker
 
 # Create a router for marker endpoints
 router = APIRouter()

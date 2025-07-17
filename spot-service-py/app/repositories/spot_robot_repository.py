@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 from uuid import UUID, uuid4
 
-from ..models import Robot, RobotPosition, RobotState, RobotType, CanonicalName, BatteryLevel
+from app.models import Robot, RobotPosition, RobotState, RobotType, CanonicalName, BatteryLevel
 
 class RobotRepository(ABC):
     """

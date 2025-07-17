@@ -9,7 +9,7 @@ define the URL paths and route structures here for documentation purposes.
 from uuid import UUID
 
 # Import models using relative imports
-from ..models import SpotMarker
+from app.models import SpotMarker
 
 # Define the URL paths for the robot resources
 ROBOTS_PATH = "/robots"

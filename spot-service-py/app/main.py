@@ -5,12 +5,12 @@ import logging
 from fastapi import FastAPI
 
 # Import models and repositories
-from .repositories.spot_marker_repository import FakeSpotMarkerRepository
-from .repositories.spot_robot_repository import FakeSpotRobotRepository
+from app.repositories.spot_marker_repository import FakeSpotMarkerRepository
+from app.repositories.spot_robot_repository import FakeSpotRobotRepository
 
 # Import handlers
-from .handlers.robot_handlers import setup_robot_handlers
-from .handlers.marker_handlers import setup_marker_handlers
+from app.handlers.robot_handlers import setup_robot_handlers
+from app.handlers.marker_handlers import setup_marker_handlers
 
 logging.basicConfig(
     level=logging.INFO,
