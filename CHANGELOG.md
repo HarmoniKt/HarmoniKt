@@ -1,3 +1,9 @@
+## [1.8.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.8.0...1.8.1) (2025-07-17)
+
+### Bug Fixes
+
+* python imports ([79e62f6](https://github.com/HarmoniKt/HarmoniKt/commit/79e62f608e4dcd3636bc180c6e992f21c587827f))
+
 ## [1.8.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.7.1...1.8.0) (2025-07-16)
 
 ### Features
