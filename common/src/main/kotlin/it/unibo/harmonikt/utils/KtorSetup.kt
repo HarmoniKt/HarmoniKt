@@ -19,8 +19,6 @@ object KtorSetup {
      * Common Ktor setup for applications.
      * This function installs common plugins and configurations for Ktor applications.
      * It includes content negotiation, logging, CORS, and an HTTP client with Consul service discovery.
-     *
-     * @return Configured HttpClient instance.
      */
     fun Application.commonKtorSetup() {
         install(Resources)
@@ -36,7 +34,16 @@ object KtorSetup {
         }
     }
 
-    fun Application.ktorClientSetup(): HttpClient = HttpClient(Apache) {
+    /**
+     * Sets up an HTTP client for Ktor applications.
+     *
+     * This function configures an HTTP client with the Apache engine,
+     * installs the Consul plugin for service discovery,
+     * and sets up retry logic for HTTP requests.
+     *
+     * @return An instance of [HttpClient] configured for Ktor applications.
+     */
+    fun ktorClientSetup(): HttpClient = HttpClient(Apache) {
         install(ConsulPlugin)
         install(HttpRequestRetry) {
             retryOnServerErrors(maxRetries = 5)
