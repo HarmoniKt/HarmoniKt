@@ -30,6 +30,7 @@ allprojects {
     }
 
     dependencies {
+        implementation(rootProject.libs.bundles.arrow)
         implementation(rootProject.libs.consul.client)
         implementation(rootProject.libs.kotlin.stdlib)
         implementation(rootProject.libs.kotlin.reflect)

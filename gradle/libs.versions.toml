@@ -1,4 +1,5 @@
 [versions]
+arrow = "2.1.2"
 consul-client = "1.4.0"
 kotlin = "2.1.10"
 mockito = "5.16.1"
@@ -8,6 +9,9 @@ logback-version = "1.5.3"
 slf4j-version = "2.0.12"
 
 [libraries]
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+arrow-resilience = { module = "io.arrow-kt:arrow-resilience", version.ref = "arrow" }
 consul-client = { module = "com.orbitz.consul:consul-client", version.ref = "consul-client" }
 eureka = { module = "com.netflix.eureka:eureka-client", version = "2.0.4" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -33,6 +37,7 @@ slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j-version" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-version" }
 
 [bundles]
+arrow = [ "arrow-core", "arrow-fx-coroutines", "arrow-resilience" ]
 kotlin-testing = [ "kotlin-test", "kotlin-test-annotations-common", "mockito-core" ]
 logging = [ "slf4j-api", "logback-classic" ]
 ktor-server = [

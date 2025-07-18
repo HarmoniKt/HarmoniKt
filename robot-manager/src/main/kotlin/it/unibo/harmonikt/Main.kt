@@ -1,22 +1,12 @@
 package it.unibo.harmonikt
 
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.apache.Apache
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
-import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
-import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.server.plugins.calllogging.CallLogging
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.plugins.cors.routing.CORS
-import io.ktor.server.plugins.requestvalidation.RequestValidation
 import io.ktor.server.plugins.swagger.swaggerUI
-import io.ktor.server.resources.Resources
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
@@ -28,10 +18,10 @@ import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repositories.ActionRepositoryRobotManager
 import it.unibo.harmonikt.repositories.PointOfInterestRepositoryRobotManager
 import it.unibo.harmonikt.repositories.RobotRepositoryRobotManager
-import it.unibo.harmonikt.utils.ConsulPlugin
 import it.unibo.harmonikt.utils.ConsulRegisterService
+import it.unibo.harmonikt.utils.KtorSetup.commonKtorSetup
+import it.unibo.harmonikt.utils.KtorSetup.ktorClientSetup
 import org.slf4j.LoggerFactory
-import org.slf4j.event.Level
 import java.net.InetAddress
 
 /**
@@ -57,24 +47,9 @@ fun main() {
 }
 
 private fun Application.module() {
-    // Create a logger for this module
-    val logger = LoggerFactory.getLogger("it.unibo.harmonikt.robot-manager")
+    commonKtorSetup()
 
-    install(Resources)
-    install(ContentNegotiation) { json() }
-    install(RequestValidation)
-    install(CallLogging) {
-        level = Level.INFO
-        // Log all requests
-    }
-    install(CORS) {
-        anyHost()
-        allowHeader(HttpHeaders.ContentType)
-    }
-
-    val client = HttpClient(Apache) {
-        install(ConsulPlugin)
-    }
+    val client = ktorClientSetup()
 
     val actionRepository = ActionRepositoryRobotManager()
     val pointOfInterestRepository = PointOfInterestRepositoryRobotManager()

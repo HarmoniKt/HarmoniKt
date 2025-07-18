@@ -1,13 +1,8 @@
 package it.unibo.harmonikt
 
-import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
-import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.server.plugins.calllogging.CallLogging
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.resources.Resources
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
@@ -16,7 +11,7 @@ import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repository.FakeSpotMarkerRepository
 import it.unibo.harmonikt.repository.FakeSpotRobotRepository
 import it.unibo.harmonikt.utils.ConsulRegisterService
-import org.slf4j.event.Level
+import it.unibo.harmonikt.utils.KtorSetup.commonKtorSetup
 import java.net.InetAddress
 
 /**
@@ -46,18 +41,9 @@ fun main() {
  * repositories, and routing for the various API endpoints provided by the service.
  */
 private fun Application.module() {
-    // Install JSON content negotiation for request/response serialization
-    install(Resources)
-    install(ContentNegotiation) { json() }
-    install(CallLogging) {
-        level = Level.INFO
-        // Log all requests
-    }
+    commonKtorSetup()
 
-    // Create HTTP client with Consul service discovery plugin
-//    val client = HttpClient(Apache) {
-//        install(ConsulPlugin)
-//    }
+//    val client = ktorClientSetup()
 
     // Initialize repositories
     val markerRepository = FakeSpotMarkerRepository()
