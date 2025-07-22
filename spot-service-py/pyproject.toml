@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "bosdyn-client>=5.0.0",
     "fastapi[standard]>=0.116.1",
     "requests>=2.32.4",
     "uvicorn>=0.35.0",
@@ -14,3 +15,6 @@ dependencies = [
 dev = [
     "ruff>=0.12.3",
 ]
+
+[tool.poetry]
+packages = [{ include = ".", from = "app" }]

@@ -19,19 +19,17 @@ ROBOT_MOVE_PATH = "/robots/{robot_id}/move"
 
 # Define the route parameters for documentation
 ROBOT_ID_PARAM = {
-    "robot_id": {
-        "description": "The unique identifier of the robot",
-        "type": UUID
-    }
+    "robot_id": {"description": "The unique identifier of the robot", "type": UUID}
 }
 
 # Define the request body schemas for documentation
 ROBOT_MOVE_BODY = {
     "target": {
         "description": "The target marker where the robot should be moved",
-        "type": SpotMarker
+        "type": SpotMarker,
     }
 }
+
 
 class SpotRobots:
     """
@@ -41,7 +39,7 @@ class SpotRobots:
     allowing for operations such as retrieving, moving, and managing
     specific robots identified by their unique IDs.
     """
-    
+
     class Id:
         """
         Represents a specific robot identified by its ID.
@@ -49,7 +47,7 @@ class SpotRobots:
         This nested resource allows for operations on a specific robot
         by its unique identifier.
         """
-        
+
         class Position:
             """
             Represents the position of a specific robot.
@@ -57,8 +55,9 @@ class SpotRobots:
             This nested resource allows for operations related to the position
             of a specific robot identified by its ID.
             """
+
             pass
-        
+
         class Move:
             """
             Represents the action of moving a robot to a specific target marker.
@@ -66,4 +65,5 @@ class SpotRobots:
             This nested resource allows for moving a robot to a target marker
             identified by its unique SpotMarker.
             """
+
             pass

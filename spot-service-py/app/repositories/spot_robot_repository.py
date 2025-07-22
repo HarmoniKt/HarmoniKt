@@ -1,13 +1,16 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from uuid import UUID, uuid4
+import bosdyn.client
 
-from app.models import Robot, RobotPosition, RobotState, RobotType, CanonicalName, BatteryLevel
+from app.models import Robot, RobotPosition, RobotState, SpotRobot, CanonicalName
+
 
 class RobotRepository(ABC):
     """
     Abstract base class for robot repositories.
     """
+
     @abstractmethod
     def get_robots(self) -> List[UUID]:
         """Returns the list of all robot IDs."""
@@ -17,6 +20,14 @@ class RobotRepository(ABC):
     def get_robot_by_id(self, robot_id: UUID) -> Optional[Robot]:
         """Returns the robot with the given id, or None if not found."""
         pass
+
+    @abstractmethod
+    def create_robot(
+        self, username: str, password: str, address: str, canonical_name: str
+    ) -> UUID:
+        """Creates a new robot and returns its ID."""
+        """This method is not abstract in the original code, but it is included here for completeness."""
+        raise NotImplementedError("This method should be implemented by subclasses.")
 
     @abstractmethod
     def update_robot_position(self, robot_id: UUID, position: RobotPosition) -> bool:
@@ -29,46 +40,49 @@ class RobotRepository(ABC):
         pass
 
 
-class FakeSpotRobotRepository(RobotRepository):
+class SpotRobotRepositoryImpl(RobotRepository):
     """
-    Fake implementation of SpotRobotRepository for testing purposes.
+    Implementation of SpotRobotRepository.
     Stores robots in memory.
     """
-    def __init__(self):
-        self.robots = [
-            Robot(
-                id=uuid4(),
-                name=CanonicalName(name="Spot 1"),
-                battery_level=BatteryLevel(value=85.0),
-                current_position=RobotPosition(x=10, y=20),
-                current_state=RobotState.IDLE,
-                type=RobotType.SPOT,
-            ),
-            Robot(
-                id=uuid4(),
-                name=CanonicalName(name="Spot 2"),
-                battery_level=BatteryLevel(value=70.0),
-                current_position=RobotPosition(x=30, y=40),
-                current_state=RobotState.ON_MISSION,
-                type=RobotType.SPOT,
-            ),
-            Robot(
-                id=uuid4(),
-                name=CanonicalName(name="Spot 3"),
-                battery_level=BatteryLevel(value=25.0),
-                current_position=RobotPosition(x=50, y=60),
-                current_state=RobotState.RECHARGING,
-                type=RobotType.SPOT,
-            ),
-        ]
 
-    def get_robots(self) -> List[UUID]:
+    spot_robot_info: dict[UUID, SpotRobot] = {}
+    spot_robot_status: dict[UUID, Robot] = {}
+
+    def get_robots(self) -> list[tuple[UUID, str]]:
         """Returns the list of all robot IDs."""
-        return [robot.id for robot in self.robots]
+        return [
+            (id, robot.canonical_name) for id, robot in self.spot_robot_info.items()
+        ]
 
     def get_robot_by_id(self, robot_id: UUID) -> Optional[Robot]:
         """Returns the robot with the given id, or None if not found."""
         return next((robot for robot in self.robots if robot.id == robot_id), None)
+
+    def create_robot(
+        self, username: str, password: str, address: str, canonical_name: str
+    ) -> UUID:
+        """
+        Creates a new robot and returns its ID.
+        If the robot already exists, raises a ValueError.
+        """
+        # Generate a new UUID for the robot
+        robot_id = uuid4()
+
+        sdk = bosdyn.client.create_standard_sdk("RobotStateClient")
+        robot_delegate = sdk.create_robot(address=address)
+        robot_delegate.authenticate(username, password)
+
+        new_spot_robot = SpotRobot(
+            username=username,
+            password=password,
+            address=address,
+            canonical_name=CanonicalName(name=canonical_name),
+            delegate=robot_delegate,
+        )
+
+        self.spot_robot_info[robot_id] = new_spot_robot
+        return robot_id
 
     def update_robot_position(self, robot_id: UUID, position: RobotPosition) -> bool:
         """

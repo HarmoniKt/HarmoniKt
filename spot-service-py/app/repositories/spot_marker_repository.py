@@ -4,10 +4,12 @@ from uuid import UUID, uuid4
 
 from app.models import SpotMarker
 
+
 class MarkerRepository(ABC):
     """
     Abstract base class for marker repositories.
     """
+
     @abstractmethod
     def get_markers(self) -> List[SpotMarker]:
         """Returns the list of all markers."""
@@ -34,6 +36,7 @@ class FakeSpotMarkerRepository(MarkerRepository):
     Fake implementation of SpotMarkerRepository for testing purposes.
     Stores markers in memory.
     """
+
     def __init__(self):
         self.markers = [
             SpotMarker(id=uuid4(), waypoint="Waypoint 1"),

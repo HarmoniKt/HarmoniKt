@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 # Import models and repositories
 from app.repositories.spot_marker_repository import FakeSpotMarkerRepository
-from app.repositories.spot_robot_repository import FakeSpotRobotRepository
+from app.repositories.spot_robot_repository import SpotRobotRepositoryImpl
 
 # Import handlers
 from app.handlers.robot_handlers import setup_robot_handlers
@@ -18,6 +18,7 @@ logging.basicConfig(
 )
 
 app = FastAPI(title="Spot Service", version="1.0.0")
+
 
 def register_consul_service(
     consul_url: str | None = None,
@@ -57,12 +58,14 @@ logging.info("Registered to Consul: %s", resp.status_code)
 
 # Initialize repositories
 marker_repository = FakeSpotMarkerRepository()
-robot_repository = FakeSpotRobotRepository()
+robot_repository = SpotRobotRepositoryImpl()
+
 
 # Health check endpoint
 @app.get("/")
 async def health_check():
     return {"message": "Hello, world from Spot Service!"}
+
 
 # Set up the handlers with the repositories
 robot_router = setup_robot_handlers(robot_repository)
