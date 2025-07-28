@@ -6,7 +6,7 @@ mockito = "5.16.1"
 kotlinx-serialization = "1.8.1"
 ktor-version = "3.0.3"
 logback-version = "1.5.18"
-slf4j-version = "2.0.12"
+slf4j-version = "2.0.17"
 
 [libraries]
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
