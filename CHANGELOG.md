@@ -1,3 +1,21 @@
+## [1.9.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.1...1.9.2) (2025-07-28)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.9.0 ([287bf93](https://github.com/HarmoniKt/HarmoniKt/commit/287bf9330fc379287e5819c6e809183c3d062615))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.5.18 ([1c7ab94](https://github.com/HarmoniKt/HarmoniKt/commit/1c7ab9424f0101b4cb39de30a089205b8a19bdd9))
+* **deps:** update dependency com.netflix.eureka:eureka-client to v2.0.5 ([#28](https://github.com/HarmoniKt/HarmoniKt/issues/28)) ([8165a26](https://github.com/HarmoniKt/HarmoniKt/commit/8165a2678a05883255b9fb4a620bbdb907050dd6))
+* **deps:** update dependency org.slf4j:slf4j-api to v2.0.17 ([#30](https://github.com/HarmoniKt/HarmoniKt/issues/30)) ([44d7151](https://github.com/HarmoniKt/HarmoniKt/commit/44d715139092c0740afeb274002241d4260b47a0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.138 ([d87abb2](https://github.com/HarmoniKt/HarmoniKt/commit/d87abb21eda144b0a935e1647ec03fc9d683945f))
+* **deps:** update plugin kotlin-qa to v0.78.3 ([b79177c](https://github.com/HarmoniKt/HarmoniKt/commit/b79177c36189f0a8cc899c63fbac7a0469641be9))
+* **deps:** update plugin kotlin-qa to v0.82.0 ([368a6dd](https://github.com/HarmoniKt/HarmoniKt/commit/368a6dd71754626d815d893aeb511ecab28a559e))
+* **deps:** update plugin multijvmtesting to v3.4.3 ([#21](https://github.com/HarmoniKt/HarmoniKt/issues/21)) ([4674225](https://github.com/HarmoniKt/HarmoniKt/commit/46742253962669ff0fcf9264aafcec85f69e2916))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.20 ([7a7894a](https://github.com/HarmoniKt/HarmoniKt/commit/7a7894a6b2052ffe779354855c70364c448283f4))
+* **deps:** update dependency windows github actions runner to v2025 ([#20](https://github.com/HarmoniKt/HarmoniKt/issues/20)) ([f27d8ce](https://github.com/HarmoniKt/HarmoniKt/commit/f27d8ce433f3fd3b673a862987b16cb28c3ea50f))
+
 ## [1.9.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.0...1.9.1) (2025-07-28)
 
 ### Dependency updates
