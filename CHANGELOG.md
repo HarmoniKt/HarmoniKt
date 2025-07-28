@@ -1,3 +1,9 @@
+## [1.9.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.0...1.9.1) (2025-07-28)
+
+### Dependency updates
+
+* **core-deps:** update kotlin to v2.1.21 ([1a5b2c7](https://github.com/HarmoniKt/HarmoniKt/commit/1a5b2c7f5dc98345a467a99cf5a36ba21bfc19fd))
+
 ## [1.9.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.8.1...1.9.0) (2025-07-28)
 
 ### Features
