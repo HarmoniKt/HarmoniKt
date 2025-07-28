@@ -14,6 +14,11 @@ import io.ktor.server.plugins.requestvalidation.RequestValidation
 import io.ktor.server.resources.Resources
 import org.slf4j.event.Level
 
+/**
+ * Object providing utility methods for setting up Ktor applications and HTTP clients.
+ * This includes common configurations such as content negotiation, logging, CORS setup,
+ * and the creation of an HTTP client with service discovery capabilities using the Consul plugin.
+ */
 object KtorSetup {
     /**
      * Common Ktor setup for applications.
