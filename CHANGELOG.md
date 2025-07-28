@@ -1,3 +1,29 @@
+## [1.9.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.8.1...1.9.0) (2025-07-28)
+
+### Features
+
+* add classes generated from boston dynamics' proto definition ([b352a19](https://github.com/HarmoniKt/HarmoniKt/commit/b352a19c709e42d610e061b9e11ff7bf7d84e8d4))
+* add manipulation of robot responses ([5c95dc3](https://github.com/HarmoniKt/HarmoniKt/commit/5c95dc34212092e608c8e14cd048d9f3531e1b0b))
+* implement mocked model of spot robot ([1e1c6ec](https://github.com/HarmoniKt/HarmoniKt/commit/1e1c6ec9b038d2f522869ab196af31d3ab26fc3c))
+* **spot:** GET, POST /robots ([2a81ef2](https://github.com/HarmoniKt/HarmoniKt/commit/2a81ef23ae6d4eb48ec17c8c36de2d9e4651a504))
+
+### Documentation
+
+* add missing kdoc ([adf8c4d](https://github.com/HarmoniKt/HarmoniKt/commit/adf8c4d0e1147919e962f8c961a763a251e361bf))
+
+### General maintenance
+
+* add DS_Store files in gitignore ([64aab8b](https://github.com/HarmoniKt/HarmoniKt/commit/64aab8b8d7df65bdee20b1c85e7c4b0bd053e1e1))
+* add missing documentation ([c20d71c](https://github.com/HarmoniKt/HarmoniKt/commit/c20d71c6c5bd17252e1848048642698972fd1730))
+* init subproject ([ab7f048](https://github.com/HarmoniKt/HarmoniKt/commit/ab7f048d13e911c1897aab7dffbc138fe3ae7c57))
+* remvoe useless main ([3c23fde](https://github.com/HarmoniKt/HarmoniKt/commit/3c23fde1bccbea9eacdafc168f5b4a8a51cd96f7))
+* rename bosdyn generated classes ([8539599](https://github.com/HarmoniKt/HarmoniKt/commit/85395993b1cd4d79f38a063b2871735dfa707f0b))
+* update deps ([746606f](https://github.com/HarmoniKt/HarmoniKt/commit/746606fee12b1c050d7755f0824469311a28e057))
+
+### Refactoring
+
+* move into common config the ktor setup and add client retry ([a21c377](https://github.com/HarmoniKt/HarmoniKt/commit/a21c377fc53ebd0d45fbbfa53fc152790a717f8b))
+
 ## [1.8.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.8.0...1.8.1) (2025-07-17)
 
 ### Bug Fixes
