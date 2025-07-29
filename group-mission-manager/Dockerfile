@@ -28,7 +28,7 @@ WORKDIR /home/gradle
 RUN gradle :group-mission-manager:buildFatJar --no-daemon
 
 # Stage 3: Create the Runtime Image
-FROM amazoncorretto:22 AS runtime
+FROM amazoncorretto:23 AS runtime
 EXPOSE 8080
 RUN mkdir /app
 COPY --from=build /home/gradle/group-mission-manager/build/libs/group-mission-manager.jar /app/group-mission-manager.jar

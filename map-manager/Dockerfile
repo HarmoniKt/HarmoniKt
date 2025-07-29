@@ -16,7 +16,7 @@ WORKDIR /home/gradle
 RUN gradle :map-manager:buildFatJar --no-daemon
 
 # Stage 3: Create the Runtime Image
-FROM amazoncorretto:22 AS runtime
+FROM amazoncorretto:23 AS runtime
 EXPOSE 8080
 RUN mkdir /app
 COPY --from=build /home/gradle/map-manager/build/libs/map-manager.jar /app/map-manager.jar

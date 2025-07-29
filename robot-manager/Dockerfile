@@ -16,7 +16,7 @@ WORKDIR /home/gradle
 RUN gradle :robot-manager:buildFatJar --no-daemon
 
 # Stage 3: Create the Runtime Image
-FROM amazoncorretto:22 AS runtime
+FROM amazoncorretto:23 AS runtime
 EXPOSE 8080
 RUN mkdir /app
 COPY --from=build /home/gradle/robot-manager/build/libs/robot-manager.jar /app/robot-manager.jar
