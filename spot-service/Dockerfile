@@ -16,7 +16,7 @@ WORKDIR /home/gradle
 RUN gradle :spot-service:buildFatJar --no-daemon
 
 # Stage 3: Create the Runtime Image
-FROM amazoncorretto:23 AS runtime
+FROM amazoncorretto:24 AS runtime
 EXPOSE 8080
 RUN mkdir /app
 COPY --from=build /home/gradle/spot-service/build/libs/spot-service.jar /app/spot-service.jar
