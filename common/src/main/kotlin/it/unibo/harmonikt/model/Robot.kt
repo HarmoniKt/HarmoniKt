@@ -114,12 +114,12 @@ data class RobotPosition(
     /**
      * The x-coordinate of the robot's position.
      */
-    val x: Int,
+    val x: Double,
 
     /**
      * The y-coordinate of the robot's position.
      */
-    val y: Int,
+    val y: Double,
 )
 
 /**
