@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.ktor)
-//    alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.serialization)
     alias(libs.plugins.taskTree)
 }
@@ -24,7 +23,6 @@ allprojects {
         apply(plugin = kotlin.jvm.id)
         apply(plugin = kotlin.qa.id)
         apply(plugin = ktor.id)
-//        apply(plugin = multiJvmTesting.id)
         apply(plugin = serialization.id)
         apply(plugin = taskTree.id)
     }
