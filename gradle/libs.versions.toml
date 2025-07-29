@@ -1,7 +1,7 @@
 [versions]
 arrow = "2.1.2"
 consul-client = "1.5.3"
-kotlin = "2.1.21"
+kotlin = "2.2.0"
 mockito = "5.16.1"
 kotlinx-serialization = "1.9.0"
 ktor-version = "3.2.2"
