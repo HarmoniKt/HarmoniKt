@@ -1,3 +1,28 @@
+## [1.9.3](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.2...1.9.3) (2025-07-29)
+
+### Dependency updates
+
+* **core-deps:** update kotlin to v2.2.0 ([4565a36](https://github.com/HarmoniKt/HarmoniKt/commit/4565a3667def444659a60431257217fc734065f7))
+* **deps:** fix ktor version ([8737684](https://github.com/HarmoniKt/HarmoniKt/commit/87376849c6ee917058607bdf0411d365cb0b23c9))
+* **deps:** update dependency com.orbitz.consul:consul-client to v1.4.2 ([2a9186a](https://github.com/HarmoniKt/HarmoniKt/commit/2a9186a0af5576973aaa570e6974ca1bf5628793))
+* **deps:** update dependency com.orbitz.consul:consul-client to v1.5.3 ([#35](https://github.com/HarmoniKt/HarmoniKt/issues/35)) ([19f017e](https://github.com/HarmoniKt/HarmoniKt/commit/19f017e276c0347cf081716cdb1c0ba38058d24e))
+* **deps:** update dependency io.ktor:ktor-server-content-negotiation to v3.2.3 ([4ab0e00](https://github.com/HarmoniKt/HarmoniKt/commit/4ab0e000424d4d021e1aae2a4a07d6f2c57a9b58))
+* **deps:** update dependency io.ktor.plugin to v3.3.0-eap-115 ([#38](https://github.com/HarmoniKt/HarmoniKt/issues/38)) ([2eae9a1](https://github.com/HarmoniKt/HarmoniKt/commit/2eae9a1a473d6be6fd0a169aa0b37e11ef7d4a31))
+* **deps:** update ktor monorepo to v3.1.3 ([09cc90b](https://github.com/HarmoniKt/HarmoniKt/commit/09cc90bd621dd57499a634f8282f9978ed29cae4))
+* **deps:** update node.js to 22.16 ([ec8073a](https://github.com/HarmoniKt/HarmoniKt/commit/ec8073a63792e2096094709b6913b2680afbede0))
+* **deps:** update node.js to 22.17 ([#42](https://github.com/HarmoniKt/HarmoniKt/issues/42)) ([ffa8d62](https://github.com/HarmoniKt/HarmoniKt/commit/ffa8d6270532149dd5861478b744bf3deb8ad820))
+* **deps:** update plugin com.gradle.develocity to v4 ([#19](https://github.com/HarmoniKt/HarmoniKt/issues/19)) ([aac7387](https://github.com/HarmoniKt/HarmoniKt/commit/aac7387a68c7bb64d002372f7cff6a0bdc76c2b1))
+* **deps:** update plugin gitsemver to v5 ([#23](https://github.com/HarmoniKt/HarmoniKt/issues/23)) ([8858e2e](https://github.com/HarmoniKt/HarmoniKt/commit/8858e2e7fbc0b31ddd0aed57e842ddc42056dcfd))
+* **deps:** update plugin kotlin-qa to v0.88.0 ([#44](https://github.com/HarmoniKt/HarmoniKt/issues/44)) ([4ea5fbc](https://github.com/HarmoniKt/HarmoniKt/commit/4ea5fbccb020d6d3e065a5d6bbdc783702fe9dae))
+* **deps:** update plugin kotlin-qa to v0.91.0 ([#47](https://github.com/HarmoniKt/HarmoniKt/issues/47)) ([7cdd805](https://github.com/HarmoniKt/HarmoniKt/commit/7cdd8051e4ca3a6d5ff563b29a0453b27caa384a))
+* **deps:** update plugin multijvmtesting to v3.6.0 ([#50](https://github.com/HarmoniKt/HarmoniKt/issues/50)) ([73f716e](https://github.com/HarmoniKt/HarmoniKt/commit/73f716ee1400ed2b4b616ae29b4e67222d71382e))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.10.0 ([#18](https://github.com/HarmoniKt/HarmoniKt/issues/18)) ([75d59c8](https://github.com/HarmoniKt/HarmoniKt/commit/75d59c829151af346d15c454c988e2d44405f000))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v1 ([#53](https://github.com/HarmoniKt/HarmoniKt/issues/53)) ([5deccf7](https://github.com/HarmoniKt/HarmoniKt/commit/5deccf7d38a7d531ed7db381fe2d8e61e45939d2))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.4.0 ([0f4cff3](https://github.com/HarmoniKt/HarmoniKt/commit/0f4cff3d6f5b124b9daa4ae2ed7603bcf1ee947c))
+
 ## [1.9.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.1...1.9.2) (2025-07-28)
 
 ### Dependency updates
