@@ -25,17 +25,17 @@ class FakeMirRobotRepository : MirRobotRepository {
     private val robots = mutableListOf(
         Robot(
             id = Uuid.random(),
-            name = CanonicalName("Mir 1"),
+            name = "Mir 1",
             batteryLevel = BatteryLevel(90.0),
-            currentPosition = RobotPosition(15, 25),
+            currentPosition = RobotPosition(15.0, 25.0),
             currentState = RobotState.IDLE,
             type = RobotType.MIR,
         ),
         Robot(
             id = Uuid.random(),
-            name = CanonicalName("Mir 2"),
+            name = "Mir 2",
             batteryLevel = BatteryLevel(60.0),
-            currentPosition = RobotPosition(35, 45),
+            currentPosition = RobotPosition(35.0, 45.0),
             currentState = RobotState.ON_MISSION,
             type = RobotType.MIR,
         ),

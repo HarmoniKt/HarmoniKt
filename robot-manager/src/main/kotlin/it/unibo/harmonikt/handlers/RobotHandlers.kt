@@ -5,11 +5,15 @@ import io.ktor.server.request.receive
 import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
 import io.ktor.server.resources.post
+import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.api.RobotAPI
 import it.unibo.harmonikt.api.RobotCreationRequest
+import it.unibo.harmonikt.api.dto.RobotInfoDTO
 import it.unibo.harmonikt.model.Action
+import it.unibo.harmonikt.model.CanonicalName
 import it.unibo.harmonikt.model.RobotId
+import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.resources.Robots
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
@@ -59,9 +63,7 @@ object RobotHandlers {
     fun Routing.setupRobotHandlers(robot: RobotAPI, client: HttpClient) {
         // GET /robots - Retrieve all active robots
         get<Robots> {
-            robot.equals(0)
-            client.equals(0)
-            TODO("Not yet implemented")
+            call.respond(RobotInfoDTO(Uuid.random(), "peppino", RobotType.SPOT))
         }
 
         // POST /robots - Add a new robot

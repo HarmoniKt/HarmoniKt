@@ -96,14 +96,7 @@ value class BatteryLevel(
  * Represents a standardized name format for robots in the system.
  * This value class encapsulates the robot's name to ensure consistent naming conventions.
  */
-@JvmInline
-@Serializable
-value class CanonicalName(
-    /**
-     * The string representation of the robot's name.
-     */
-    val name: String,
-)
+typealias CanonicalName = String
 
 /**
  * Represents the position of a robot in a 2D environment.

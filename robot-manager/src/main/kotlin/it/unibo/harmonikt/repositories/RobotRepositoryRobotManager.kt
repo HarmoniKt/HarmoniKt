@@ -25,9 +25,9 @@ class RobotRepositoryRobotManager : RobotRepository {
         // Sample MIR robot
         val mirRobot = Robot(
             id = Uuid.random(),
-            name = CanonicalName("MIR-100"),
+            name = "MIR-100",
             batteryLevel = BatteryLevel(85.5),
-            currentPosition = RobotPosition(10, 20),
+            currentPosition = RobotPosition(10.0, 20.0),
             currentState = RobotState.IDLE,
             type = RobotType.MIR,
         )
@@ -36,9 +36,9 @@ class RobotRepositoryRobotManager : RobotRepository {
         // Sample SPOT robot
         val spotRobot = Robot(
             id = Uuid.random(),
-            name = CanonicalName("SPOT-1"),
+            name = "SPOT-1",
             batteryLevel = BatteryLevel(92.0),
-            currentPosition = RobotPosition(30, 40),
+            currentPosition = RobotPosition(30.0, 40.0),
             currentState = RobotState.ON_MISSION,
             type = RobotType.SPOT,
         )
