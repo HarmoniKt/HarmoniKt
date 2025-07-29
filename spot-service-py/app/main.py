@@ -22,7 +22,7 @@ app = FastAPI(title="Spot Service", version="1.0.0")
 
 def register_consul_service(
     consul_url: str | None = None,
-    service_name: str = "spot-service-py",
+    service_name: str = "spot-service",
     address: str | None = None,
     port: int = 8000,
     service_id: str | None = None,

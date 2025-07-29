@@ -60,7 +60,7 @@ private fun Application.module() {
         swaggerUI(path = "/swagger", swaggerFile = "openapi/harmonikt.yml") {}
         get("/hello") {
             val mirContent = client.get("http://mir-service/")
-            val spotContent = client.get("http://spot-service-py/robots")
+            val spotContent = client.get("http://spot-service/robots")
             call.respondText(
                 "This is the Robot Manager service! And can reach:\n" +
                     "MIR Service Response: ${mirContent.bodyAsText()}\n" +

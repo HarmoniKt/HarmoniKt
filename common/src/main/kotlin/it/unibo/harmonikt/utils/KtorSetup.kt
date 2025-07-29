@@ -8,11 +8,12 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.plugins.calllogging.CallLogging
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.plugins.requestvalidation.RequestValidation
 import io.ktor.server.resources.Resources
 import org.slf4j.event.Level
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation as ContentNegotiationClient
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation as ContentNegotiationServer
 
 /**
  * Object providing utility methods for setting up Ktor applications and HTTP clients.
@@ -27,7 +28,7 @@ object KtorSetup {
      */
     fun Application.commonKtorSetup() {
         install(Resources)
-        install(ContentNegotiation) { json() }
+        install(ContentNegotiationServer) { json() }
         install(RequestValidation)
         install(CallLogging) {
             level = Level.INFO
@@ -53,6 +54,9 @@ object KtorSetup {
         install(HttpRequestRetry) {
             retryOnServerErrors(maxRetries = 5)
             exponentialDelay()
+        }
+        install(ContentNegotiationClient) {
+            json() // Example: Register JSON content transformation
         }
     }
 }

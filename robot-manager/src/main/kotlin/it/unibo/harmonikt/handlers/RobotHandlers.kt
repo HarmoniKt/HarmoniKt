@@ -1,6 +1,8 @@
 package it.unibo.harmonikt.handlers
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
 import io.ktor.server.request.receive
 import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
@@ -63,7 +65,10 @@ object RobotHandlers {
     fun Routing.setupRobotHandlers(robot: RobotAPI, client: HttpClient) {
         // GET /robots - Retrieve all active robots
         get<Robots> {
-            call.respond(RobotInfoDTO(Uuid.random(), "peppino", RobotType.SPOT))
+//            call.respond(RobotInfoDTO(Uuid.random(), "peppino", RobotType.SPOT))
+            val spotsRobotInfoDTO = client.get("http://spot-service/robots").body<List<RobotInfoDTO>>()
+//            val mirRobotInfoDTO = client.get("http://mir-service/robots").body<List<RobotInfoDTO>>()
+            call.respond(spotsRobotInfoDTO)
         }
 
         // POST /robots - Add a new robot

@@ -17,7 +17,7 @@ class Robots {
      * @param parent The parent Robots resource.
      * @param robotId The unique identifier of the robot.
      */
-    @Resource("{robotId}")
+    @Resource("/{robotId}")
     class Id(val parent: Robots, val robotId: RobotId) {
         /**
          * Represents the actions resource for a specific robot.
@@ -26,7 +26,7 @@ class Robots {
          * associated with a specific robot.
          * @param parent The parent Id resource.
          */
-        @Resource("actions")
+        @Resource("/actions")
         class Actions(val parent: Id)
     }
 }
