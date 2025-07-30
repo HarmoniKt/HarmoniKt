@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.1
 info:
   title: Robot Management API
   version: 1.0.0
@@ -30,7 +30,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Robot'
+                  $ref: '#/components/schemas/RobotInfoDTO'
     post:
       tags:
         - robots
@@ -47,7 +47,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Robot'
+                $ref: '#/components/schemas/RobotIdDTO'
 
   /robots/{robotId}:
     parameters:
@@ -67,7 +67,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Robot'
+                $ref: '#/components/schemas/RobotStatusDTO'
         '404':
           description: Robot not found
     delete:
@@ -145,7 +145,7 @@ paths:
 
 components:
   schemas:
-    Robot:
+    RobotInfoDTO:
       type: object
       properties:
         id:
@@ -154,19 +154,71 @@ components:
         type:
           type: string
           enum: [MIR, SPOT]
-        name:
+        canonicalName:
           type: string
-      required: [id, type, name]
+      required: [id, type, canonicalName]
 
-    RobotCreate:
+    RobotIdDTO:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+        required: [id]
+
+    RobotStatusDTO:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+        canonicalName:
+          type: string
+        state:
+          type: string
+          enum: [IDLE, ON_MISSION, RECHARGING]
+        batteryLevel:
+          type: number
+          format: float
+        currentPosition:
+          type: object
+          properties:
+            x:
+              type: number
+              format: float
+            y:
+              type: number
+              format: float
         type:
           type: string
           enum: [MIR, SPOT]
-        name:
+      required: [id, type, canonicalName, status]
+
+    RobotCreate:
+      type: object
+      required: [canonicalName]
+      properties:
+        canonicalName:
           type: string
-      required: [type, name]
+      oneOf:
+        - required: [type, host, username, password]
+          properties:
+            type:
+              const: SPOT
+            host:
+              type: string
+            username:
+              type: string
+            password:
+              type: string
+        - required: [type, host, apiToken]
+          properties:
+            type:
+              const: MIR
+            host:
+              type: string
+            apiToken:
+              type: string
 
     Action:
       type: object
