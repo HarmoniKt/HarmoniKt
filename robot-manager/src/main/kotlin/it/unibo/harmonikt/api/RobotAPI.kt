@@ -6,16 +6,19 @@ import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
+import kotlinx.serialization.Serializable
 
 /**
  * Represents errors that can occur in the Robot Management API.
  */
+@Serializable
 sealed interface RobotAPIError {
     /**
      * Represents an error when a robot with the specified ID is not found.
      *
      * @property robotId The unique identifier of the robot that was not found.
      */
+    @Serializable
     data class RobotNotFound(val robotId: RobotId) : RobotAPIError
 
     /**
@@ -23,6 +26,7 @@ sealed interface RobotAPIError {
      *
      * @property name The canonical name of the robot that already exists.
      */
+    @Serializable
     data class RobotCanonicalNameAlreadyExists(val name: String) : RobotAPIError
 
     /**
@@ -30,6 +34,7 @@ sealed interface RobotAPIError {
      *
      * @property robotId The unique identifier of the robot that already exists.
      */
+    @Serializable
     data class RobotDeletionFailed(val robotId: RobotId) : RobotAPIError
 
     /**
@@ -37,6 +42,7 @@ sealed interface RobotAPIError {
      *
      * @property reason A description of the reason why the robot creation failed.
      */
+    @Serializable
     data class RobotCreationFailed(val reason: String?) : RobotAPIError
 }
 

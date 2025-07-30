@@ -1,8 +1,6 @@
 package it.unibo.harmonikt.handlers
 
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
@@ -10,7 +8,6 @@ import io.ktor.server.resources.post
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.api.RobotAPI
-import it.unibo.harmonikt.api.dto.RobotInfoDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.RobotId
@@ -67,7 +64,7 @@ object RobotHandlers {
         post<Robots> {
             val request = call.receive<RobotRegistrationDTO>()
             robot.registerNewRobot(request).fold(
-                { error -> TODO() },
+                { error -> call.respond(HttpStatusCode.InternalServerError, error) },
                 { robotId -> call.respond(robotId) },
             )
         }
