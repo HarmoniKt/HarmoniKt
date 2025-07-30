@@ -8,17 +8,6 @@ from bosdyn.client import Robot as BosdynRobot
 RobotId = UUID
 
 
-class RobotType(str, Enum):
-    """
-    Represents the type of robot within the system.
-    Determines the category or model of the robot and guides its specific functionalities,
-    such as marker type interpretation or action compatibility.
-    """
-
-    MIR = "MIR"
-    SPOT = "SPOT"
-
-
 class RobotState(str, Enum):
     """
     Represents the current operational state of a robot.
@@ -65,13 +54,13 @@ class Robot(BaseModel):
     """
 
     id: UUID
+    canonical_name: CanonicalName
     battery_level: BatteryLevel
     current_position: RobotPosition
     current_state: RobotState
-    type: RobotType
 
 
-class SpotRobot(BaseModel):
+class SpotRobot(Robot):
     """
     Represents a Spot robot in the system.
     Inherits from the base Robot class and specifies the type as SPOT.
@@ -82,7 +71,6 @@ class SpotRobot(BaseModel):
     username: str
     password: str
     address: str
-    canonical_name: CanonicalName
     delegate: BosdynRobot
 
 
