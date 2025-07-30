@@ -40,7 +40,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RobotCreate'
+              $ref: '#/components/schemas/RobotCreateDTO'
       responses:
         '201':
           description: Robot created
@@ -194,7 +194,7 @@ components:
           enum: [MIR, SPOT]
       required: [id, type, canonicalName, status]
 
-    RobotCreate:
+    RobotCreateDTO:
       type: object
       required: [canonicalName]
       properties:

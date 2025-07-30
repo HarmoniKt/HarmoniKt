@@ -18,6 +18,7 @@ import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repositories.ActionRepositoryRobotManager
 import it.unibo.harmonikt.repositories.PointOfInterestRepositoryRobotManager
 import it.unibo.harmonikt.repositories.RobotRepositoryRobotManager
+import it.unibo.harmonikt.repositories.mock.MockRepositoryRobotManager
 import it.unibo.harmonikt.utils.ConsulRegisterService
 import it.unibo.harmonikt.utils.KtorSetup.commonKtorSetup
 import it.unibo.harmonikt.utils.KtorSetup.ktorClientSetup
@@ -53,26 +54,27 @@ private fun Application.module() {
 
     val actionRepository = ActionRepositoryRobotManager()
     val pointOfInterestRepository = PointOfInterestRepositoryRobotManager()
-    val robotRepository = RobotRepositoryRobotManager()
-    val robotApi = RobotAPIImpl(robotRepository, actionRepository)
+    val robotRepository =
+        if (System.getenv("MOCKED") == "true") MockRepositoryRobotManager() else RobotRepositoryRobotManager()
+    val robotApi = RobotAPIImpl(robotRepository, actionRepository, client)
 
     routing {
         swaggerUI(path = "/swagger", swaggerFile = "openapi/harmonikt.yml") {}
-        get("/hello") {
-            val mirContent = client.get("http://mir-service/")
-            val spotContent = client.get("http://spot-service/robots")
-            call.respondText(
-                "This is the Robot Manager service! And can reach:\n" +
-                    "MIR Service Response: ${mirContent.bodyAsText()}\n" +
-                    "Spot Service Py Response: ${spotContent.bodyAsText()}",
-            )
-        }
+//        get("/hello") {
+//            val mirContent = client.get("http://mir-service/")
+//            val spotContent = client.get("http://spot-service/robots")
+//            call.respondText(
+//                "This is the Robot Manager service! And can reach:\n" +
+//                    "MIR Service Response: ${mirContent.bodyAsText()}\n" +
+//                    "Spot Service Py Response: ${spotContent.bodyAsText()}",
+//            )
+//        }
         get("/") {
             call.respond(HttpStatusCode.OK)
         }
 
         setupActionsHandlers(actionRepository, client)
         pointOfInterestsHandlers(pointOfInterestRepository, client)
-        setupRobotHandlers(robotApi, client)
+        setupRobotHandlers(robotApi)
     }
 }

@@ -10,12 +10,10 @@ import io.ktor.server.resources.post
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.api.RobotAPI
-import it.unibo.harmonikt.api.RobotCreationRequest
 import it.unibo.harmonikt.api.dto.RobotInfoDTO
+import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.model.Action
-import it.unibo.harmonikt.model.CanonicalName
 import it.unibo.harmonikt.model.RobotId
-import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.resources.Robots
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
@@ -36,11 +34,6 @@ data class ActionCreateRequest(val command: String)
 /**
  * Represents the response for a robot action.
  *
- * This data class holds information about a specific action performed by a robot,
- * including the unique identifier of the action, the identifier of the robot
- * that performed the action, the command issued, and a timestamp indicating
- * when the action was executed.
- *
  * @property id The unique identifier of the action.
  * @property robotId The identifier of the robot that performed the action.
  * @property command The command issued as part of the action.
@@ -60,22 +53,23 @@ object RobotHandlers {
      * and managing actions associated with a specific robot.
      *
      * @param robot The instance of the RobotAPI interface, which provides methods for interacting with robot data.
-     * @param client The HttpClient to be used for making any external HTTP requests required within the handlers.
      */
-    fun Routing.setupRobotHandlers(robot: RobotAPI, client: HttpClient) {
+    fun Routing.setupRobotHandlers(robot: RobotAPI) {
         // GET /robots - Retrieve all active robots
         get<Robots> {
 //            call.respond(RobotInfoDTO(Uuid.random(), "peppino", RobotType.SPOT))
-            val spotsRobotInfoDTO = client.get("http://spot-service/robots").body<List<RobotInfoDTO>>()
+//            val spotsRobotInfoDTO = client.get("http://spot-service/robots").body<List<RobotInfoDTO>>()
 //            val mirRobotInfoDTO = client.get("http://mir-service/robots").body<List<RobotInfoDTO>>()
-            call.respond(spotsRobotInfoDTO)
+//            call.respond(spotsRobotInfoDTO)
         }
 
         // POST /robots - Add a new robot
         post<Robots> {
-            val request = call.receive<RobotCreationRequest>()
-            request.equals(0)
-            TODO("Not yet implemented")
+            val request = call.receive<RobotRegistrationDTO>()
+            robot.registerNewRobot(request).fold(
+                { error -> TODO() },
+                { robotId -> call.respond(robotId) },
+            )
         }
 
         // GET /robots/{robotId} - Retrieve information about a robot

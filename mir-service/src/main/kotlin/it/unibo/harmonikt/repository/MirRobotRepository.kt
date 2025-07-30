@@ -41,6 +41,10 @@ class FakeMirRobotRepository : MirRobotRepository {
         ),
     )
 
+    override fun registerRobot(robot: RobotId, type: RobotType): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun getRobots(): List<RobotId> = robots.map { it.id }
 
     override fun getRobotById(id: RobotId): Robot? = robots.find { it.id == id }

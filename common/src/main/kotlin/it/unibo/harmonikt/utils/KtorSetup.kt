@@ -10,7 +10,10 @@ import io.ktor.server.application.install
 import io.ktor.server.plugins.calllogging.CallLogging
 import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.plugins.requestvalidation.RequestValidation
+import io.ktor.server.plugins.requestvalidation.ValidationResult
 import io.ktor.server.resources.Resources
+import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
+import kotlinx.serialization.json.Json
 import org.slf4j.event.Level
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation as ContentNegotiationClient
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation as ContentNegotiationServer
@@ -28,8 +31,16 @@ object KtorSetup {
      */
     fun Application.commonKtorSetup() {
         install(Resources)
-        install(ContentNegotiationServer) { json() }
-        install(RequestValidation)
+        install(ContentNegotiationServer) {
+            json(
+                Json {
+                    classDiscriminator = "type"
+                },
+            )
+        }
+        install(RequestValidation) {
+            validate<RobotRegistrationDTO>(RobotRegistrationDTO::validate)
+        }
         install(CallLogging) {
             level = Level.INFO
             // Log all requests
@@ -50,6 +61,7 @@ object KtorSetup {
      * @return An instance of [HttpClient] configured for Ktor applications.
      */
     fun ktorClientSetup(): HttpClient = HttpClient(Apache) {
+        expectSuccess = true
         install(ConsulPlugin)
         install(HttpRequestRetry) {
             retryOnServerErrors(maxRetries = 5)

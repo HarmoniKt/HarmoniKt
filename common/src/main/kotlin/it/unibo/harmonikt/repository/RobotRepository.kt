@@ -4,12 +4,22 @@ import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
+import it.unibo.harmonikt.model.RobotType
 
 /**
  * Repository interface for managing Robot entities.
  * This interface defines methods for retrieving and updating robot information.
  */
 interface RobotRepository {
+    /**
+     * Registers a new robot with the given id and type.
+     *
+     * @param robot the unique identifier of the robot
+     * @param type the type of the robot (e.g., MIR, SPOT)
+     * @return true if the registration was successful, false if a robot with the same id already exists
+     */
+    fun registerRobot(robot: RobotId, type: RobotType): Boolean
+
     /**
      * Returns the list of all robots.
      */

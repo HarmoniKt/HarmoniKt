@@ -2,60 +2,33 @@
 
 package it.unibo.harmonikt.repositories
 
-import it.unibo.harmonikt.model.BatteryLevel
-import it.unibo.harmonikt.model.CanonicalName
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.RobotRepository
-import kotlin.uuid.Uuid
 
 /**
  * Implementation of the RobotRepository interface for the Robot Manager service.
  * This class provides access to robot data in the Robot Manager service.
  */
 class RobotRepositoryRobotManager : RobotRepository {
-    // In-memory storage for robots
-    private val robots = mutableMapOf<RobotId, Robot>()
-
-    // Initialize with some sample robots
-    init {
-        // Sample MIR robot
-        val mirRobot = Robot(
-            id = Uuid.random(),
-            name = "MIR-100",
-            batteryLevel = BatteryLevel(85.5),
-            currentPosition = RobotPosition(10.0, 20.0),
-            currentState = RobotState.IDLE,
-            type = RobotType.MIR,
-        )
-        robots[mirRobot.id] = mirRobot
-
-        // Sample SPOT robot
-        val spotRobot = Robot(
-            id = Uuid.random(),
-            name = "SPOT-1",
-            batteryLevel = BatteryLevel(92.0),
-            currentPosition = RobotPosition(30.0, 40.0),
-            currentState = RobotState.ON_MISSION,
-            type = RobotType.SPOT,
-        )
-        robots[spotRobot.id] = spotRobot
+    override fun registerRobot(robot: RobotId, type: RobotType): Boolean {
+        TODO("Not yet implemented")
     }
 
     /**
      * Returns the list of all robots.
      */
-    override fun getRobots(): List<RobotId> = robots.keys.toList()
+    override fun getRobots(): List<RobotId> = TODO()
 
     /**
      * Returns the robot with the given id, or null if not found.
      *
      * @param id the unique identifier of the robot
      */
-    override fun getRobotById(id: RobotId): Robot? = robots[id]
+    override fun getRobotById(id: RobotId): Robot? = TODO()
 
     /**
      * Updates the position of the robot with the given id.
@@ -65,9 +38,7 @@ class RobotRepositoryRobotManager : RobotRepository {
      * @return true if the update was successful, false otherwise
      */
     override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean {
-        val robot = robots[id] ?: return false
-        robots[id] = robot.copy(currentPosition = position)
-        return true
+        TODO()
     }
 
     /**
@@ -78,9 +49,7 @@ class RobotRepositoryRobotManager : RobotRepository {
      * @return true if the update was successful, false otherwise
      */
     override fun updateRobotState(id: RobotId, state: RobotState): Boolean {
-        val robot = robots[id] ?: return false
-        robots[id] = robot.copy(currentState = state)
-        return true
+        TODO()
     }
 
     /**
@@ -90,7 +59,7 @@ class RobotRepositoryRobotManager : RobotRepository {
      * @return true if the robot was added successfully, false otherwise
      */
     fun addRobot(robot: Robot) {
-        robots[robot.id] = robot
+        TODO()
     }
 
     /**
@@ -99,5 +68,5 @@ class RobotRepositoryRobotManager : RobotRepository {
      * @param id the unique identifier of the robot to remove
      * @return true if the robot was removed successfully, false otherwise
      */
-    fun removeRobot(id: RobotId): Boolean = robots.remove(id) != null
+    fun removeRobot(id: RobotId): Boolean = TODO()
 }
