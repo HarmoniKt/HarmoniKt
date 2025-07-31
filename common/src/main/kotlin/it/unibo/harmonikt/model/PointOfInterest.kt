@@ -13,7 +13,7 @@ data class PointOfInterest(
      * Unique identifier for the point of interest.
      */
     val id: Uuid,
-    
+
     /**
      * Canonical name of the point of interest.
      * This name is used to identify the point in a human-readable format.

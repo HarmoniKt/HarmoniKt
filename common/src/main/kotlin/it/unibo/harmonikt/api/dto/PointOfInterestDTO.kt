@@ -3,6 +3,7 @@ package it.unibo.harmonikt.api.dto
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 import it.unibo.harmonikt.model.PointOfInterest
 import kotlinx.serialization.Serializable
+import kotlin.uuid.Uuid
 
 /**
  * Data Transfer Object (DTO) representing basic information about a point of interest in the system.
@@ -14,13 +15,27 @@ import kotlinx.serialization.Serializable
  *                            Different robot types may use different marker types to identify the same location.
  */
 @Serializable
-data class PointOfInterestDTO(val associatedMarkers: List<MarkerDTO>) {
+data class PointOfInterestDTO(
+    val id: Uuid,
+    val name: String,
+    val latitude: Float,
+    val longitude: Float,
+    /**
+     * The list of markers associated with this point of interest.
+     * Different robot types may use different marker types to identify the same location.
+     */
+    val associatedMarkers: List<MarkerDTO>,
+) {
     /**
      * Converts this DTO to a domain model PointOfInterest.
      *
      * @return A PointOfInterest domain model representing this DTO.
      */
     fun toPointOfInterest(): PointOfInterest = PointOfInterest(
+        id = id,
+        name = name,
+        latitude = latitude,
+        longitude = longitude,
         associatedMarkers = associatedMarkers.map { it.toMarker() },
     )
 
@@ -52,6 +67,10 @@ data class PointOfInterestDTO(val associatedMarkers: List<MarkerDTO>) {
          * @return A PointOfInterestDTO representing the given PointOfInterest.
          */
         fun fromPointOfInterest(pointOfInterest: PointOfInterest): PointOfInterestDTO = PointOfInterestDTO(
+            id = pointOfInterest.id,
+            name = pointOfInterest.name,
+            latitude = pointOfInterest.latitude,
+            longitude = pointOfInterest.longitude,
             associatedMarkers = pointOfInterest.associatedMarkers.map { MarkerDTO.fromMarker(it) },
         )
     }
