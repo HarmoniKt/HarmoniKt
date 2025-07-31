@@ -1,6 +1,6 @@
 package it.unibo.harmonikt.api.dto
 
-import io.ktor.server.plugins.requestvalidation.*
+import io.ktor.server.plugins.requestvalidation.ValidationResult
 import it.unibo.harmonikt.model.PointOfInterest
 import kotlinx.serialization.Serializable
 
