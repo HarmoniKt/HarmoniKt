@@ -30,10 +30,7 @@ sealed interface MarkerDTO {
      */
     @Serializable
     @SerialName("MIR")
-    data class MirMarkerDTO(
-        override val id: Uuid,
-        val identifier: String,
-    ) : MarkerDTO
+    data class MirMarkerDTO(override val id: Uuid, val identifier: String) : MarkerDTO
 
     /**
      * Data Transfer Object (DTO) for a SPOT marker.
@@ -43,10 +40,7 @@ sealed interface MarkerDTO {
      */
     @Serializable
     @SerialName("SPOT")
-    data class SpotMarkerDTO(
-        override val id: Uuid,
-        val waypoint: String,
-    ) : MarkerDTO
+    data class SpotMarkerDTO(override val id: Uuid, val waypoint: String) : MarkerDTO
 
     /**
      * Converts this DTO to a Marker model object.
