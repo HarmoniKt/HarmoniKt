@@ -64,7 +64,6 @@ sealed interface RobotRegistrationDTO {
     /**
      * Data Transfer Object (DTO) for registering a MIR robot.
      *
-     * @property type The type of the robot, defaulting to "MIR".
      * @property canonicalName The canonical name of the robot.
      * @property apiToken The API token for authentication.
      * @property host The host address of the robot.

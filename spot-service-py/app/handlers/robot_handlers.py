@@ -12,9 +12,10 @@ from uuid import UUID
 from app.repositories.spot_robot_repository import RobotRepository
 from app.models import Robot
 from app.api.robot_api import (
-    SpotRobotCreationRequest,
+    RobotRegistrationDTO,
     RobotInfoDTO,
     RobotStatusDTO,
+    RobotIdDTO,
 )
 
 # Create a router for robot endpoints
@@ -37,17 +38,17 @@ def setup_robot_handlers(repository: RobotRepository):
         """Get all robot IDs"""
         return [RobotInfoDTO.from_robot(robot) for robot in repository.get_robots()]
 
-    @router.post("/robots", response_model=UUID)
-    async def create_robot(robot_creation_request: SpotRobotCreationRequest):
+    @router.post("/robots", response_model=RobotIdDTO)
+    async def create_robot(robot_creation_request: RobotRegistrationDTO):
         """Create a new robot"""
         try:
             robot_id = repository.create_robot(
                 username=robot_creation_request.username,
                 password=robot_creation_request.password,
-                address=robot_creation_request.address,
-                canonical_name=robot_creation_request.canonical_name,
+                address=robot_creation_request.host,
+                canonical_name=robot_creation_request.canonicalName,
             )
-            return robot_id
+            return RobotIdDTO(id=robot_id)
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))
 

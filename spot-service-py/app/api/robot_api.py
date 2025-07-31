@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from app.models import RobotPosition, Robot
 
 
-class SpotRobotCreationRequest(BaseModel):
+class RobotRegistrationDTO(BaseModel):
     """
     Represents a request to create a new Spot robot.
     This model is used for validating the request body when creating a new Spot robot.
@@ -12,8 +12,16 @@ class SpotRobotCreationRequest(BaseModel):
 
     username: str
     password: str
-    address: str
-    canonical_name: str
+    host: str
+    canonicalName: str
+
+class RobotIdDTO(BaseModel):
+    """
+    Represents a request to create a new Spot robot with only the ID.
+    This model is used for validating the request body when creating a new Spot robot.
+    """
+
+    id: UUID
 
 
 class RobotInfoDTO(BaseModel):

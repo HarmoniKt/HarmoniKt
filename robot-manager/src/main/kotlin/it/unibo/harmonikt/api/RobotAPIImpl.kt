@@ -5,6 +5,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.model.Action
@@ -38,12 +40,18 @@ class RobotAPIImpl(
         Either.catch {
             when (request) {
                 is RobotRegistrationDTO.MirRobotRegistrationDTO -> {
-                    val robotId = client.post("http://mir-service/robots") { setBody(request) }.body<RobotIdDTO>()
+                    val robotId = client.post("http://mir-service/robots") {
+                        setBody(request)
+                        contentType(ContentType.Application.Json)
+                    }.body<RobotIdDTO>()
                     robotRepository.registerRobot(robotId.toRobotId(), RobotType.MIR)
                     robotId
                 }
                 is RobotRegistrationDTO.SpotRobotRegistrationDTO -> {
-                    val robotId = client.post("http://spot-service/robots") { setBody(request) }.body<RobotIdDTO>()
+                    val robotId = client.post("http://spot-service/robots") {
+                        setBody(request)
+                        contentType(ContentType.Application.Json)
+                    }.body<RobotIdDTO>()
                     robotRepository.registerRobot(robotId.toRobotId(), RobotType.SPOT)
                     robotId
                 }
