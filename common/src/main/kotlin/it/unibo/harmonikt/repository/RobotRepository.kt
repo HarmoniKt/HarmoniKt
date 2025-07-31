@@ -2,6 +2,7 @@ package it.unibo.harmonikt.repository
 
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
+import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
@@ -18,12 +19,12 @@ interface RobotRepository {
      * @param type the type of the robot (e.g., MIR, SPOT)
      * @return true if the registration was successful, false if a robot with the same id already exists
      */
-    fun registerRobot(robot: RobotId, type: RobotType): Boolean
+    fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean
 
     /**
      * Returns the list of all robots.
      */
-    fun getRobots(): List<RobotId>
+    fun getRobots(): List<RobotInfo>
 
     /**
      * Returns the robot with the given id, or null if not found.

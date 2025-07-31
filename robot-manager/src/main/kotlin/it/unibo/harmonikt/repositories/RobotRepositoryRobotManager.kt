@@ -4,6 +4,7 @@ package it.unibo.harmonikt.repositories
 
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
+import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
@@ -14,14 +15,14 @@ import it.unibo.harmonikt.repository.RobotRepository
  * This class provides access to robot data in the Robot Manager service.
  */
 class RobotRepositoryRobotManager : RobotRepository {
-    override fun registerRobot(robot: RobotId, type: RobotType): Boolean {
+    override fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean {
         TODO("Not yet implemented")
     }
 
     /**
      * Returns the list of all robots.
      */
-    override fun getRobots(): List<RobotId> = TODO()
+    override fun getRobots(): List<RobotInfo> = TODO()
 
     /**
      * Returns the robot with the given id, or null if not found.

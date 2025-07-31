@@ -54,10 +54,10 @@ object RobotHandlers {
     fun Routing.setupRobotHandlers(robot: RobotAPI) {
         // GET /robots - Retrieve all active robots
         get<Robots> {
-//            call.respond(RobotInfoDTO(Uuid.random(), "peppino", RobotType.SPOT))
-//            val spotsRobotInfoDTO = client.get("http://spot-service/robots").body<List<RobotInfoDTO>>()
-//            val mirRobotInfoDTO = client.get("http://mir-service/robots").body<List<RobotInfoDTO>>()
-//            call.respond(spotsRobotInfoDTO)
+            robot.getAllRobots().fold(
+                { error -> call.respond(HttpStatusCode.InternalServerError, error) },
+                { robots -> call.respond(robots) },
+            )
         }
 
         // POST /robots - Add a new robot

@@ -39,6 +39,27 @@ enum class RobotType {
 }
 
 /**
+ * Simple robot information class used for basic identification and categorization.
+ */
+@Serializable
+data class RobotInfo(
+    /**
+     * Unique identifier for the robot.
+     */
+    val id: RobotId,
+
+    /**
+     * Canonical name of the robot.
+     */
+    val canonicalName: CanonicalName,
+
+    /**
+     * Type of the robot, indicating its model or category (e.g., MIR, SPOT).
+     */
+    val type: RobotType,
+)
+
+/**
  * Represents a robot in the system.
  * This class is used at the `robot service` level to model robot entities.
  */

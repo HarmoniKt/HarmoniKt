@@ -2,23 +2,24 @@ package it.unibo.harmonikt.repositories.mock
 
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
+import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.RobotRepository
 
 class MockRepositoryRobotManager : RobotRepository {
-    private val registeredRobots = mutableMapOf<RobotId, RobotType>()
-    override fun registerRobot(robot: RobotId, type: RobotType): Boolean {
+    private val registeredRobots = mutableMapOf<RobotId, Pair<RobotType, String>>()
+    override fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean {
         if (registeredRobots.containsKey(robot)) {
             return false // Robot with this ID already exists
         }
-        registeredRobots[robot] = type
+        registeredRobots[robot] = type to canonicalName
         return true // Registration successful
     }
 
-    override fun getRobots(): List<RobotId> {
-        TODO("Not yet implemented")
+    override fun getRobots(): List<RobotInfo> = registeredRobots.map { (robotId, robot) ->
+        RobotInfo(robotId, robot.second, robot.first)
     }
 
     override fun getRobotById(id: RobotId): Robot? {

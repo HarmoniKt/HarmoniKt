@@ -2,10 +2,12 @@ package it.unibo.harmonikt.api
 
 import arrow.core.Either
 import it.unibo.harmonikt.api.dto.RobotIdDTO
+import it.unibo.harmonikt.api.dto.RobotInfoDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
+import it.unibo.harmonikt.model.RobotInfo
 import kotlinx.serialization.Serializable
 
 /**
@@ -13,6 +15,12 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 sealed interface RobotAPIError {
+    /**
+     * Represents a generic error in the Robot Management API.
+     */
+    @Serializable
+    data object GenericRobotAPIError : RobotAPIError
+
     /**
      * Represents an error when a robot with the specified ID is not found.
      *
@@ -56,7 +64,7 @@ interface RobotAPI {
      *
      * @return A list of all active robots Uuids.
      */
-    suspend fun getAllRobots(): Either<RobotAPIError, List<RobotId>>
+    suspend fun getAllRobots(): Either<RobotAPIError, List<RobotInfo>>
 
     /**
      * Retrieves information about a specific robot.
@@ -64,7 +72,7 @@ interface RobotAPI {
      * @param robotId The unique identifier of the robot.
      * @return The robot with the specified ID, or null if not found.
      */
-    suspend fun getRobotById(robotId: RobotId): Either<RobotAPIError, Robot>
+    suspend fun getRobotById(robotId: RobotIdDTO): Either<RobotAPIError, Robot>
 
     /**
      * Creates a new robot in the system based on the provided request.
@@ -80,7 +88,7 @@ interface RobotAPI {
      * @param robotId The unique identifier of the robot to remove.
      * @return True if the robot was successfully removed, false otherwise.
      */
-    suspend fun deleteRobot(robotId: RobotId): Either<RobotAPIError, Unit>
+    suspend fun deleteRobot(robotId: RobotIdDTO): Either<RobotAPIError, RobotIdDTO>
 
     /**
      * Creates a new action for a specific robot.

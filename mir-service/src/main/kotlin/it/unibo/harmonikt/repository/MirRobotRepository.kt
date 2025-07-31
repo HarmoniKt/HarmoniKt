@@ -6,6 +6,7 @@ import it.unibo.harmonikt.model.BatteryLevel
 import it.unibo.harmonikt.model.CanonicalName
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
+import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
@@ -45,7 +46,7 @@ class FakeMirRobotRepository : MirRobotRepository {
         TODO("Not yet implemented")
     }
 
-    override fun getRobots(): List<RobotId> = robots.map { it.id }
+    override fun getRobots(): List<RobotInfo> = TODO()
 
     override fun getRobotById(id: RobotId): Robot? = robots.find { it.id == id }
 
