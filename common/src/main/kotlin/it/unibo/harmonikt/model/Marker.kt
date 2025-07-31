@@ -39,8 +39,8 @@ sealed interface Marker {
         val id: Uuid,
 
         /**
-         * Waypoint string used by Spot robots to recognize this marker.
+         * Fiducial number used by Spot robots to recognize this marker.
          */
-        val waypoint: String,
+        val fiducial: Int,
     ) : Marker
 }

@@ -36,11 +36,11 @@ sealed interface MarkerDTO {
      * Data Transfer Object (DTO) for a SPOT marker.
      *
      * @property id The unique identifier of the marker.
-     * @property waypoint The waypoint string used by Spot robots to recognize this marker.
+     * @property fiducial The waypoint string used by Spot robots to recognize this marker.
      */
     @Serializable
     @SerialName("SPOT")
-    data class SpotMarkerDTO(override val id: Uuid, val waypoint: String) : MarkerDTO
+    data class SpotMarkerDTO(override val id: Uuid, val fiducial: Int) : MarkerDTO
 
     /**
      * Converts this DTO to a Marker model object.
@@ -54,7 +54,7 @@ sealed interface MarkerDTO {
         )
         is SpotMarkerDTO -> Marker.SpotMarker(
             id = id,
-            waypoint = waypoint,
+            fiducial = fiducial,
         )
     }
 
@@ -73,15 +73,17 @@ sealed interface MarkerDTO {
         fun validate(dto: MarkerDTO): ValidationResult = when (dto) {
             is MirMarkerDTO -> {
                 when {
-                    dto.id.toString().isBlank() -> ValidationResult.Invalid("ID must not be empty")
-                    dto.identifier.isBlank() -> ValidationResult.Invalid("Identifier must not be empty")
+                    dto.id.toString().isBlank() -> ValidationResult.Invalid("Mir Marker ID must not be empty")
+                    dto.identifier.isBlank() -> ValidationResult.Invalid("Mir Marker Identifier must not be empty")
                     else -> ValidationResult.Valid
                 }
             }
             is SpotMarkerDTO -> {
                 when {
-                    dto.id.toString().isBlank() -> ValidationResult.Invalid("ID must not be empty")
-                    dto.waypoint.isBlank() -> ValidationResult.Invalid("Waypoint must not be empty")
+                    dto.id.toString().isBlank() -> ValidationResult.Invalid("Spot Marker ID must not be empty")
+                    dto.fiducial.toString().isBlank() -> ValidationResult.Invalid(
+                        "Spot Marker Fiducial must not be empty",
+                    )
                     else -> ValidationResult.Valid
                 }
             }
@@ -100,7 +102,7 @@ sealed interface MarkerDTO {
             )
             is Marker.SpotMarker -> SpotMarkerDTO(
                 id = marker.id,
-                waypoint = marker.waypoint,
+                fiducial = marker.fiducial,
             )
         }
     }
