@@ -15,6 +15,11 @@ import kotlin.uuid.Uuid
  */
 @Serializable
 sealed interface MarkerDTO {
+    /**
+     * Unique identifier for the marker.
+     *
+     * This identifier is used to uniquely reference a marker in the system.
+     */
     val id: Uuid
 
     /**
@@ -117,5 +122,8 @@ sealed interface MarkerDTO {
  */
 @Serializable
 data class MarkerIdDTO(val id: Uuid) {
+    /**
+     * Converts this DTO to a MarkerId.
+     */
     fun toMarkerId(): Uuid = id
 }

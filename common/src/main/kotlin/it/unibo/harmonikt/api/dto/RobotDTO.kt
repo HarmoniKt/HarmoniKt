@@ -56,6 +56,9 @@ data class RobotStatusDTO(
  */
 @Serializable
 sealed interface RobotRegistrationDTO {
+    /**
+     * The canonical name of the robot.
+     */
     val canonicalName: CanonicalName
 
     /**
@@ -133,5 +136,8 @@ sealed interface RobotRegistrationDTO {
  */
 @Serializable
 data class RobotIdDTO(val id: RobotId) {
+    /**
+     * Converts this DTO to a domain model RobotId.
+     */
     fun toRobotId(): RobotId = id
 }
