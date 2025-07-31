@@ -53,6 +53,7 @@ class RobotStatusDTO(BaseModel):
     state: str
     batteryLevel: float
     currentPosition: RobotPosition
+    type: str
 
     @staticmethod
     def from_robot(robot: Robot) -> "RobotStatusDTO":
@@ -71,4 +72,5 @@ class RobotStatusDTO(BaseModel):
             state=robot.current_state.value,
             batteryLevel=robot.battery_level.value,
             currentPosition=robot.current_position,
+            type="SPOT",
         )

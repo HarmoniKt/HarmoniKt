@@ -46,7 +46,7 @@ class RobotAPIImpl(
                 RobotType.SPOT -> client.get("http://spot-service/robots/${robotId.robotId}").body<RobotStatusDTO>()
             }
         } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId.robotId))
-    }.mapLeft { error -> RobotAPIError.RobotNotFound(robotId.robotId) }
+    }.mapLeft { error -> RobotAPIError.GenericRobotAPIError(error.message) }
 
     override suspend fun registerNewRobot(request: RobotRegistrationDTO): Either<RobotAPIError, RobotIdDTO> =
         Either.catch {

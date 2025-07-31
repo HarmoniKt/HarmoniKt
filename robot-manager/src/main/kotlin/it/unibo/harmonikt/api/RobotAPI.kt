@@ -21,7 +21,7 @@ sealed interface RobotAPIError {
      * Represents a generic error in the Robot Management API.
      */
     @Serializable
-    data object GenericRobotAPIError : RobotAPIError
+    data class GenericRobotAPIError(val message: String? = null) : RobotAPIError
 
     /**
      * Represents an error when a robot with the specified ID is not found.
