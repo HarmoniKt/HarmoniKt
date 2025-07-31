@@ -51,11 +51,11 @@ sealed interface MarkerDTO {
     fun toMarker(): Marker = when (this) {
         is MirMarkerDTO -> Marker.MirMarker(
             id = id,
-            identifier = identifier
+            identifier = identifier,
         )
         is SpotMarkerDTO -> Marker.SpotMarker(
             id = id,
-            waypoint = waypoint
+            waypoint = waypoint,
         )
     }
 
@@ -97,11 +97,11 @@ sealed interface MarkerDTO {
         fun fromMarker(marker: Marker): MarkerDTO = when (marker) {
             is Marker.MirMarker -> MirMarkerDTO(
                 id = marker.id,
-                identifier = marker.identifier
+                identifier = marker.identifier,
             )
             is Marker.SpotMarker -> SpotMarkerDTO(
                 id = marker.id,
-                waypoint = marker.waypoint
+                waypoint = marker.waypoint,
             )
         }
     }
@@ -111,7 +111,7 @@ sealed interface MarkerDTO {
  * Data Transfer Object (DTO) representing the response after a marker is created.
  *
  * This class encapsulates the unique identifier of the newly created marker,
- * allowing clients to reference or interact with the marker in subsequent operations.
+ * allowing clients to reference or interact with the marker in later operations.
  *
  * @property id The unique identifier of the created marker.
  */
