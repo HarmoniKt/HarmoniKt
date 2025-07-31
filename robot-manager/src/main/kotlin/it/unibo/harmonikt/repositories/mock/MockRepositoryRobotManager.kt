@@ -18,6 +18,12 @@ class MockRepositoryRobotManager : RobotRepository {
         return true // Registration successful
     }
 
+    override fun deleteRobot(robot: RobotId): Boolean = if (registeredRobots.remove(robot) != null) {
+        true // Deletion successful
+    } else {
+        false // No robot with this ID exists
+    }
+
     override fun getRobots(): List<RobotInfo> = registeredRobots.map { (robotId, robot) ->
         RobotInfo(robotId, robot.second, robot.first)
     }

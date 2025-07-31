@@ -19,6 +19,10 @@ class RobotRepositoryRobotManager : RobotRepository {
         TODO("Not yet implemented")
     }
 
+    override fun deleteRobot(robot: RobotId): Boolean {
+        TODO("Not yet implemented")
+    }
+
     /**
      * Returns the list of all robots.
      */

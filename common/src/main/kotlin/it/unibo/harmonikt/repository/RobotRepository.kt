@@ -22,6 +22,14 @@ interface RobotRepository {
     fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean
 
     /**
+     * Deletes the robot with the given id.
+     *
+     * @param robot the unique identifier of the robot to delete
+     * @return true if the deletion was successful, false if no robot with that id exists
+     */
+    fun deleteRobot(robot: RobotId): Boolean
+
+    /**
      * Returns the list of all robots.
      */
     fun getRobots(): List<RobotInfo>

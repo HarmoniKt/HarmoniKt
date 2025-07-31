@@ -46,6 +46,10 @@ class FakeMirRobotRepository : MirRobotRepository {
         TODO("Not yet implemented")
     }
 
+    override fun deleteRobot(robot: RobotId): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun getRobots(): List<RobotInfo> = TODO()
 
     override fun getRobotById(id: RobotId): RobotType? = TODO()

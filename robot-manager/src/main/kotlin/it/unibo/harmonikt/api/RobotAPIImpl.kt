@@ -3,6 +3,7 @@ package it.unibo.harmonikt.api
 import arrow.core.Either
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -69,9 +70,16 @@ class RobotAPIImpl(
             }
         }.mapLeft { error -> RobotAPIError.RobotCreationFailed(error.message) }
 
-    override suspend fun deleteRobot(robotId: RobotIdDTO): Either<RobotAPIError, RobotIdDTO> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteRobot(robotId: Robots.Id): Either<RobotAPIError, RobotIdDTO> = Either.catch {
+        robotRepository.getRobotById(robotId.robotId)?.let {
+            when (it) {
+                RobotType.MIR -> client.delete("http://mir-service/robots/${robotId.robotId}")
+                RobotType.SPOT -> client.delete("http://spot-service/robots/${robotId.robotId}")
+            }
+            robotRepository.deleteRobot(robotId.robotId)
+            RobotIdDTO(robotId.robotId)
+        } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId.robotId))
+    }.mapLeft { error -> RobotAPIError.RobotNotFound(robotId.robotId) }
 
     override suspend fun createRobotAction(robotId: RobotId, action: Action): Either<RobotAPIError, Action> {
         TODO("Not yet implemented")

@@ -10,34 +10,7 @@ import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.api.RobotAPI
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.model.Action
-import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.resources.Robots
-import kotlinx.serialization.Serializable
-import kotlin.uuid.Uuid
-
-/**
- * Represents a request to create a new action for a robot.
- *
- * This data class is used to capture the necessary information required
- * to create an actionable command for a robot in the system. The command
- * defined in this request specifies the task or operation to be executed
- * by the robot.
- *
- * @property command The command string describing the action to be performed by the robot.
- */
-@Serializable
-data class ActionCreateRequest(val command: String)
-
-/**
- * Represents the response for a robot action.
- *
- * @property id The unique identifier of the action.
- * @property robotId The identifier of the robot that performed the action.
- * @property command The command issued as part of the action.
- * @property timestamp The timestamp marking when the action was executed.
- */
-@Serializable
-data class ActionResponse(val id: Uuid, val robotId: RobotId, val command: String, val timestamp: String)
 
 /**
  * Handles HTTP requests related to robots in the Robot Manager service.
@@ -79,7 +52,10 @@ object RobotHandlers {
 
         // DELETE /robots/{robotId} - Remove a robot
         delete<Robots.Id> { robotId ->
-            TODO("Not yet implemented")
+            robot.deleteRobot(robotId).fold(
+                { error -> call.respond(HttpStatusCode.NotFound, error) },
+                { _ -> call.respond(HttpStatusCode.NoContent) },
+            )
         }
 
         // POST /robots/{robotId}/actions - Create a new action for a robot

@@ -90,7 +90,7 @@ interface RobotAPI {
      * @param robotId The unique identifier of the robot to remove.
      * @return True if the robot was successfully removed, false otherwise.
      */
-    suspend fun deleteRobot(robotId: RobotIdDTO): Either<RobotAPIError, RobotIdDTO>
+    suspend fun deleteRobot(robotId: Robots.Id): Either<RobotAPIError, RobotIdDTO>
 
     /**
      * Creates a new action for a specific robot.
