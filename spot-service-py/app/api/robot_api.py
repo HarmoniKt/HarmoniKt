@@ -15,6 +15,7 @@ class RobotRegistrationDTO(BaseModel):
     host: str
     canonicalName: str
 
+
 class RobotIdDTO(BaseModel):
     """
     Represents a request to create a new Spot robot with only the ID.

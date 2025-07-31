@@ -10,7 +10,6 @@ from typing import List, Dict
 from uuid import UUID
 
 from app.repositories.spot_robot_repository import RobotRepository
-from app.models import Robot
 from app.api.robot_api import (
     RobotRegistrationDTO,
     RobotInfoDTO,

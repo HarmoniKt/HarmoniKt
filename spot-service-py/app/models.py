@@ -43,8 +43,8 @@ class RobotPosition(BaseModel):
     Uses a Cartesian coordinate system with x and y coordinates.
     """
 
-    x: int
-    y: int
+    x: float
+    y: float
 
 
 class Robot(BaseModel):

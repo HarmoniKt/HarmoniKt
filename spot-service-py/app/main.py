@@ -7,7 +7,7 @@ from fastapi import FastAPI
 # Import models and repositories
 from app.repositories.spot_marker_repository import FakeSpotMarkerRepository
 from app.repositories.spot_robot_repository import (
-    FakeSpotRobotRepositoryImpl,
+    MockSpotRobotRepositoryImpl,
 )
 
 # Import handlers
@@ -60,7 +60,7 @@ logging.info("Registered to Consul: %s", resp.status_code)
 
 # Initialize repositories
 marker_repository = FakeSpotMarkerRepository()
-robot_repository = FakeSpotRobotRepositoryImpl()
+robot_repository = MockSpotRobotRepositoryImpl()
 
 
 # Health check endpoint
