@@ -60,7 +60,7 @@ class Robot(BaseModel):
     current_state: RobotState
 
 
-class SpotRobot(Robot):
+class SpotRobot(BaseModel):
     """
     Represents a Spot robot in the system.
     Inherits from the base Robot class and specifies the type as SPOT.
@@ -72,6 +72,7 @@ class SpotRobot(Robot):
     password: str
     address: str
     delegate: BosdynRobot
+    canonical_name: CanonicalName
 
 
 class MarkerBase(BaseModel):

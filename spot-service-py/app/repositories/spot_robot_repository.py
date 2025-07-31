@@ -2,6 +2,10 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 from uuid import UUID, uuid4
 import bosdyn.client
+from bosdyn.client.robot_state import RobotStateClient
+from bosdyn.client.frame_helpers import get_odom_tform_body
+from bosdyn.client import Robot as BosdynRobot
+import numpy
 
 from app.models import (
     Robot,
@@ -50,11 +54,43 @@ class SpotRobotRepositoryImpl(RobotRepository):
 
     spot_robots: dict[UUID, SpotRobot] = {}
 
+    def __fetch_status_from_spot(self, robot: BosdynRobot) -> (any, numpy.array):
+        spot_robot_status_client = robot.ensure_client(RobotStateClient.default_service_name)
+        spot_robot_status = spot_robot_status_client.get_robot_state()
+
+        odom_tform_body = get_odom_tform_body(robot.get_frame_tree_snapshot())
+        position = odom_tform_body.get_translation()
+
+        return spot_robot_status, position
+
     def get_robots(self) -> list[Robot]:
-        return list(self.spot_robots.values())
+        # We can also query all robots from the Spot SDK if needed.
+        return [
+            Robot(
+                id=robot.id,
+                canonical_name=robot.canonical_name,
+                battery_level=BatteryLevel(value=0),  # Placeholder for battery level
+                current_position=RobotPosition(x=0, y=0),  # Placeholder for position
+                current_state=RobotState.IDLE,  # Placeholder for state
+            ) for robot in self.spot_robots.values()
+        ]
 
     def get_robot_by_id(self, robot_id: UUID) -> Optional[Robot]:
-        return self.spot_robots.get(robot_id)
+        spot_robot = self.spot_robots.get(robot_id)
+        if spot_robot is None:
+            return None
+
+        spot_robot_status, position = self.__fetch_status_from_spot(spot_robot.delegate)
+
+        # TODO: check if methods are correct... no types :)
+        robot = Robot(
+            id=robot_id,
+            canonical_name=spot_robot.canonical_name,
+            battery_level=BatteryLevel(value=spot_robot_status.battery_percentage),
+            current_position=RobotPosition(x=position.x, y=position.y),
+            current_state=RobotState(spot_robot_status['behavior_state']['state']),
+        )
+        return robot
 
     def create_robot(
         self, username: str, password: str, address: str, canonical_name: str
@@ -67,11 +103,7 @@ class SpotRobotRepositoryImpl(RobotRepository):
 
         # Assuming default values for battery level and position
         new_spot_robot = SpotRobot(
-            id=robot_id,
             canonical_name=CanonicalName(name=canonical_name),
-            battery_level=BatteryLevel(value=0.0),
-            current_position=RobotPosition(x=0, y=0),
-            current_state=RobotState.IDLE,
             username=username,
             password=password,
             address=address,
