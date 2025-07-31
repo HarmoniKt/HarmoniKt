@@ -1,6 +1,7 @@
 package it.unibo.harmonikt.api.dto
 
 import io.ktor.server.plugins.requestvalidation.ValidationResult
+import it.unibo.harmonikt.model.Marker
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
@@ -43,11 +44,29 @@ sealed interface MarkerDTO {
     ) : MarkerDTO
 
     /**
-     * Companion object for validating marker DTOs.
+     * Converts this DTO to a Marker model object.
      *
-     * This object provides a method to validate the fields of the marker DTOs,
-     * ensuring that all required fields are properly filled out.
+     * @return The corresponding Marker model object.
      */
+    fun toMarker(): Marker = when (this) {
+        is MirMarkerDTO -> Marker.MirMarker(
+            id = id,
+            identifier = identifier
+        )
+        is SpotMarkerDTO -> Marker.SpotMarker(
+            id = id,
+            waypoint = waypoint
+        )
+    }
+
+    /**
+     * Companion object for validating marker DTOs and converting between DTOs and domain models.
+     *
+     * This object provides methods to validate the fields of the marker DTOs,
+     * ensuring that all required fields are properly filled out, and to convert
+     * between MarkerDTO and Marker domain models.
+     */
+
     companion object {
         /**
          * Validates the provided marker DTO.
@@ -67,6 +86,23 @@ sealed interface MarkerDTO {
                     else -> ValidationResult.Valid
                 }
             }
+        }
+
+        /**
+         * Creates a MarkerDTO from a Marker model object.
+         *
+         * @param marker The Marker model object to convert.
+         * @return The corresponding MarkerDTO.
+         */
+        fun fromMarker(marker: Marker): MarkerDTO = when (marker) {
+            is Marker.MirMarker -> MirMarkerDTO(
+                id = marker.id,
+                identifier = marker.identifier
+            )
+            is Marker.SpotMarker -> SpotMarkerDTO(
+                id = marker.id,
+                waypoint = marker.waypoint
+            )
         }
     }
 }
