@@ -42,25 +42,15 @@ class FakeMirRobotRepository : MirRobotRepository {
         ),
     )
 
-    override fun registerRobot(robot: RobotId, type: RobotType): Boolean {
+    override fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean {
         TODO("Not yet implemented")
     }
 
     override fun getRobots(): List<RobotInfo> = TODO()
 
-    override fun getRobotById(id: RobotId): Robot? = robots.find { it.id == id }
+    override fun getRobotById(id: RobotId): RobotType? = TODO()
 
-    override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean {
-        val robot = getRobotById(id) ?: return false
-        val index = robots.indexOf(robot)
-        robots[index] = robot.copy(currentPosition = position)
-        return true
-    }
+    override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean = TODO()
 
-    override fun updateRobotState(id: RobotId, state: RobotState): Boolean {
-        val robot = getRobotById(id) ?: return false
-        val index = robots.indexOf(robot)
-        robots[index] = robot.copy(currentState = state)
-        return true
-    }
+    override fun updateRobotState(id: RobotId, state: RobotState): Boolean = TODO()
 }

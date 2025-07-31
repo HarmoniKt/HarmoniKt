@@ -1,6 +1,5 @@
 package it.unibo.harmonikt.repositories.mock
 
-import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
@@ -10,6 +9,7 @@ import it.unibo.harmonikt.repository.RobotRepository
 
 class MockRepositoryRobotManager : RobotRepository {
     private val registeredRobots = mutableMapOf<RobotId, Pair<RobotType, String>>()
+
     override fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean {
         if (registeredRobots.containsKey(robot)) {
             return false // Robot with this ID already exists
@@ -22,9 +22,7 @@ class MockRepositoryRobotManager : RobotRepository {
         RobotInfo(robotId, robot.second, robot.first)
     }
 
-    override fun getRobotById(id: RobotId): Robot? {
-        TODO("Not yet implemented")
-    }
+    override fun getRobotById(id: RobotId): RobotType? = registeredRobots[id]?.first
 
     override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean {
         TODO("Not yet implemented")

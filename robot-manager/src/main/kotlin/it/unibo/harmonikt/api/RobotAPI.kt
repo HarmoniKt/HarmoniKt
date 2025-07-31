@@ -4,10 +4,12 @@ import arrow.core.Either
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotInfoDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
+import it.unibo.harmonikt.api.dto.RobotStatusDTO
 import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
+import it.unibo.harmonikt.resources.Robots
 import kotlinx.serialization.Serializable
 
 /**
@@ -72,7 +74,7 @@ interface RobotAPI {
      * @param robotId The unique identifier of the robot.
      * @return The robot with the specified ID, or null if not found.
      */
-    suspend fun getRobotById(robotId: RobotIdDTO): Either<RobotAPIError, Robot>
+    suspend fun getRobotById(robotId: Robots.Id): Either<RobotAPIError, RobotStatusDTO>
 
     /**
      * Creates a new robot in the system based on the provided request.

@@ -29,7 +29,7 @@ class RobotRepositoryRobotManager : RobotRepository {
      *
      * @param id the unique identifier of the robot
      */
-    override fun getRobotById(id: RobotId): Robot? = TODO()
+    override fun getRobotById(id: RobotId): RobotType? = TODO()
 
     /**
      * Updates the position of the robot with the given id.

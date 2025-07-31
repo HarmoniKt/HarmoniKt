@@ -11,6 +11,7 @@ import io.ktor.http.contentType
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotInfoDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
+import it.unibo.harmonikt.api.dto.RobotStatusDTO
 import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
@@ -18,6 +19,7 @@ import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.ActionRepository
 import it.unibo.harmonikt.repository.RobotRepository
+import it.unibo.harmonikt.resources.Robots
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
@@ -36,9 +38,14 @@ class RobotAPIImpl(
     override suspend fun getAllRobots(): Either<RobotAPIError, List<RobotInfo>> =
         Either.Right(robotRepository.getRobots())
 
-    override suspend fun getRobotById(robotId: RobotIdDTO): Either<RobotAPIError, Robot> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getRobotById(robotId: Robots.Id): Either<RobotAPIError, RobotStatusDTO> = Either.catch {
+        robotRepository.getRobotById(robotId.robotId)?.let {
+            when (it) {
+                RobotType.MIR -> client.get("http://mir-service/robots/${robotId.robotId}").body<RobotStatusDTO>()
+                RobotType.SPOT -> client.get("http://spot-service/robots/${robotId.robotId}").body<RobotStatusDTO>()
+            }
+        } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId.robotId))
+    }.mapLeft { error -> RobotAPIError.RobotNotFound(robotId.robotId) }
 
     override suspend fun registerNewRobot(request: RobotRegistrationDTO): Either<RobotAPIError, RobotIdDTO> =
         Either.catch {

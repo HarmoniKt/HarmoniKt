@@ -71,7 +71,10 @@ object RobotHandlers {
 
         // GET /robots/{robotId} - Retrieve information about a robot
         get<Robots.Id> { robotId ->
-            TODO("Not yet implemented")
+            robot.getRobotById(robotId).fold(
+                { error -> call.respond(HttpStatusCode.NotFound, error) },
+                { robotStatus -> call.respond(robotStatus) },
+            )
         }
 
         // DELETE /robots/{robotId} - Remove a robot

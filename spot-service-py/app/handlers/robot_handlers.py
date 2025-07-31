@@ -52,7 +52,7 @@ def setup_robot_handlers(repository: RobotRepository):
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))
 
-    @router.get("/robots/{robot_id}", response_model=Robot)
+    @router.get("/robots/{robot_id}", response_model=RobotStatusDTO)
     async def get_robot(robot_id: UUID):
         """Get a robot by ID"""
         robot = repository.get_robot_by_id(robot_id)
