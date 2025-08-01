@@ -1,8 +1,12 @@
 package it.unibo.harmonikt.api
 
 import arrow.core.Either
+import it.unibo.harmonikt.api.dto.MarkerIdDTO
+import it.unibo.harmonikt.api.dto.MarkerRegistrationDTO
 import it.unibo.harmonikt.model.Marker
+import it.unibo.harmonikt.resources.Markers
 import kotlinx.serialization.Serializable
+import kotlin.uuid.Uuid
 
 @Serializable
 sealed interface MarkerAPIError {
@@ -11,14 +15,14 @@ sealed interface MarkerAPIError {
      * This error is thrown when the requested marker does not exist in the system.
      */
     @Serializable
-    data class MarkerNotFound(val message: String) : MarkerAPIError
+    data class MarkerNotFound(val id: Uuid) : MarkerAPIError
 
     /**
      * Represents an error that occurs when a marker already exists.
      * This error is thrown when attempting to create a marker that already exists in the system.
      */
     @Serializable
-    data class MarkerAlreadyExists(val message: String) : MarkerAPIError
+    data class MarkerAlreadyExists(val id: Uuid) : MarkerAPIError
 
     /**
      * Represents a generic error in the Marker Management API.
@@ -32,7 +36,7 @@ sealed interface MarkerAPIError {
      * This error is thrown when the deletion of a marker fails for any reason.
      */
     @Serializable
-    data class MarkerDeletionFailed(val message: String) : MarkerAPIError
+    data class MarkerDeletionFailed(val id: Uuid) : MarkerAPIError
 }
 
 /**
@@ -41,12 +45,19 @@ sealed interface MarkerAPIError {
  */
 interface MarkerAPI {
     /**
+     * Retrieves all markers in the system.
+     *
+     * @return A list of all markers.
+     */
+    suspend fun getAllMarkers(): Either<MarkerAPIError, List<Marker>>
+
+    /**
      * Retrieves a marker by its unique identifier.
      *
-     * @param id The unique identifier of the marker to retrieve.
+     * @param markerId The unique identifier of the marker to retrieve.
      * @return The marker associated with the given identifier.
      */
-    suspend fun getMarker(id: String): Either<MarkerAPIError, Marker>
+    suspend fun getMarkerInfo(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO>
 
     /**
      * Creates a new marker in the system.
@@ -54,19 +65,12 @@ interface MarkerAPI {
      * @param marker The marker to create.
      * @return The created marker.
      */
-    suspend fun registerMarker(marker: Marker): Either<MarkerAPIError, Marker>
+    suspend fun registerNewMarker(marker: MarkerRegistrationDTO): Either<MarkerAPIError, MarkerIdDTO>
 
     /**
      * Deletes a marker by its unique identifier.
      *
-     * @param id The unique identifier of the marker to delete.
+     * @param markerId The unique identifier of the marker to delete.
      */
-    suspend fun deleteMarker(id: String): Either<MarkerAPIError, Marker>
-
-    /**
-     * Retrieves all markers in the system.
-     *
-     * @return A list of all markers.
-     */
-    suspend fun getAllMarkers(): Either<MarkerAPIError, List<Marker>>
+    suspend fun deleteMarker(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO>
 }
