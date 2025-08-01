@@ -1,17 +1,13 @@
 package it.unibo.harmonikt
 
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.Application
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
-import io.ktor.server.plugins.swagger.swaggerUI
-import io.ktor.server.response.respond
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.get
-import io.ktor.server.routing.routing
-import it.unibo.harmonikt.api.RobotAPIImpl
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.plugins.swagger.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import it.unibo.harmonikt.api.impl.RobotAPIImpl
 import it.unibo.harmonikt.handlers.ActionsHandlers.setupActionsHandlers
 import it.unibo.harmonikt.handlers.PointOfInterestsHandlers.pointOfInterestsHandlers
 import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
