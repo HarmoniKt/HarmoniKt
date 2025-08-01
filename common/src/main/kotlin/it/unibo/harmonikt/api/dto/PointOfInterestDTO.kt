@@ -24,7 +24,7 @@ data class PointOfInterestDTO(
      * The list of markers associated with this point of interest.
      * Different robot types may use different marker types to identify the same location.
      */
-    val associatedMarkers: List<MarkerDTO>,
+    val associatedMarkers: List<MarkerRegistrationDTO>,
 ) {
     /**
      * Converts this DTO to a domain model PointOfInterest.
@@ -71,7 +71,7 @@ data class PointOfInterestDTO(
             name = pointOfInterest.name,
             latitude = pointOfInterest.latitude,
             longitude = pointOfInterest.longitude,
-            associatedMarkers = pointOfInterest.associatedMarkers.map { MarkerDTO.fromMarker(it) },
+            associatedMarkers = pointOfInterest.associatedMarkers.map { MarkerRegistrationDTO.fromMarker(it) },
         )
     }
 }
