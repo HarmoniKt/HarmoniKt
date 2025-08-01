@@ -6,13 +6,18 @@ import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
 /**
- * Data Transfer Object (DTO) representing basic information about a point of interest in the system.
- *
- * This class encapsulates the essential attributes of a point of interest, including its associated markers.
- * It is used for transmitting point of interest-related data between components of the system in a structured manner.
- *
- * @property associatedMarkers The list of markers associated with this point of interest.
- *                            Different robot types may use different marker types to identify the same location.
+ * Data Transfer Object (DTO) for representing a point of interest in the environment.
+ * This DTO encapsulates the necessary information about a point of interest,
+ * including its unique identifier, name, geographical coordinates,
+ * and associated markers.
+ * This DTO is used to transfer data between different layers of the application,
+ * such as from the API to the domain model.
+ * * @property id Unique identifier for the point of interest.
+ * * @property name Canonical name of the point of interest.
+ * * @property latitude Latitude coordinate of the point of interest.
+ * * @property longitude Longitude coordinate of the point of interest.
+ * * @property associatedMarkers List of markers associated with this point of interest.
+ * * Different robot types may use different marker types to identify the same location.
  */
 @Serializable
 data class PointOfInterestDTO(
@@ -20,10 +25,6 @@ data class PointOfInterestDTO(
     val name: String,
     val latitude: Float,
     val longitude: Float,
-    /**
-     * The list of markers associated with this point of interest.
-     * Different robot types may use different marker types to identify the same location.
-     */
     val associatedMarkers: List<MarkerRegistrationDTO>,
 ) {
     /**

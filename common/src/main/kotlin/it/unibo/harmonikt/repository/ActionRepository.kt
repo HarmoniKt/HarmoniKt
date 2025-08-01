@@ -12,5 +12,11 @@ import it.unibo.harmonikt.model.RobotId
  * Implementations will provide specific functionality based on the robot type.
  */
 interface ActionRepository {
+    /**
+     * Retrieves all actions associated with a specific robot.
+     *
+     * @param robotId The unique identifier of the robot whose actions are to be retrieved.
+     * @return A list of actions associated with the specified robot.
+     */
     fun queueAction(robotId: RobotId, action: Action): Boolean
 }
