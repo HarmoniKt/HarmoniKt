@@ -15,25 +15,25 @@ sealed interface PointOfInterestAPIError {
     data class GenericPointOfInterestAPIError(val message: String? = null) : PointOfInterestAPIError
 
     /**
-     * Represents an error when a point of interest with the specified ID is not found.
+     * Represents an error when a "Point of Interest" with the specified ID is not found.
      *
-     * @property poiId The unique identifier of the point of interest that was not found.
+     * @property poiId The unique identifier of the "Point of Interest" that was not found.
      */
     @Serializable
     data class PointOfInterestNotFound(val poiId: String) : PointOfInterestAPIError
 
     /**
-     * Represents an error when a point of interest with the specified ID already exists.
+     * Represents an error when a "Point of Interest" with the specified ID already exists.
      *
-     * @property poiId The unique identifier of the point of interest that already exists.
+     * @property poiId The unique identifier of the "Point of Interest" that already exists.
      */
     @Serializable
     data class PointOfInterestAlreadyExists(val poiId: String) : PointOfInterestAPIError
 
     /**
-     * Represents an error when the deletion of a point of interest fails.
+     * Represents an error when the deletion of a "Point of Interest" fails.
      *
-     * @property poiId The unique identifier of the point of interest that could not be deleted.
+     * @property poiId The unique identifier of the "Point of Interest" that could not be deleted.
      */
     @Serializable
     data class PointOfInterestDeletionFailed(val poiId: String) : PointOfInterestAPIError
@@ -45,25 +45,25 @@ sealed interface PointOfInterestAPIError {
  */
 interface PointOfInterestAPI {
     /**
-     * Retrieves a point of interest by its unique identifier.
+     * Retrieves a "Point of Interest" by its unique identifier.
      *
-     * @param id The unique identifier of the point of interest to retrieve.
-     * @return The point of interest associated with the given identifier.
+     * @param id The unique identifier of the "Point of Interest" to retrieve.
+     * @return The "Point of Interest" associated with the given identifier.
      */
     suspend fun getPointOfInterest(id: String): Either<PointOfInterestAPIError, PointOfInterest>
 
     /**
-     * Creates a new point of interest in the system.
+     * Creates a new "Point of Interest" in the system.
      *
-     * @param poi The point of interest to create.
-     * @return The created point of interest.
+     * @param poi The "Point of Interest" to create.
+     * @return The created "Point of Interest".
      */
     suspend fun registerPointOfInterest(poi: PointOfInterest): Either<PointOfInterestAPIError, PointOfInterest>
 
     /**
-     * Deletes a point of interest by its unique identifier.
+     * Deletes a "Point of Interest" by its unique identifier.
      *
-     * @param id The unique identifier of the point of interest to delete.
+     * @param id The unique identifier of the "Point of Interest" to delete.
      * @return A result indicating success or failure of the deletion operation.
      */
     suspend fun deletePointOfInterest(id: String): Either<PointOfInterestAPIError, Unit>
