@@ -13,7 +13,6 @@ import it.unibo.harmonikt.resources.Markers
 
 object MarkersHandler {
     fun Routing.setupMarkersHandlers(marker: MarkerAPI) {
-
         // GET /markers - Retrieve all markers
         get<Markers> {
             marker.getAllMarkers().fold(

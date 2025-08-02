@@ -18,27 +18,23 @@ import it.unibo.harmonikt.model.Marker.SpotMarker
 import it.unibo.harmonikt.repository.MarkerRepository
 import it.unibo.harmonikt.resources.Markers
 
-
-class MarkerAPIImpl(
-    private val markerRepository: MarkerRepository<Marker>,
-    private val client: HttpClient,
-): MarkerAPI {
+class MarkerAPIImpl(private val markerRepository: MarkerRepository<Marker>, private val client: HttpClient) :
+    MarkerAPI {
     override suspend fun getAllMarkers(): Either<MarkerAPIError, List<Marker>> =
         Either.Right(markerRepository.getMarkers())
 
-    override suspend fun getMarkerInfo(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO> =
-        Either.catch {
-            markerRepository.getMarkerById(markerId.id)?.let { marker ->
-                when(marker) {
-                    is SpotMarker -> client.get("http://spot-service/markers/${marker.id}").body<MarkerIdDTO>()
-                    is MirMarker -> client.get("http://mir-service/markers/${marker.id}").body<MarkerIdDTO>()
-                }
-            } ?: return Either.Left(MarkerAPIError.MarkerNotFound(markerId.id))
-        }.mapLeft { error -> MarkerAPIError.GenericMarkerAPIError(error.message) }
+    override suspend fun getMarkerInfo(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO> = Either.catch {
+        markerRepository.getMarkerById(markerId.id)?.let { marker ->
+            when (marker) {
+                is SpotMarker -> client.get("http://spot-service/markers/${marker.id}").body<MarkerIdDTO>()
+                is MirMarker -> client.get("http://mir-service/markers/${marker.id}").body<MarkerIdDTO>()
+            }
+        } ?: return Either.Left(MarkerAPIError.MarkerNotFound(markerId.id))
+    }.mapLeft { error -> MarkerAPIError.GenericMarkerAPIError(error.message) }
 
     override suspend fun registerNewMarker(marker: MarkerRegistrationDTO): Either<MarkerAPIError, MarkerIdDTO> =
         Either.catch {
-            when(marker) {
+            when (marker) {
                 is MarkerRegistrationDTO.MirMarkerRegistrationDTO -> {
                     val markerId = client.post("http://mir-service/markers") {
                         setBody(marker)
@@ -58,18 +54,16 @@ class MarkerAPIImpl(
             }
         }.mapLeft { error -> MarkerAPIError.GenericMarkerAPIError(error.message) }
 
-    override suspend fun deleteMarker(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO> =
-        Either.catch {
-            markerRepository.getMarkerById(markerId.id)?.let {
-                when (it) {
-                    is SpotMarker -> client.post("http://spot-service/markers/${it.id}") {
-                        contentType(ContentType.Application.Json)
-                    }.body<MarkerIdDTO>()
-                    is MirMarker -> client.post("http://mir-service/markers/${it.id}") {
-                        contentType(ContentType.Application.Json)
-                    }.body<MarkerIdDTO>()
-                }
-            } ?: return Either.Left(MarkerAPIError.MarkerNotFound(markerId.id))
-        }.mapLeft { error -> MarkerAPIError.MarkerDeletionFailed(markerId.id) }
+    override suspend fun deleteMarker(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO> = Either.catch {
+        markerRepository.getMarkerById(markerId.id)?.let {
+            when (it) {
+                is SpotMarker -> client.post("http://spot-service/markers/${it.id}") {
+                    contentType(ContentType.Application.Json)
+                }.body<MarkerIdDTO>()
+                is MirMarker -> client.post("http://mir-service/markers/${it.id}") {
+                    contentType(ContentType.Application.Json)
+                }.body<MarkerIdDTO>()
+            }
+        } ?: return Either.Left(MarkerAPIError.MarkerNotFound(markerId.id))
+    }.mapLeft { error -> MarkerAPIError.MarkerDeletionFailed(markerId.id) }
 }
-

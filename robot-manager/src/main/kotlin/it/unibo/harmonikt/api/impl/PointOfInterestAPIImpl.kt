@@ -10,7 +10,9 @@ class PointOfInterestAPIImpl : PointOfInterestAPI {
         TODO("Not yet implemented")
     }
 
-    override suspend fun registerPointOfInterest(poi: PointOfInterest): Either<PointOfInterestAPIError, PointOfInterest> {
+    override suspend fun registerPointOfInterest(
+        poi: PointOfInterest,
+    ): Either<PointOfInterestAPIError, PointOfInterest> {
         TODO("Not yet implemented")
     }
 
@@ -21,5 +23,4 @@ class PointOfInterestAPIImpl : PointOfInterestAPI {
     override suspend fun getAllPointsOfInterest(): Either<PointOfInterestAPIError, List<PointOfInterest>> {
         TODO("Not yet implemented")
     }
-
 }

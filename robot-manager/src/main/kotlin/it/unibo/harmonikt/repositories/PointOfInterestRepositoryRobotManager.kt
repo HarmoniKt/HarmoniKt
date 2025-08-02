@@ -14,11 +14,7 @@ class PointOfInterestRepositoryRobotManager : PointOfInterestRepository {
         TODO("Not yet implemented")
     }
 
-    override fun registerPointOfInterest(
-        name: String,
-        latitude: Float,
-        longitude: Float
-    ): Boolean {
+    override fun registerPointOfInterest(name: String, latitude: Float, longitude: Float): Boolean {
         TODO("Not yet implemented")
     }
 
