@@ -16,6 +16,6 @@ class PointOfInterests {
      * @property parent reference to the parent PointOfInterests resource
      * @property id identifier of the point of interest
      */
-    @Resource("{id}")
+    @Resource("/{id}")
     class Id(val parent: PointOfInterests, val id: String)
 }

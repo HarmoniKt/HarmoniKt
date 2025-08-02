@@ -17,6 +17,6 @@ class Actions {
      * @param parent The parent Actions resource.
      * @param id The unique identifier of the action.
      */
-    @Resource("{id}")
+    @Resource("/{id}")
     class Id(val parent: Actions, val id: Uuid)
 }
