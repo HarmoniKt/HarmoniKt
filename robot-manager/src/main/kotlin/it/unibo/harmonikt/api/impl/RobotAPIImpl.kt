@@ -11,10 +11,12 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import it.unibo.harmonikt.api.RobotAPI
 import it.unibo.harmonikt.api.RobotAPIError
+import it.unibo.harmonikt.api.dto.RobotActionDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
 import it.unibo.harmonikt.model.Action
+import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotType
@@ -81,7 +83,39 @@ class RobotAPIImpl(
         } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId.robotId))
     }.mapLeft { error -> RobotAPIError.RobotNotFound(robotId.robotId) }
 
-    override suspend fun createRobotAction(robotId: RobotId, action: Action): Either<RobotAPIError, Action> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun createRobotAction(robotId: RobotId, action: Action): Either<RobotAPIError, Action> =
+        Either.catch {
+            robotRepository.getRobotById(robotId)?.let {
+                when (it) {
+                    MIR -> client.post("http://mir-service/robots/$robotId/actions") {
+                        when (action) {
+                            is Action.MoveToTarget -> action.target.associatedMarkers.forEach { marker ->
+                                if (marker is Marker.MirMarker) {
+                                    setBody(
+                                        RobotActionDTO.MoveToTargetDTO.MirMoveToTargetDTO(
+                                            target = marker,
+                                        ),
+                                    )
+                                    contentType(ContentType.Application.Json)
+                                }
+                            }
+                        }
+                    }.body<Action>()
+                    SPOT -> client.post("http://spot-service/robots/$robotId/actions") {
+                        when (action) {
+                            is Action.MoveToTarget -> action.target.associatedMarkers.forEach { marker ->
+                                if (marker is Marker.SpotMarker) {
+                                    setBody(
+                                        RobotActionDTO.MoveToTargetDTO.SpotMoveToTargetDTO(
+                                            target = marker,
+                                        ),
+                                    )
+                                    contentType(ContentType.Application.Json)
+                                }
+                            }
+                        }
+                    }.body<Action>()
+                }
+            } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId))
+        }.mapLeft { error -> RobotAPIError.ActionFailed(error.message) }
 }

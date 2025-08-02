@@ -2,6 +2,7 @@ package it.unibo.harmonikt.api.dto
 
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 import it.unibo.harmonikt.model.Action
+import it.unibo.harmonikt.model.Marker
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -110,5 +111,35 @@ sealed interface ActionRegistrationDTO {
                 target = PointOfInterestDTO.fromPointOfInterest(action.target),
             )
         }
+    }
+}
+
+/**
+ * Data Transfer Object (DTO) for robot actions.
+ *
+ * This sealed interface defines the structure for representing different types of actions
+ * that robots can perform, such as moving to a target location. Each action type has its own
+ * specific details and parameters.
+ */
+@Serializable
+sealed interface RobotActionDTO {
+    /**
+     * Data Transfer Object (DTO) for a robot action.
+     *
+     * This class encapsulates the information needed for a robot to perform an action,
+     * such as moving to a target location.
+     */
+    @Serializable
+    sealed interface MoveToTargetDTO : RobotActionDTO {
+        /**
+         * Converts this DTO to a domain model Action.
+         *
+         * @return An Action domain model representing this DTO.
+         */
+        @Serializable
+        data class SpotMoveToTargetDTO(val target: Marker.SpotMarker) : MoveToTargetDTO
+
+        @Serializable
+        data class MirMoveToTargetDTO(val target: Marker.MirMarker) : MoveToTargetDTO
     }
 }

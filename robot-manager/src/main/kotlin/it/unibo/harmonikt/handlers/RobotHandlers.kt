@@ -60,9 +60,10 @@ object RobotHandlers {
 
         // POST /robots/{robotId}/actions - Create a new action for a robot
         post<Robots.Id.Actions> { actions ->
-            val action = call.receive<Action>()
-            action.equals(0)
-            TODO("Not yet implemented")
+            robot.createRobotAction(actions.parent.robotId, call.receive<Action>()).fold(
+                { error -> call.respond(HttpStatusCode.InternalServerError, error) },
+                { action -> call.respond(action) },
+            )
         }
     }
 }

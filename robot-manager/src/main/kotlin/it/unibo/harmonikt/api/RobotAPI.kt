@@ -54,6 +54,14 @@ sealed interface RobotAPIError {
      */
     @Serializable
     data class RobotCreationFailed(val reason: String?) : RobotAPIError
+
+    /**
+     * Represents an error when an action cannot be performed on a robot.
+     *
+     * @property reason A description of the reason why the action could not be performed.
+     */
+    @Serializable
+    data class ActionFailed(val reason: String?) : RobotAPIError
 }
 
 /**
