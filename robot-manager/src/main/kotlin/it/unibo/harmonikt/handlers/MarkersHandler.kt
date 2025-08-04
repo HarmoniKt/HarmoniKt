@@ -7,7 +7,6 @@ import io.ktor.server.resources.get
 import io.ktor.server.resources.post
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
-import io.ktor.server.routing.get
 import it.unibo.harmonikt.api.MarkerAPI
 import it.unibo.harmonikt.resources.Markers
 
