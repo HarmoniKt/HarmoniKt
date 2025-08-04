@@ -24,9 +24,9 @@ class FakeMirMarkerRepository : MirMarkerRepository {
 
     override fun getMarkerById(id: Uuid): MirMarker? = markers.find { it.id == id }
 
-    override fun createMarker(marker: MirMarker) {
+    override fun registerMarker(marker: MirMarker): Boolean {
         requireNotNull(getMarkerById(marker.id)) { "Marker with id ${marker.id} already exists." }
-        markers.add(marker)
+        return markers.add(marker)
     }
 
     override fun deleteMarker(id: Uuid): Boolean = markers.removeIf { it.id == id }

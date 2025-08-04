@@ -31,7 +31,7 @@ interface MarkerRepository<M : Marker> {
      *
      * @param marker The marker to create.
      */
-    fun createMarker(marker: M)
+    fun registerMarker(marker: M): Boolean
 
     /**
      * Deletes a marker from the repository.

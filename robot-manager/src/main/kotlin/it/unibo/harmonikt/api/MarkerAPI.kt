@@ -2,9 +2,9 @@ package it.unibo.harmonikt.api
 
 import arrow.core.Either
 import it.unibo.harmonikt.api.dto.MarkerIdDTO
-import it.unibo.harmonikt.api.dto.MarkerRegistrationDTO
 import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.resources.Markers
+import it.unibo.harmonikt.resources.PointOfInterests
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
@@ -57,20 +57,5 @@ interface MarkerAPI {
      * @param markerId The unique identifier of the marker to retrieve.
      * @return The marker associated with the given identifier.
      */
-    suspend fun getMarkerInfo(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO>
-
-    /**
-     * Creates a new marker in the system.
-     *
-     * @param marker The marker to create.
-     * @return The created marker.
-     */
-    suspend fun registerNewMarker(marker: MarkerRegistrationDTO): Either<MarkerAPIError, MarkerIdDTO>
-
-    /**
-     * Deletes a marker by its unique identifier.
-     *
-     * @param markerId The unique identifier of the marker to delete.
-     */
-    suspend fun deleteMarker(markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO>
+    suspend fun getMarkerInfo(poiId: PointOfInterests.Id, markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO>
 }
