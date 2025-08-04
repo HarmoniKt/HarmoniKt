@@ -2,7 +2,8 @@ package it.unibo.harmonikt.api.dto
 
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 import it.unibo.harmonikt.model.Action
-import it.unibo.harmonikt.model.Marker
+import it.unibo.harmonikt.model.Marker.MirMarker
+import it.unibo.harmonikt.model.Marker.SpotMarker
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -137,9 +138,9 @@ sealed interface RobotActionDTO {
          * @return An Action domain model representing this DTO.
          */
         @Serializable
-        data class SpotMoveToTargetDTO(val target: Marker.SpotMarker) : MoveToTargetDTO
+        data class SpotMoveToTargetDTO(val target: SpotMarker) : MoveToTargetDTO
 
         @Serializable
-        data class MirMoveToTargetDTO(val target: Marker.MirMarker) : MoveToTargetDTO
+        data class MirMoveToTargetDTO(val target: MirMarker) : MoveToTargetDTO
     }
 }

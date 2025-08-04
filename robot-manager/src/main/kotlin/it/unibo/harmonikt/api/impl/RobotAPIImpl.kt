@@ -11,7 +11,8 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import it.unibo.harmonikt.api.RobotAPI
 import it.unibo.harmonikt.api.RobotAPIError
-import it.unibo.harmonikt.api.dto.RobotActionDTO
+import it.unibo.harmonikt.api.dto.RobotActionDTO.MoveToTargetDTO.MirMoveToTargetDTO
+import it.unibo.harmonikt.api.dto.RobotActionDTO.MoveToTargetDTO.SpotMoveToTargetDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
@@ -92,7 +93,7 @@ class RobotAPIImpl(
                             is Action.MoveToTarget -> action.target.associatedMarkers.forEach { marker ->
                                 if (marker is Marker.MirMarker) {
                                     setBody(
-                                        RobotActionDTO.MoveToTargetDTO.MirMoveToTargetDTO(
+                                        MirMoveToTargetDTO(
                                             target = marker,
                                         ),
                                     )
@@ -106,7 +107,7 @@ class RobotAPIImpl(
                             is Action.MoveToTarget -> action.target.associatedMarkers.forEach { marker ->
                                 if (marker is Marker.SpotMarker) {
                                     setBody(
-                                        RobotActionDTO.MoveToTargetDTO.SpotMoveToTargetDTO(
+                                        SpotMoveToTargetDTO(
                                             target = marker,
                                         ),
                                     )
