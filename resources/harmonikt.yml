@@ -117,7 +117,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Poi'
+                  $ref: '#/components/schemas/PoiInfoDTO'
     post:
       tags:
         - pois
@@ -127,14 +127,35 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PoiCreate'
+              $ref: '#/components/schemas/PoiCreateDTO'
       responses:
         '201':
           description: POI created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Poi'
+                $ref: '#/components/schemas/PoiIdDTO'
+
+  /pois/{poiId}:
+    parameters:
+      - name: poiId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags:
+        - pois
+      summary: Retrieve information about a specific POI
+      responses:
+        '200':
+          description: Robot details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoiDTO'
+
     delete:
       tags:
         - pois
@@ -142,6 +163,80 @@ paths:
       responses:
         '204':
           description: POI deleted
+
+  /pois/{poiId}/markers:
+    parameters:
+      - name: poiId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags:
+        - markers
+      summary: Retrieve all markers for a specific POI
+      responses:
+        '200':
+          description: List of markers for the POI
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MarkerDTO'
+    post:
+      tags:
+        - markers
+      summary: Add a new marker to a POI
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkerCreateDTO'
+      responses:
+        '201':
+          description: Marker created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarkerIdDTO'
+
+  /pois/{poiId}/markers/{markerId}:
+    parameters:
+      - name: poiId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: markerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags:
+        - markers
+      summary: Retrieve a specific marker for a POI
+      responses:
+        '200':
+          description: Marker details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarkerDTO'
+        '404':
+          description: Marker not found
+    delete:
+      tags:
+        - markers
+      summary: Delete a specific marker from a POI
+      responses:
+        '204':
+          description: Marker deleted
 
 components:
   schemas:
@@ -159,12 +254,12 @@ components:
       required: [id, type, canonicalName]
 
     RobotIdDTO:
-        type: object
-        properties:
-          id:
-            type: string
-            format: uuid
-        required: [id]
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required: [id]
 
     RobotStatusDTO:
       type: object
@@ -243,7 +338,15 @@ components:
           type: string
       required: [command]
 
-    Poi:
+    PoiIdDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required: [id]
+
+    PoiInfoDTO:
       type: object
       properties:
         id:
@@ -251,15 +354,9 @@ components:
           format: uuid
         name:
           type: string
-        lat:
-          type: number
-          format: float
-        lon:
-          type: number
-          format: float
-      required: [id, name, lat, lon]
+      required: [id, name]
 
-    PoiCreate:
+    PoiCreateDTO:
       type: object
       properties:
         name:
@@ -272,10 +369,98 @@ components:
           format: float
       required: [name, lat, lon]
 
-    PoiKey:
+    PoiDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        lat:
+          type: number
+          format: float
+        lon:
+          type: number
+          format: float
+        markers:
+          type: array
+          description: List of marker links associated with this POI
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum: [MIR, SPOT]
+              href:
+                type: string
+                format: uri
+                example: /pois/3fa85f64-5717-4562-b3fc-2c963f66afa6/markers/6cdbe621-cd54-4762-b5b5-a6cd1ad3e831
+            required: [type, href]
+      required: [id, name, lat, lon]
+
+    MarkerIdDTO:
       type: object
       properties:
         id:
           type: string
           format: uuid
       required: [id]
+
+    SpotMarkerCreateDTO:
+      type: object
+      required: [id, type, fiducial]
+      properties:
+        type:
+          const: SPOT
+        fiducial:
+          type: number
+
+    MirMarkerCreateDTO:
+      type: object
+      required: [id, type, identifier]
+      properties:
+        type:
+          const: MIR
+        identifier:
+          type: number
+          format: uuid
+
+    MarkerCreateDTO:
+      oneOf:
+        - $ref: '#/components/schemas/MarkerCreateDTO'
+        - $ref: '#/components/schemas/SpotMarkerCreateDTO'
+      discriminator:
+        propertyName: type
+
+    SpotMarkerDTO:
+      type: object
+      required: [id, type, fiducial]
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          const: SPOT
+        fiducial:
+          type: number
+
+    MirMarkerDTO:
+      type: object
+      required: [id, type, identifier]
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          const: MIR
+        identifier:
+          type: number
+          format: uuid
+
+    MarkerDTO:
+      oneOf:
+        - $ref: '#/components/schemas/SpotMarkerDTO'
+        - $ref: '#/components/schemas/MirMarkerDTO'
+      discriminator:
+        propertyName: type
