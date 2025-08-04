@@ -1,5 +1,6 @@
 package it.unibo.harmonikt.repository
 
+import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.PointOfInterest
 import kotlin.uuid.Uuid
 
@@ -18,6 +19,14 @@ interface PointOfInterestRepository {
      * @return A list of all points of interest.
      */
     fun getPointsOfInterest(): List<PointOfInterest>
+
+    /**
+     * Checks if a point of interest with the specified ID exists in the repository.
+     *
+     * @param id The unique identifier of the point of interest to check.
+     * @return true if the point of interest exists, false otherwise.
+     */
+    fun getPointOfInterestById(id: Uuid): PointOfInterest?
 
     /**
      * Retrieves a specific point of interest by its unique identifier.
@@ -42,7 +51,7 @@ interface PointOfInterestRepository {
      * @param id The unique identifier of the point of interest to retrieve.
      * @return The point of interest associated with the given identifier, or null if not found.
      */
-    fun associateMarker(poiId: Uuid, markerId: Uuid): Boolean
+    fun associateMarker(poiId: Uuid, marker: Marker): Boolean
 
     /**
      * Dissociates a marker from a point of interest.

@@ -5,6 +5,35 @@ import it.unibo.harmonikt.model.PointOfInterest
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
+sealed interface PointOfInterestRegistrationDTO {
+    /**
+     * Represents a point of interest registration with a unique identifier.
+     * This interface is used to register points of interest in the system.
+     */
+    val id: Uuid
+
+    val canonicalName: String
+
+    val latitude: Float
+
+    val longitude: Float
+
+    companion object {
+        /**
+         * Validates the provided point of interest registration DTO.
+         *
+         * @param dto The PointOfInterestRegistrationDTO to validate.
+         * @return A ValidationResult indicating whether the DTO is valid.
+         */
+        fun validate(dto: PointOfInterestRegistrationDTO): ValidationResult = when {
+            dto.canonicalName.isBlank() -> ValidationResult.Invalid("Canonical name must not be blank")
+            dto.latitude < -90 || dto.latitude > 90 -> ValidationResult.Invalid("Latitude must be between -90 and 90")
+            dto.longitude < -180 || dto.longitude > 180 -> ValidationResult.Invalid("Longitude must be between -180 and 180")
+            else -> ValidationResult.Valid
+        }
+    }
+}
+
 /**
  * Data Transfer Object (DTO) for representing a point of interest in the environment.
  * This DTO encapsulates the necessary information about a point of interest,

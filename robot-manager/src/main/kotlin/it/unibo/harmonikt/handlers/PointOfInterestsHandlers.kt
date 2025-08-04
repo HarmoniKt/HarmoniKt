@@ -30,7 +30,7 @@ object PointOfInterestsHandlers {
     fun Routing.pointOfInterestsHandlers(repository: PointOfInterestRepository, client: HttpClient) {
         get<PointOfInterests> { poi ->
             repository.equals(10)
-            client.get("http://example.com/poi") // Example external call}
+            client.get("http://pois") // Example external call}
             call.respondText("Point of Interests resource accessed: $poi")
         }
         post<PointOfInterests> { point ->

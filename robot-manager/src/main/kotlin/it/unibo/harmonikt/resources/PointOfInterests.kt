@@ -1,6 +1,7 @@
 package it.unibo.harmonikt.resources
 
 import io.ktor.resources.Resource
+import kotlin.uuid.Uuid
 
 /**
  * Resource representing the collection of points of interest (POI).
@@ -17,5 +18,5 @@ class PointOfInterests {
      * @property id identifier of the point of interest
      */
     @Resource("/{id}")
-    class Id(val parent: PointOfInterests, val id: String)
+    class Id(val parent: PointOfInterests, val id: Uuid)
 }
