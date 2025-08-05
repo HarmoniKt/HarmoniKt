@@ -1,9 +1,18 @@
 package it.unibo.harmonikt.api
 
 import arrow.core.Either
+import it.unibo.harmonikt.api.MarkerAPIError.MarkerAlreadyExists
+import it.unibo.harmonikt.api.MarkerAPIError.MarkerDeletionFailed
+import it.unibo.harmonikt.api.MarkerAPIError.MarkerNotFound
+import it.unibo.harmonikt.api.PointOfInterestAPIError.GenericPointOfInterestAPIError
+import it.unibo.harmonikt.api.PointOfInterestAPIError.PointOfInterestDeletionFailed
+import it.unibo.harmonikt.api.dto.MarkerDTO
+import it.unibo.harmonikt.api.dto.MarkerIdDTO
 import it.unibo.harmonikt.api.dto.PointOfInterestDTO
+import it.unibo.harmonikt.api.dto.PointOfInterestRegistrationDTO
 import it.unibo.harmonikt.model.PointOfInterest
 import it.unibo.harmonikt.resources.PointOfInterests
+import it.unibo.harmonikt.resources.PointOfInterests.Id.Markers
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
@@ -68,7 +77,7 @@ interface PointOfInterestAPI {
      * @param poi The "Point of Interest" to create.
      * @return The created "Point of Interest".
      */
-    suspend fun registerPointOfInterest(poi: PointOfInterestDTO): Either<PointOfInterestAPIError, PointOfInterestDTO>
+    suspend fun registerPointOfInterest(poi: PointOfInterestRegistrationDTO): Either<PointOfInterestAPIError, PointOfInterestDTO>
 
     /**
      * Deletes a "Point of Interest" by its unique identifier.
@@ -76,9 +85,13 @@ interface PointOfInterestAPI {
      * @param poiId The unique identifier of the "Point of Interest" to delete.
      * @return A result indicating success or failure of the deletion operation.
      */
-    suspend fun deletePointOfInterest(poiId: PointOfInterests.Id): Either<PointOfInterestAPIError, PointOfInterestDTO>
+    suspend fun deletePointOfInterest(poiId: PointOfInterests.Id): Either<PointOfInterestDeletionFailed, PointOfInterestDTO>
 
-    suspend fun registerMarker(poiId: PointOfInterests.Id, markerId: PointOfInterests.Id): Either<PointOfInterestAPIError, Unit>
+    suspend fun getPointOfInterestMarkers(poiId: PointOfInterests.Id): Either<GenericPointOfInterestAPIError, List<MarkerIdDTO>>
 
-    suspend fun removeMarker(poiId: PointOfInterests.Id, markerId: PointOfInterests.Id): Either<PointOfInterestAPIError, Unit>
+    suspend fun getMarkerInfo(poiId: PointOfInterests.Id, markerId: Markers.Id): Either<MarkerNotFound, MarkerDTO>
+
+    suspend fun registerMarker(poiId: PointOfInterests.Id, markerId: Markers.Id): Either<MarkerAlreadyExists, MarkerIdDTO>
+
+    suspend fun removeMarker(poiId: PointOfInterests.Id, markerId: Markers.Id): Either<MarkerDeletionFailed, MarkerIdDTO>
 }

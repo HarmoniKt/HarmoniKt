@@ -3,8 +3,8 @@ package it.unibo.harmonikt.api
 import arrow.core.Either
 import it.unibo.harmonikt.api.dto.MarkerIdDTO
 import it.unibo.harmonikt.model.Marker
-import it.unibo.harmonikt.resources.Markers
 import it.unibo.harmonikt.resources.PointOfInterests
+import it.unibo.harmonikt.resources.PointOfInterests.Id.Markers
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
