@@ -9,6 +9,7 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.post
 import it.unibo.harmonikt.repository.PointOfInterestRepository
+import it.unibo.harmonikt.resources.Markers
 import it.unibo.harmonikt.resources.PointOfInterests
 
 /**
@@ -28,16 +29,28 @@ object PointOfInterestsHandlers {
      * @param client The HttpClient to use for making external HTTP requests needed within the handlers.
      */
     fun Routing.pointOfInterestsHandlers(repository: PointOfInterestRepository, client: HttpClient) {
+        // GET /pois - Retrieve all points of interest
         get<PointOfInterests> { poi ->
             repository.equals(10)
-            client.get("http://pois") // Example external call}
             call.respondText("Point of Interests resource accessed: $poi")
         }
+
+        // POST /pois - Create a new point of interest
         post<PointOfInterests> { point ->
             call.respondText("Point of Interests resource created with POST: $point")
         }
-        delete<PointOfInterests> { poi ->
+
+        // DELETE /pois/{poiId} - Delete a point of interest by ID
+        delete<PointOfInterests.Id> { poi ->
             call.respondText("Point of Interests resource deleted: $poi", status = HttpStatusCode.NoContent)
+        }
+
+        get<PointOfInterests.Id> { poi ->
+            TODO("Implement retrieval of point of interest by ID")
+        }
+
+        get<Markers.Id> {
+            TODO("Implement retrieval of marker by ID")
         }
     }
 }

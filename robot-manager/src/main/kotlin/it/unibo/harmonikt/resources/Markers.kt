@@ -3,8 +3,13 @@ package it.unibo.harmonikt.resources
 import io.ktor.resources.Resource
 import kotlin.uuid.Uuid
 
+/**
+ * Resource representing the collection of markers.
+ *
+ * Endpoint: `/markers`
+ */
 @Resource("/markers")
-class Markers {
+class Markers(val parent: PointOfInterests) {
     /**
      * Represents a specific marker identified by its ID.
      *
@@ -13,7 +18,7 @@ class Markers {
      * @param parent The parent Marker resource.
      * @param id The unique identifier of the marker.
      */
-    @Resource("/{id}")
+    @Resource("/{markerId}")
     class Id(val parent: Markers, val id: Uuid) {
         /**
          * Represents the position of a specific marker.
