@@ -715,7 +715,7 @@ wheels = [
 ]
 
 [[package]]
-name = "spot-service-py"
+name = "spot-service"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

@@ -63,9 +63,9 @@ services:
       timeout: 5s
       retries: 5
 
-  spot-service-py:
+  spot-service:
     build:
-      context: spot-service-py
+      context: spot-service
       dockerfile: Dockerfile
     ports:
       - "8084:8000"

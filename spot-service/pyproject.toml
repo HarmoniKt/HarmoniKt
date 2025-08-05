@@ -1,5 +1,5 @@
 [project]
-name = "spot-service-py"
+name = "spot-service"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
