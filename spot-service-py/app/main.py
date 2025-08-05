@@ -4,14 +4,6 @@ import requests
 import logging
 from fastapi import FastAPI
 
-# Import models and repositories
-from app.repositories.spot_robot_repository import (
-    MockSpotRobotRepositoryImpl,
-)
-from app.services.spot_robot_service import (
-    FakeSpotRobotServiceImpl,
-)
-
 # Import handlers
 from app.handlers.robot_handlers import setup_robot_handlers
 
@@ -59,11 +51,18 @@ def register_consul_service(
 resp = register_consul_service()
 logging.info("Registered to Consul: %s", resp.status_code)
 
-# Initialize repositories
-robot_repository = MockSpotRobotRepositoryImpl()
+if os.getenv("MOCKED") == "true":
+    from app.repositories.spot_robot_repository import MockSpotRobotRepositoryImpl
+    from app.services.spot_robot_service import FakeSpotRobotServiceImpl
 
-# Initialize services
-robot_service = FakeSpotRobotServiceImpl(robot_repository)
+    robot_repository = MockSpotRobotRepositoryImpl()
+    robot_service = FakeSpotRobotServiceImpl(robot_repository)
+else:
+    from app.repositories.spot_robot_repository import SpotRobotRepositoryImpl
+    from app.services.spot_robot_service import SpotRobotServiceImpl
+
+    robot_repository = SpotRobotRepositoryImpl()
+    robot_service = SpotRobotServiceImpl(robot_repository)
 
 
 # Health check endpoint
