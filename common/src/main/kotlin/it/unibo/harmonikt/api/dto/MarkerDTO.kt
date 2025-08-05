@@ -6,6 +6,23 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
+data class MarkerDTO(
+    val id: Uuid,
+    val identifier: String? = null,
+    val fiducial: Int? = null,
+) {
+    /**
+     * Converts this DTO to a Marker model object.
+     *
+     * @return The corresponding Marker model object.
+     */
+    fun toMarker(): Marker = when {
+        identifier != null -> Marker.MirMarker(id, identifier)
+        fiducial != null -> Marker.SpotMarker(id, fiducial)
+        else -> throw IllegalArgumentException("Either identifier or fiducial must be provided")
+    }
+}
+
 /**
  * Data Transfer Object (DTO) for markers in the environment.
  *
