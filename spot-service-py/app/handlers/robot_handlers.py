@@ -5,9 +5,11 @@ This module defines the handlers for robot-related HTTP endpoints in the Spot se
 These handlers process HTTP requests and generate appropriate responses for robot operations.
 """
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from typing import List, Dict
 from uuid import UUID
+from pydantic import BaseModel
+from typing import Union
 
 from app.repositories.spot_robot_repository import RobotRepository
 from app.api.robot_api import (
@@ -16,17 +18,19 @@ from app.api.robot_api import (
     RobotStatusDTO,
     RobotIdDTO,
 )
+from app.services.spot_robot_service import RobotService
 
 # Create a router for robot endpoints
 router = APIRouter()
 
 
-def setup_robot_handlers(repository: RobotRepository):
+def setup_robot_handlers(repository: RobotRepository, service: RobotService):
     """
     Sets up the routing for robot-related endpoints in the Spot service.
 
     Args:
         repository: The repository for accessing robot data
+        service: The service for handling robot actions
 
     Returns:
         The configured router
@@ -70,4 +74,27 @@ def setup_robot_handlers(repository: RobotRepository):
             )
         return {"message": f"Robot with ID {robot_id} deleted successfully"}
 
+    @router.post("/robots/{robot_id}/actions", status_code=status.HTTP_201_CREATED)
+    async def create_marker(robot_id: UUID, action: ActionDTO):
+        """Create a new action for a robot"""
+        try:
+            if isinstance(action, MoveToTargetDTO):
+                service.move_to_target(
+                    robot_id=robot_id,
+                    fiducial=action.fiducial,
+                )
+            else:
+                raise HTTPException(status_code=400, detail="Unsupported action type")
+            return {"message": f"Creation for robot {robot_id}"}
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+
     return router
+
+
+type ActionDTO = Union[MoveToTargetDTO]
+
+
+class MoveToTargetDTO(BaseModel):
+    type: str = "MoveToTarget"
+    fiducial: int

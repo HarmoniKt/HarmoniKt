@@ -5,14 +5,15 @@ import logging
 from fastapi import FastAPI
 
 # Import models and repositories
-from app.repositories.spot_marker_repository import FakeSpotMarkerRepository
 from app.repositories.spot_robot_repository import (
     MockSpotRobotRepositoryImpl,
+)
+from app.services.spot_robot_service import (
+    FakeSpotRobotServiceImpl,
 )
 
 # Import handlers
 from app.handlers.robot_handlers import setup_robot_handlers
-from app.handlers.marker_handlers import setup_marker_handlers
 
 logging.basicConfig(
     level=logging.INFO,
@@ -59,8 +60,10 @@ resp = register_consul_service()
 logging.info("Registered to Consul: %s", resp.status_code)
 
 # Initialize repositories
-marker_repository = FakeSpotMarkerRepository()
 robot_repository = MockSpotRobotRepositoryImpl()
+
+# Initialize services
+robot_service = FakeSpotRobotServiceImpl(robot_repository)
 
 
 # Health check endpoint
@@ -71,8 +74,7 @@ async def health_check():
 
 # Set up the handlers with the repositories
 robot_router = setup_robot_handlers(robot_repository)
-marker_router = setup_marker_handlers(marker_repository)
+
 
 # Include the routers in the FastAPI app
 app.include_router(robot_router)
-app.include_router(marker_router)
