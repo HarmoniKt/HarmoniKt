@@ -1,0 +1,49 @@
+http://localhost
+
+@robotPaths {
+    path /robots* /pois*
+}
+
+handle @robotPaths {
+    reverse_proxy http://robot-manager:8080
+}
+
+##############################
+### For debugging purposes ###
+##############################
+
+handle_path /consul* {
+    reverse_proxy http://consul:8500
+}
+
+handle_path /group-mission-manager* {
+    reverse_proxy http://group-mission-manager:8080
+}
+
+handle_path /map-manager* {
+    reverse_proxy http://map-manager:8080
+}
+
+handle_path /robot-manager* {
+    reverse_proxy http://robot-manager:8080
+}
+
+handle_path /mir-service* {
+    reverse_proxy http://mir-service:8080
+}
+
+handle_path /spot-service* {
+    reverse_proxy http://spot-service:8080
+}
+
+##################################
+### End for debugging purposes ###
+##################################
+
+handle /health {
+    respond "healthy" 200
+}
+
+handle * {
+    respond "Error: Invalid path" 404
+}

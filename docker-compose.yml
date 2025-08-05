@@ -1,8 +1,29 @@
 services:
+  proxy:
+    image: caddy:2.10-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/Caddyfile:/etc/caddy/Caddyfile
+    restart: unless-stopped
+    depends_on:
+      consul:
+        condition: service_healthy
+      robot-manager:
+        condition: service_healthy
+      group-mission-manager:
+        condition: service_healthy
+      map-manager:
+        condition: service_healthy
+      spot-service:
+        condition: service_healthy
+      mir-service:
+        condition: service_healthy
+
   consul:
     image: consul:1.15
     ports:
-      - "8500:8500"  # UI and API
+      - "8500:8500"  # UI and API - Only for development purposes
       - "8600:8600/udp"  # DNS
     command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0"
     healthcheck:
@@ -15,6 +36,7 @@ services:
     build:
       context: .
       dockerfile: robot-manager/Dockerfile
+    # Only for development purposes
     ports:
       - "8081:8080"
     environment:
@@ -33,6 +55,7 @@ services:
     build:
       context: .
       dockerfile: group-mission-manager/Dockerfile
+    # Only for development purposes
     ports:
       - "8082:8080"
     environment:
@@ -50,6 +73,7 @@ services:
     build:
       context: .
       dockerfile: map-manager/Dockerfile
+    # Only for development purposes
     ports:
       - "8083:8080"
     environment:
@@ -67,10 +91,12 @@ services:
     build:
       context: spot-service
       dockerfile: Dockerfile
+    # Only for development purposes
     ports:
       - "8084:8000"
     environment:
       - CONSUL_URL=http://consul:8500
+      - MOCKED=true
     depends_on:
       consul:
         condition: service_healthy
@@ -84,6 +110,7 @@ services:
     build:
       context: .
       dockerfile: mir-service/Dockerfile
+    # Only for development purposes
     ports:
       - "8085:8080"
     environment:
