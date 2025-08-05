@@ -73,7 +73,7 @@ async def health_check():
 
 
 # Set up the handlers with the repositories
-robot_router = setup_robot_handlers(robot_repository)
+robot_router = setup_robot_handlers(robot_repository, robot_service)
 
 
 # Include the routers in the FastAPI app
