@@ -1,3 +1,5 @@
+@file:Suppress("UnusedPrivateProperty")
+
 package it.unibo.harmonikt.api.impl
 
 import arrow.core.Either
