@@ -2,23 +2,40 @@ package it.unibo.harmonikt.api.dto
 
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 import it.unibo.harmonikt.model.Marker
+import it.unibo.harmonikt.model.Marker.MirMarker
+import it.unibo.harmonikt.model.Marker.SpotMarker
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
-data class MarkerDTO(
-    val id: Uuid,
-    val identifier: String? = null,
-    val fiducial: Int? = null,
-) {
+/**
+ * Data Transfer Object (DTO) for markers in the environment.
+ * This DTO encapsulates the necessary information about a marker,
+ * including its unique identifier and specific details
+ * for different types of markers.
+ *
+ * This DTO is used to transfer data between different layers of the application,
+ * such as from the API to the domain model.
+ * @property id Unique identifier for the marker.
+ * * @property identifier String identifier used by MIR robots to recognize this marker.
+ * * @property fiducial Waypoint string used by Spot robots to recognize this marker.
+ *
+ * Different robot types may use different marker types to identify the same location.
+ * @throws IllegalArgumentException if neither identifier nor fiducial is provided.
+ * @constructor Creates a MarkerDTO with the specified id, identifier, and fiducial.
+ * @property id Unique identifier for the marker.
+ * @property identifier String identifier used by MIR robots to recognize this marker.
+ * @property fiducial Waypoint string used by Spot robots to recognize this marker.
+ */
+data class MarkerDTO(val id: Uuid, val identifier: String? = null, val fiducial: Int? = null) {
     /**
      * Converts this DTO to a Marker model object.
      *
      * @return The corresponding Marker model object.
      */
     fun toMarker(): Marker = when {
-        identifier != null -> Marker.MirMarker(id, identifier)
-        fiducial != null -> Marker.SpotMarker(id, fiducial)
+        identifier != null -> MirMarker(id, identifier)
+        fiducial != null -> SpotMarker(id, fiducial)
         else -> throw IllegalArgumentException("Either identifier or fiducial must be provided")
     }
 }
@@ -40,6 +57,13 @@ sealed interface MarkerRegistrationDTO {
     val id: Uuid
 
     /**
+     * Unique identifier for the point of interest associated with this marker.
+     *
+     * This identifier links the marker to a specific point of interest in the environment.
+     */
+    val associatedPointOfInterest: Uuid
+
+    /**
      * Data Transfer Object (DTO) for a MIR marker.
      *
      * @property id The unique identifier of the marker.
@@ -47,7 +71,11 @@ sealed interface MarkerRegistrationDTO {
      */
     @Serializable
     @SerialName("MIR")
-    data class MirMarkerRegistrationDTO(override val id: Uuid, val identifier: String) : MarkerRegistrationDTO
+    data class MirMarkerRegistrationDTO(
+        override val id: Uuid,
+        override val associatedPointOfInterest: Uuid,
+        val identifier: String,
+    ) : MarkerRegistrationDTO
 
     /**
      * Data Transfer Object (DTO) for a SPOT marker.
@@ -57,7 +85,11 @@ sealed interface MarkerRegistrationDTO {
      */
     @Serializable
     @SerialName("SPOT")
-    data class SpotMarkerRegistrationDTO(override val id: Uuid, val fiducial: Int) : MarkerRegistrationDTO
+    data class SpotMarkerRegistrationDTO(
+        override val id: Uuid,
+        override val associatedPointOfInterest: Uuid,
+        val fiducial: Int,
+    ) : MarkerRegistrationDTO
 
     /**
      * Converts this DTO to a Marker model object.
@@ -65,11 +97,11 @@ sealed interface MarkerRegistrationDTO {
      * @return The corresponding Marker model object.
      */
     fun toMarker(): Marker = when (this) {
-        is MirMarkerRegistrationDTO -> Marker.MirMarker(
+        is MirMarkerRegistrationDTO -> MirMarker(
             id = id,
             identifier = identifier,
         )
-        is SpotMarkerRegistrationDTO -> Marker.SpotMarker(
+        is SpotMarkerRegistrationDTO -> SpotMarker(
             id = id,
             fiducial = fiducial,
         )
@@ -112,13 +144,15 @@ sealed interface MarkerRegistrationDTO {
          * @param marker The Marker model object to convert.
          * @return The corresponding MarkerDTO.
          */
-        fun fromMarker(marker: Marker): MarkerRegistrationDTO = when (marker) {
-            is Marker.MirMarker -> MirMarkerRegistrationDTO(
+        fun fromMarker(poi: Uuid, marker: Marker): MarkerRegistrationDTO = when (marker) {
+            is MirMarker -> MirMarkerRegistrationDTO(
                 id = marker.id,
+                associatedPointOfInterest = poi,
                 identifier = marker.identifier,
             )
-            is Marker.SpotMarker -> SpotMarkerRegistrationDTO(
+            is SpotMarker -> SpotMarkerRegistrationDTO(
                 id = marker.id,
+                associatedPointOfInterest = poi,
                 fiducial = marker.fiducial,
             )
         }

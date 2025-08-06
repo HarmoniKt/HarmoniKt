@@ -20,10 +20,8 @@ import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
-import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.model.RobotType.MIR
 import it.unibo.harmonikt.model.RobotType.SPOT
-import it.unibo.harmonikt.repository.ActionRepository
 import it.unibo.harmonikt.repository.RobotRepository
 import it.unibo.harmonikt.resources.Robots
 
@@ -36,7 +34,7 @@ import it.unibo.harmonikt.resources.Robots
  */
 class RobotAPIImpl(
     private val robotRepository: RobotRepository,
-    private val actionRepository: ActionRepository,
+//    private val actionRepository: ActionRepository,
     private val client: HttpClient,
 ) : RobotAPI {
     override suspend fun getAllRobots(): Either<RobotAPIError, List<RobotInfo>> =
@@ -52,14 +50,14 @@ class RobotAPIImpl(
     }.mapLeft { error -> RobotAPIError.GenericRobotAPIError(error.message) }
 
     override suspend fun registerNewRobot(request: RobotRegistrationDTO): Either<RobotAPIError, RobotIdDTO> =
-        Either.Companion.catch {
+        Either.catch {
             when (request) {
                 is RobotRegistrationDTO.MirRobotRegistrationDTO -> {
                     val robotId = client.post("http://mir-service/robots") {
                         setBody(request)
                         contentType(ContentType.Application.Json)
                     }.body<RobotIdDTO>()
-                    robotRepository.registerRobot(robotId.toRobotId(), RobotType.MIR, request.canonicalName)
+                    robotRepository.registerRobot(robotId.toRobotId(), MIR, request.canonicalName)
                     robotId
                 }
                 is RobotRegistrationDTO.SpotRobotRegistrationDTO -> {
@@ -67,13 +65,13 @@ class RobotAPIImpl(
                         setBody(request)
                         contentType(ContentType.Application.Json)
                     }.body<RobotIdDTO>()
-                    robotRepository.registerRobot(robotId.toRobotId(), RobotType.SPOT, request.canonicalName)
+                    robotRepository.registerRobot(robotId.toRobotId(), SPOT, request.canonicalName)
                     robotId
                 }
             }
         }.mapLeft { error -> RobotAPIError.RobotCreationFailed(error.message) }
 
-    override suspend fun deleteRobot(robotId: Robots.Id): Either<RobotAPIError, RobotIdDTO> = Either.Companion.catch {
+    override suspend fun deleteRobot(robotId: Robots.Id): Either<RobotAPIError, RobotIdDTO> = Either.catch {
         robotRepository.getRobotById(robotId.robotId)?.let {
             when (it) {
                 MIR -> client.delete("http://mir-service/robots/${robotId.robotId}")
