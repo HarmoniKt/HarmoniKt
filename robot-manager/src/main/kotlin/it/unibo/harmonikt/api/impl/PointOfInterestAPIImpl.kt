@@ -113,10 +113,9 @@ class PointOfInterestAPIImpl(val pointOfInterestRepository: PointOfInterestRepos
                 }.body<MarkerDTO>()
                 val associated = pointOfInterestRepository.associateMarker(point.id, marker.toMarker())
                 if (associated) marker else return Either.Left(MarkerAssociationFailed(marker.id, point.id))
-            }
-                ?: return Either.Left(
-                    GenericMarkerAPIError(PointOfInterestNotFound(request.associatedPointOfInterest).toString()),
-                )
+            } ?: return Either.Left(
+                GenericMarkerAPIError(PointOfInterestNotFound(request.associatedPointOfInterest).toString()),
+            )
         }.mapLeft { error -> GenericMarkerAPIError(error.message) }
 
     override suspend fun removeMarker(
