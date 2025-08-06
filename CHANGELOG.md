@@ -1,3 +1,107 @@
+## [1.10.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.3...1.10.0) (2025-08-06)
+
+### Features
+
+* add action main methods ([21baf81](https://github.com/HarmoniKt/HarmoniKt/commit/21baf81fd7f299bb2b348868be655cb0f7f2ef18))
+* add action main methods ([6006769](https://github.com/HarmoniKt/HarmoniKt/commit/6006769f7d18ca044111f953db2e2cb3bfe02e1d))
+* add marker API implementation ([1feb571](https://github.com/HarmoniKt/HarmoniKt/commit/1feb5714165857c26290cf22a659019a0f72e88d))
+* add Marker API main mathods ([ff87912](https://github.com/HarmoniKt/HarmoniKt/commit/ff879126da0e47d0276fa56b598548a6152cd163))
+* add marker handler ([211d4c6](https://github.com/HarmoniKt/HarmoniKt/commit/211d4c6a920aa3c0191b756a7bea2e93fc74b018))
+* add more info about POI ([c3f7804](https://github.com/HarmoniKt/HarmoniKt/commit/c3f78040e19cb31a016ca5397256b03dba82e59c))
+* add POI API implementation base ([f243a84](https://github.com/HarmoniKt/HarmoniKt/commit/f243a8490ac795c03b07ec6ba1d1695e0d5a7a26))
+* add point of interest API and handler implementation ([0d0076a](https://github.com/HarmoniKt/HarmoniKt/commit/0d0076a98ad1920fdad2273e22c31fcaec89b859))
+* add POIs methods ([6f9bc52](https://github.com/HarmoniKt/HarmoniKt/commit/6f9bc520a6612585c20396b0637f3f1dba75963f))
+* add POIs parameters and main API methods ([84892f7](https://github.com/HarmoniKt/HarmoniKt/commit/84892f7625ad091d3b6dbc40881357dbd2efc413))
+* add serializer for errors ([852a2cb](https://github.com/HarmoniKt/HarmoniKt/commit/852a2cbac62f26b9cacf3aed6b3601db62dc2219))
+* add spot movement service ([32e7dd6](https://github.com/HarmoniKt/HarmoniKt/commit/32e7dd60ec306b414bc68e88f1e2b99a7732df22))
+* **api:** robots openapi spec ([0580a09](https://github.com/HarmoniKt/HarmoniKt/commit/0580a09180fa7742b0221e00602c172c2aec403e))
+* **common:** add action DTO ([824420b](https://github.com/HarmoniKt/HarmoniKt/commit/824420be6fab3b9f7fc06baf848770ef98ef2fd8))
+* **common:** add from marker and to marker function in DTO ([4af1ffb](https://github.com/HarmoniKt/HarmoniKt/commit/4af1ffb090009b5c491318c6d29e13d8b4aeaa41))
+* **common:** add marker DTO ([b66bc26](https://github.com/HarmoniKt/HarmoniKt/commit/b66bc26ecda46525eb892386eaf08f1f876f42ec))
+* **common:** add point of interest DTO ([81a9c73](https://github.com/HarmoniKt/HarmoniKt/commit/81a9c732d0a982d10a66dac3de977ab4e896bf74))
+* **common:** add robot info & status DTO ([2e1e6da](https://github.com/HarmoniKt/HarmoniKt/commit/2e1e6da52f13f9a7c7857853a56df7dd9b531b60))
+* implement delete robot ([fbef2bc](https://github.com/HarmoniKt/HarmoniKt/commit/fbef2bc049f3ff767b64abd0bdfa0e592dc7f18e))
+* implement get of a specific robot ([488de8e](https://github.com/HarmoniKt/HarmoniKt/commit/488de8e56bd9499fe5682dc0000b008e6177608b))
+* implement get on robot info ([2f6fade](https://github.com/HarmoniKt/HarmoniKt/commit/2f6fadeb66d646364a028676eca7a2d3d8444a2f))
+* **proxy:** add Caddy as a reverse proxy ([6007dd4](https://github.com/HarmoniKt/HarmoniKt/commit/6007dd4136c0be82103fd27a6fe32d87996d659a))
+* remove spot service kotlin implementation ([9366a95](https://github.com/HarmoniKt/HarmoniKt/commit/9366a954eb32f7a0f06e213b67e24e0f578e7f67))
+* **robot-manager:** GET /robots on spots ([17c2708](https://github.com/HarmoniKt/HarmoniKt/commit/17c27080d16f6b1ebaff4f552c51bdae37b19dc6))
+* setup robot registration handler and logic ([58ac137](https://github.com/HarmoniKt/HarmoniKt/commit/58ac1377dfa09d1c98df1638ff2744be014e891e))
+* **spot:** conditional import when MOCKED=true ([b59299f](https://github.com/HarmoniKt/HarmoniKt/commit/b59299fe168cb4624d138f7c27abb2e45a245ee5))
+* **spot:** fetch spot status ([3e7545b](https://github.com/HarmoniKt/HarmoniKt/commit/3e7545b6b98716f8d906c29a7db2fbbd91ec2166))
+* **spot:** GET, POST, DELETE robots ([2ad1fc5](https://github.com/HarmoniKt/HarmoniKt/commit/2ad1fc569538f148af9de8d24bb22f62c1214005))
+* **spot:** implement mocked repository ([3bcda63](https://github.com/HarmoniKt/HarmoniKt/commit/3bcda63f1b1d42af654a539dab0aec6325dad44f))
+* **spot:** implement MoveToTarget ([37e8907](https://github.com/HarmoniKt/HarmoniKt/commit/37e890793d228f6afa3dd36c2f559a117d2510c5))
+* swagger api ([671d8df](https://github.com/HarmoniKt/HarmoniKt/commit/671d8df08fbdc87903d38f4a7990d8e4a8a5ccfc))
+* update Markers API ([8eb7e33](https://github.com/HarmoniKt/HarmoniKt/commit/8eb7e33a1d42d2f6a0cb5115fdc05c673b00106d))
+* update POIs API ([35eda35](https://github.com/HarmoniKt/HarmoniKt/commit/35eda35b159d245ae3790fcbe22e6fb3f7240481))
+
+### Dependency updates
+
+* **deps:** update amazoncorretto docker tag to v23 ([8cd6945](https://github.com/HarmoniKt/HarmoniKt/commit/8cd6945c59d206905bd5feba5d17ea3631c48458))
+* **deps:** update amazoncorretto docker tag to v24 ([3f031a3](https://github.com/HarmoniKt/HarmoniKt/commit/3f031a3480a0a60b9539689e9917c684bee16eae))
+* **deps:** update dependency gradle to v8.14.3 ([647c267](https://github.com/HarmoniKt/HarmoniKt/commit/647c26777a3cf7bde56dc2ff419d4de4f8476816))
+* **deps:** update dependency org.mockito:mockito-core to v5.18.0 ([#39](https://github.com/HarmoniKt/HarmoniKt/issues/39)) ([e84e22e](https://github.com/HarmoniKt/HarmoniKt/commit/e84e22e6cb10293ec8a5edd27543d11bc802e045))
+* **deps:** update ktor monorepo to v3.2.3 ([2aedd7e](https://github.com/HarmoniKt/HarmoniKt/commit/2aedd7e8d3e87d7e1eb95f71edf4e02c6dd5f83f))
+* **deps:** update ktor monorepo to v3.2.3 ([#55](https://github.com/HarmoniKt/HarmoniKt/issues/55)) ([00e0bff](https://github.com/HarmoniKt/HarmoniKt/commit/00e0bff90e8d839421595f7d8b08915cebbfaeef))
+* **deps:** update plugin kotlin-qa to v0.92.0 ([0311acc](https://github.com/HarmoniKt/HarmoniKt/commit/0311acc6efa04ccdde9dadc8097c285ccaa14972))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.28 ([440d6b2](https://github.com/HarmoniKt/HarmoniKt/commit/440d6b2cf5fbffb1d0114c8cd03818890951e25f))
+
+### Bug Fixes
+
+* / in resources paths ([d45db7d](https://github.com/HarmoniKt/HarmoniKt/commit/d45db7dbceb6b3be6fc803f32c519e872a2b8785))
+* adapt to new Marker and POI structure ([924f6dc](https://github.com/HarmoniKt/HarmoniKt/commit/924f6dc0eaf8064abb58554bc1318e9829e7af57))
+* remove id from POI registration request ([b5e2ce2](https://github.com/HarmoniKt/HarmoniKt/commit/b5e2ce29f3012743bfe4f7a03e29cd9313845f83))
+* solve serialization probelm on DTO robot status ([febf5a3](https://github.com/HarmoniKt/HarmoniKt/commit/febf5a3b6e1698f11468c53f8f6674d857b972d4))
+* spot use compliant API wrt robot-service ([ff52bc4](https://github.com/HarmoniKt/HarmoniKt/commit/ff52bc43f2fd753e30c9b7f579d71ce768b67c65))
+* **spot:** change starting Docker image to another with curl ([4b9e35f](https://github.com/HarmoniKt/HarmoniKt/commit/4b9e35fd0621a00cfbe33074f8bb6b790d8860d7))
+* **spot:** routing deps ([19c74b8](https://github.com/HarmoniKt/HarmoniKt/commit/19c74b8a1adffe2bed61b2ff6cf27c434164f06c))
+* update robotAPI import ([2c4d091](https://github.com/HarmoniKt/HarmoniKt/commit/2c4d091d81f8feffa9905c3e3c1c2162694aeba0))
+* wrong path for delete POI ([f7d1c05](https://github.com/HarmoniKt/HarmoniKt/commit/f7d1c0517b63efc7ef1fbeaccc4fc88e22406459))
+* wrong route conflict ([4adac3f](https://github.com/HarmoniKt/HarmoniKt/commit/4adac3f5871de089debe8953868d60729044e30d))
+
+### Documentation
+
+* add missing documentation ([7a27200](https://github.com/HarmoniKt/HarmoniKt/commit/7a272003431209adf5d6ef83a63de6254ad64fe4))
+* add missing documentation ([9ece035](https://github.com/HarmoniKt/HarmoniKt/commit/9ece03529bd57a49d91037df499fed38a1b65672))
+* add missing documentation ([adf5d04](https://github.com/HarmoniKt/HarmoniKt/commit/adf5d0408561b82d9e7a976edba5de8fa6de8429))
+* minor in POIs doc ([d6ee3cd](https://github.com/HarmoniKt/HarmoniKt/commit/d6ee3cd51fa4b2fad8c7bca76b4de45c6cc9dbba))
+
+### Build and continuous integration
+
+* **deps:** update actions/create-github-app-token action to v2 ([1afd3d8](https://github.com/HarmoniKt/HarmoniKt/commit/1afd3d874cfa421f4fe5fada0698cd1d5b6e0fca))
+* revert ktor update ([71c4d28](https://github.com/HarmoniKt/HarmoniKt/commit/71c4d28d691dd83df2293b894689c686a5fcd572))
+
+### General maintenance
+
+* format ([6271035](https://github.com/HarmoniKt/HarmoniKt/commit/62710351c6f94cadce39b74c083bc457a0b0b815))
+* remove useless import ([39b6ee5](https://github.com/HarmoniKt/HarmoniKt/commit/39b6ee59878093dcc79c25b3345ce5137344005d))
+* **spot:** move spot-service-py -> spot-service ([4939f8f](https://github.com/HarmoniKt/HarmoniKt/commit/4939f8f3b31e6fd30242c8047a14c32253a8d2df))
+
+### Style improvements
+
+* adapt to ktlint specs ([9af3155](https://github.com/HarmoniKt/HarmoniKt/commit/9af315534535320312578569c544e57ea34e0bdc))
+* add missing trailing comma ([f8d9fd1](https://github.com/HarmoniKt/HarmoniKt/commit/f8d9fd1d703b87886593862d8ef24384cb8c6c70))
+* fix criminal indentation ([27b9b11](https://github.com/HarmoniKt/HarmoniKt/commit/27b9b118eeb396c45cc0f000cd551ee7dcab9185))
+* fix imports ([bfdfb9e](https://github.com/HarmoniKt/HarmoniKt/commit/bfdfb9e9a42a43ff53f0ac8dcd906619f544d1db))
+* minors in imports ([2ca170a](https://github.com/HarmoniKt/HarmoniKt/commit/2ca170a8ac80e5abfae9c1c47167c2c1612a2b51))
+* remove useless import ([9ed22ed](https://github.com/HarmoniKt/HarmoniKt/commit/9ed22ed5a5a78ab7af5bef9dcebfe87faf6a350f))
+* remove wildcard from import ([99c9e05](https://github.com/HarmoniKt/HarmoniKt/commit/99c9e05b7c9309c50f7c554c0a7e7b689bc09e46))
+* temporary suppress unused private property in not yet implemented code ([7235d73](https://github.com/HarmoniKt/HarmoniKt/commit/7235d733134723509bf859cf0cf85eef0336f6a3))
+
+### Refactoring
+
+* canonical name and robot position ([b663514](https://github.com/HarmoniKt/HarmoniKt/commit/b6635145af6d72be1ea96022263f7e207b42b91e))
+* change return tipe from POI dto to POI ID dto ([a374f3a](https://github.com/HarmoniKt/HarmoniKt/commit/a374f3a54fad43671ef3cadba53d34161bbccca1))
+* **common:** robot position from Int to Double ([2ca6071](https://github.com/HarmoniKt/HarmoniKt/commit/2ca6071f068733754f9a8bed7b9beb83b81a89b6))
+* marker signatures ([11aa4b5](https://github.com/HarmoniKt/HarmoniKt/commit/11aa4b506153ba7876796462b44fed9d719700c3))
+* marker signatures ([799df62](https://github.com/HarmoniKt/HarmoniKt/commit/799df6206d99e5ab1fba7971f9bab6f15842f508))
+* minor in resource identifiers ([f07111e](https://github.com/HarmoniKt/HarmoniKt/commit/f07111ea4e1d37015e360e36381371e62ad20916))
+* move robot API implementation into proper package ([dfc0f8e](https://github.com/HarmoniKt/HarmoniKt/commit/dfc0f8eb66b72ad255822c1bd37db567181a7cf1))
+* nest Marker resource into POI ([54f630e](https://github.com/HarmoniKt/HarmoniKt/commit/54f630ef3061e67b1cd3dd0564b6d68e2789030e))
+* rename class ([ecacee0](https://github.com/HarmoniKt/HarmoniKt/commit/ecacee05a8fe149b395872bd54f5d3a1f9379c31))
+* rename waypoint into fiducial ([cc38e47](https://github.com/HarmoniKt/HarmoniKt/commit/cc38e470f6de525c84cbc4e5190c3661019000a3))
+
 ## [1.9.3](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.2...1.9.3) (2025-07-29)
 
 ### Dependency updates
