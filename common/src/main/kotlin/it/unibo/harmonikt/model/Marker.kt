@@ -44,4 +44,3 @@ sealed interface Marker {
         val fiducial: Int,
     ) : Marker
 }
-

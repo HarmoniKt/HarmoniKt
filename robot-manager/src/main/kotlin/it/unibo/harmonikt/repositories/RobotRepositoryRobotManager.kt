@@ -1,4 +1,4 @@
-@file:Suppress("MagicNumber")
+@file:Suppress("MagicNumber", "UnusedParameter")
 
 package it.unibo.harmonikt.repositories
 

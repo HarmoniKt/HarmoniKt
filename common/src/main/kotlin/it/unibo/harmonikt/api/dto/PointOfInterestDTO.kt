@@ -5,6 +5,12 @@ import it.unibo.harmonikt.model.PointOfInterest
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
 
+/**
+ * Sealed interface representing a point of interest registration DTO.
+ * This interface is used to register points of interest in the system.
+ * It includes properties for the unique identifier, canonical name,
+ * latitude, and longitude of the point of interest.
+ */
 sealed interface PointOfInterestRegistrationDTO {
     /**
      * Represents a point of interest registration with a unique identifier.
@@ -12,12 +18,28 @@ sealed interface PointOfInterestRegistrationDTO {
      */
     val id: Uuid
 
+    /**
+     * Canonical name of the point of interest.
+     * This name is used to uniquely identify the point of interest in the system.
+     */
     val canonicalName: String
 
+    /**
+     * Latitude coordinate of the point of interest.
+     * This value represents the geographical latitude of the point of interest.
+     */
     val latitude: Float
 
+    /**
+     * Longitude coordinate of the point of interest.
+     * This value represents the geographical longitude of the point of interest.
+     */
     val longitude: Float
 
+    /**
+     * Companion object for validating point of interest registration DTOs
+     * and converting between DTOs and domain models.
+     */
     companion object {
         /**
          * Validates the provided point of interest registration DTO.
@@ -27,8 +49,6 @@ sealed interface PointOfInterestRegistrationDTO {
          */
         fun validate(dto: PointOfInterestRegistrationDTO): ValidationResult = when {
             dto.canonicalName.isBlank() -> ValidationResult.Invalid("Canonical name must not be blank")
-            dto.latitude < -90 || dto.latitude > 90 -> ValidationResult.Invalid("Latitude must be between -90 and 90")
-            dto.longitude < -180 || dto.longitude > 180 -> ValidationResult.Invalid("Longitude must be between -180 and 180")
             else -> ValidationResult.Valid
         }
     }
@@ -101,7 +121,31 @@ data class PointOfInterestDTO(
             name = pointOfInterest.name,
             latitude = pointOfInterest.latitude,
             longitude = pointOfInterest.longitude,
-            associatedMarkers = pointOfInterest.associatedMarkers.map { MarkerRegistrationDTO.fromMarker(it) },
+            associatedMarkers = pointOfInterest.associatedMarkers.map { marker ->
+                MarkerRegistrationDTO.fromMarker(pointOfInterest.id, marker)
+            },
         )
     }
+}
+
+/**
+ * Data Transfer Object (DTO) representing the unique identifier of a point of interest.
+ * This DTO is used to transfer the ID of a point of interest
+ * between different layers of the application,
+ * such as from the API to the domain model.
+ *
+ * @property id The unique identifier of the point of interest, represented as a Uuid.
+ *
+ * This DTO is typically used in scenarios where only the ID of the point of interest is needed,
+ * such as when referencing a point of interest in other operations
+ * or when performing lookups.
+ */
+@Serializable
+data class PointOfInterestIdDTO(val id: Uuid) {
+    /**
+     * Converts this DTO to a domain model PointOfInterest.Id.
+     *
+     * @return The corresponding PointOfInterest.Id domain model.
+     */
+    fun toPointOfInterestId(): Uuid = id
 }

@@ -34,7 +34,7 @@ interface PointOfInterestRepository {
      * @param id The unique identifier of the point of interest to retrieve.
      * @return The point of interest with the specified ID, or null if no such point exists.
      */
-    fun registerPointOfInterest(name: String, latitude: Float, longitude: Float): Boolean
+    fun registerPointOfInterest(id: Uuid, name: String, latitude: Float, longitude: Float): Boolean
 
     /**
      * Deletes a point of interest from the repository.
@@ -52,6 +52,15 @@ interface PointOfInterestRepository {
      * @return The point of interest associated with the given identifier, or null if not found.
      */
     fun associateMarker(poiId: Uuid, marker: Marker): Boolean
+
+    /**
+     * Retrieves information about a specific marker associated with a point of interest.
+     *
+     * @param poiId The unique identifier of the point of interest.
+     * @param markerId The unique identifier of the marker to retrieve.
+     * @return The marker associated with the given point of interest and marker ID, or null if not found.
+     */
+    fun getMarkerInfo(poiId: Uuid, markerId: Uuid): Marker?
 
     /**
      * Dissociates a marker from a point of interest.

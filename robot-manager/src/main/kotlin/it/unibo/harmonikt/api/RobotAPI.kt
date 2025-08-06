@@ -19,6 +19,9 @@ import kotlinx.serialization.Serializable
 sealed interface RobotAPIError {
     /**
      * Represents a generic error in the Robot Management API.
+     * This error is thrown for any issues that do not fall under specific categories,
+     * such as network errors, server errors, or unexpected conditions.
+     * * @property message An optional message providing additional details about the error.
      */
     @Serializable
     data class GenericRobotAPIError(val message: String? = null) : RobotAPIError

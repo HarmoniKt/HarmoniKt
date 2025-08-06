@@ -1,9 +1,8 @@
-@file:Suppress("MagicNumber")
+@file:Suppress("MagicNumber", "UnusedPrivateMember")
 
 package it.unibo.harmonikt.repository
 
 import it.unibo.harmonikt.model.BatteryLevel
-import it.unibo.harmonikt.model.CanonicalName
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo

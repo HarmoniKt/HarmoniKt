@@ -135,11 +135,18 @@ sealed interface RobotActionDTO {
         /**
          * Converts this DTO to a domain model Action.
          *
+         * @param target The point of interest that the robot should interact with.
          * @return An Action domain model representing this DTO.
          */
         @Serializable
         data class SpotMoveToTargetDTO(val target: SpotMarker) : MoveToTargetDTO
 
+        /**
+         * Converts this DTO to a domain model Action.
+         *
+         * @param target The point of interest that the robot should interact with.
+         * @return An Action domain model representing this DTO.
+         */
         @Serializable
         data class MirMoveToTargetDTO(val target: MirMarker) : MoveToTargetDTO
     }

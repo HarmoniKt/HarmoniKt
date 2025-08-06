@@ -7,6 +7,11 @@ import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.RobotRepository
 
+/**
+ * Mock implementation of the RobotRepository interface for testing purposes.
+ * This class simulates a repository for managing robots, allowing for registration,
+ * deletion, and retrieval of robot information without a real database.
+ */
 class MockRepositoryRobotManager : RobotRepository {
     private val registeredRobots = mutableMapOf<RobotId, Pair<RobotType, String>>()
 

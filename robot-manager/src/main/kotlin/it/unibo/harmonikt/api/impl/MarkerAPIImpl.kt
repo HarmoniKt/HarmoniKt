@@ -2,28 +2,29 @@ package it.unibo.harmonikt.api.impl
 
 import arrow.core.Either
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
 import it.unibo.harmonikt.api.MarkerAPI
 import it.unibo.harmonikt.api.MarkerAPIError
 import it.unibo.harmonikt.api.dto.MarkerIdDTO
 import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.repository.MarkerRepository
-import it.unibo.harmonikt.resources.Markers
 import it.unibo.harmonikt.resources.PointOfInterests
 
+/**
+ * Implementation of the MarkerAPI interface for managing markers.
+ *
+ * @property markerRepository The repository for accessing marker data.
+ * @property client The HTTP client used to make requests to the marker service.
+ */
 class MarkerAPIImpl(private val markerRepository: MarkerRepository<Marker>, private val client: HttpClient) :
     MarkerAPI {
-    override suspend fun getAllMarkers(): Either<MarkerAPIError, List<Marker>> =
-        Either.Right(markerRepository.getMarkers())
+    override suspend fun getAllMarkers(): Either<MarkerAPIError, List<Marker>> {
+        TODO("Not yet implemented")
+    }
 
-    override suspend fun getMarkerInfo(poiId: PointOfInterests.Id, markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO> = Either.catch {
-        markerRepository.getMarkerById(markerId.id)?.let {
-            client.get("http://pois/{poiId}/markers/${markerId}") {
-                contentType(ContentType.Application.Json)
-            }.body<MarkerIdDTO>()
-        } ?: return Either.Left(MarkerAPIError.MarkerNotFound(markerId.id))
-    }.mapLeft { error -> MarkerAPIError.GenericMarkerAPIError(error.message) }
+    override suspend fun getMarkerInfo(
+        poiId: PointOfInterests.Id,
+        markerId: PointOfInterests.Id.Markers.Id,
+    ): Either<MarkerAPIError, MarkerIdDTO> {
+        TODO("Not yet implemented")
+    }
 }
