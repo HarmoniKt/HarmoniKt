@@ -97,7 +97,7 @@ interface PointOfInterestAPI {
      * @param poiId The unique identifier of the "Point of Interest" to delete.
      * @return A result indicating success or failure of the deletion operation.
      */
-    suspend fun deletePointOfInterest(poiId: PointOfInterests.Id): Either<PointOfInterestAPIError, PointOfInterestDTO>
+    suspend fun deletePointOfInterest(poiId: PointOfInterests.Id): Either<PointOfInterestAPIError, PointOfInterestIdDTO>
 
     /**
      * Retrieves all markers associated with a specific "Point of Interest".

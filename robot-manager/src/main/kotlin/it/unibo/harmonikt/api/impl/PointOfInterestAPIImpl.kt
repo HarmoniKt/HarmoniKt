@@ -73,12 +73,13 @@ class PointOfInterestAPIImpl(val pointOfInterestRepository: PointOfInterestRepos
 
     override suspend fun deletePointOfInterest(
         poiId: PointOfInterests.Id,
-    ): Either<PointOfInterestAPIError, PointOfInterestDTO> = Either.catch {
+    ): Either<PointOfInterestAPIError, PointOfInterestIdDTO> = Either.catch {
         pointOfInterestRepository.getPointOfInterestById(poiId.id)?.let { point ->
             client.delete("http://pois/${point.id}") {
                 contentType(ContentType.Application.Json)
             }.body<PointOfInterestDTO>()
             pointOfInterestRepository.deletePointOfInterest(poiId.id)
+            PointOfInterestIdDTO(poiId.id)
         } ?: return Either.Left(PointOfInterestNotFound(poiId.id))
     }.mapLeft { error -> PointOfInterestDeletionFailed(poiId.id) }
 
