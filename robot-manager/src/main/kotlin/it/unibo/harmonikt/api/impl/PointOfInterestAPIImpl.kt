@@ -3,6 +3,7 @@ package it.unibo.harmonikt.api.impl
 import arrow.core.Either
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -74,9 +75,10 @@ class PointOfInterestAPIImpl(val pointOfInterestRepository: PointOfInterestRepos
         poiId: PointOfInterests.Id,
     ): Either<PointOfInterestAPIError, PointOfInterestDTO> = Either.catch {
         pointOfInterestRepository.getPointOfInterestById(poiId.id)?.let { point ->
-            client.post("http://pois/${point.id}/delete") {
+            client.delete("http://pois/${point.id}") {
                 contentType(ContentType.Application.Json)
             }.body<PointOfInterestDTO>()
+            pointOfInterestRepository.deletePointOfInterest(poiId.id)
         } ?: return Either.Left(PointOfInterestNotFound(poiId.id))
     }.mapLeft { error -> PointOfInterestDeletionFailed(poiId.id) }
 
@@ -122,9 +124,9 @@ class PointOfInterestAPIImpl(val pointOfInterestRepository: PointOfInterestRepos
     ): Either<MarkerAPIError, MarkerIdDTO> = Either.catch {
         pointOfInterestRepository.getPointOfInterestById(poiId.id)?.let { point ->
             pointOfInterestRepository.getMarkerInfo(point.id, markerId.id)?.let { marker ->
-                client.post("http://pois/${point.id}/markers/${markerId.id}/remove") {
-                    contentType(ContentType.Application.Json)
-                }.body<MarkerIdDTO>()
+                client.delete("http://pois/${point.id}/markers/${markerId.id}")
+                pointOfInterestRepository.dissociateMarker(poiId.id, markerId.id)
+                MarkerIdDTO(markerId.id)
             } ?: return Either.Left(MarkerNotFound(markerId.id))
         } ?: return Either.Left(GenericMarkerAPIError(PointOfInterestNotFound(poiId.id).toString()))
     }.mapLeft { error -> MarkerDeletionFailed(markerId.id) }
