@@ -11,12 +11,8 @@ import kotlin.uuid.Uuid
  * It includes properties for the unique identifier, canonical name,
  * latitude, and longitude of the point of interest.
  */
+@Serializable
 sealed interface PointOfInterestRegistrationDTO {
-    /**
-     * Represents a point of interest registration with a unique identifier.
-     * This interface is used to register points of interest in the system.
-     */
-    val id: Uuid
 
     /**
      * Canonical name of the point of interest.
