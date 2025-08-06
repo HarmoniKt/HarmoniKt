@@ -1,6 +1,8 @@
 package it.unibo.harmonikt.repositories
 
 import it.unibo.harmonikt.model.Marker
+import it.unibo.harmonikt.model.Marker.MirMarker
+import it.unibo.harmonikt.model.Marker.SpotMarker
 import it.unibo.harmonikt.model.PointOfInterest
 import it.unibo.harmonikt.repository.PointOfInterestRepository
 import kotlin.uuid.Uuid
@@ -17,7 +19,7 @@ class PointOfInterestRepositoryRobotManager : PointOfInterestRepository {
 
     override fun getPointOfInterestById(id: Uuid): PointOfInterest? = pointsOfInterest.find { it.id == id }
 
-    override fun registerPointOfInterest(name: String, latitude: Float, longitude: Float): Boolean =
+    override fun registerPointOfInterest(id: Uuid, name: String, latitude: Float, longitude: Float): Boolean =
         pointsOfInterest.add(
             PointOfInterest(
                 id = Uuid.random(),
@@ -30,10 +32,32 @@ class PointOfInterestRepositoryRobotManager : PointOfInterestRepository {
 
     override fun deletePointOfInterest(id: Uuid): Boolean = pointsOfInterest.remove(getPointOfInterestById(id))
 
-    override fun associateMarker(poiId: Uuid, marker: Marker): Boolean =
-        TODO("Not yet implemented")
+    override fun associateMarker(poiId: Uuid, marker: Marker): Boolean {
+        val poi = pointsOfInterest.find { it.id == poiId } ?: return false
+        val updatedPoi = poi.copy(associatedMarkers = poi.associatedMarkers + marker)
+        pointsOfInterest.remove(poi)
+        return pointsOfInterest.add(updatedPoi)
+    }
+
+    override fun getMarkerInfo(poiId: Uuid, markerId: Uuid): Marker? =
+        pointsOfInterest.find { it.id == poiId }?.associatedMarkers?.find {
+            when (it) {
+                is MirMarker -> it.id == markerId
+                is SpotMarker -> it.id == markerId
+            }
+        }
 
     override fun dissociateMarker(poiId: Uuid, markerId: Uuid): Boolean {
-        TODO("Not yet implemented")
+        val poi = pointsOfInterest.find { it.id == poiId } ?: return false
+        val updatedPoi = poi.copy(
+            associatedMarkers = poi.associatedMarkers.filterNot {
+                when (it) {
+                    is MirMarker -> it.id == markerId
+                    is SpotMarker -> it.id == markerId
+                }
+            },
+        )
+        pointsOfInterest.remove(poi)
+        return pointsOfInterest.add(updatedPoi)
     }
 }

@@ -8,6 +8,7 @@ import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import it.unibo.harmonikt.api.impl.PointOfInterestAPIImpl
 import it.unibo.harmonikt.api.impl.RobotAPIImpl
 import it.unibo.harmonikt.handlers.ActionsHandlers.setupActionsHandlers
 import it.unibo.harmonikt.handlers.PointOfInterestsHandlers.pointOfInterestsHandlers
@@ -53,7 +54,8 @@ private fun Application.module() {
     val pointOfInterestRepository = PointOfInterestRepositoryRobotManager()
     val robotRepository =
         if (System.getenv("MOCKED") == "true") MockRepositoryRobotManager() else RobotRepositoryRobotManager()
-    val robotApi = RobotAPIImpl(robotRepository, actionRepository, client)
+    val pointOfInterestAPI = PointOfInterestAPIImpl(pointOfInterestRepository, client)
+    val robotApi = RobotAPIImpl(robotRepository, client) // actionRepository,
 
     routing {
         swaggerUI(path = "/swagger", swaggerFile = "openapi/harmonikt.yml") {}
@@ -71,7 +73,7 @@ private fun Application.module() {
         }
 
         setupActionsHandlers(actionRepository, client)
-        pointOfInterestsHandlers(pointOfInterestRepository, client)
+        pointOfInterestsHandlers(pointOfInterestAPI)
         setupRobotHandlers(robotApi)
     }
 }
