@@ -64,11 +64,11 @@ object PointOfInterestsHandlers {
             )
         }
 
-        // GET /pois{poiId}/markers - Retrieve all markers for a specific point of interest
-        get<PointOfInterests.Id> { poiId ->
-            pointOfInterest.getPointOfInterestMarkers(poiId).fold(
+        // GET /pois/{poiId}/markers - Retrieve all markers for a specific point of interest
+        get<Markers> { marker ->
+            pointOfInterest.getPointOfInterestMarkers(marker.parent).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
-                { markers -> call.respondText("Markers for Point of Interest with ID ${poiId.id}: $markers") },
+                { markers -> call.respondText("Markers for Point of Interest with ID ${marker.parent.id}: $markers") },
             )
         }
 
