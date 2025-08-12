@@ -1,3 +1,30 @@
+## [1.10.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.0...1.10.1) (2025-08-12)
+
+### Dependency updates
+
+* **deps:** update dependency gradle to v9 ([432db7c](https://github.com/HarmoniKt/HarmoniKt/commit/432db7c5b2cd04896e27931f2d47a439f9a2b26c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.139 ([32b6664](https://github.com/HarmoniKt/HarmoniKt/commit/32b6664e2b5d67161315945144a19e8461e83dd3))
+* **deps:** update node.js to 22.18 ([#61](https://github.com/HarmoniKt/HarmoniKt/issues/61)) ([1f555e0](https://github.com/HarmoniKt/HarmoniKt/commit/1f555e0b7714c80668072a26ead3b43d5802a90e))
+* **deps:** update plugin gitsemver to v6 ([02843fe](https://github.com/HarmoniKt/HarmoniKt/commit/02843feac0f4875dfa7ddda2d3657704308b706a))
+* **deps:** update plugin kotlin-qa to v0.93.0 ([2054a8b](https://github.com/HarmoniKt/HarmoniKt/commit/2054a8b0de9c1e7a56b3d8129f57e84a074dafb7))
+* **deps:** update plugin multijvmtesting to v3.6.1 ([5c2e308](https://github.com/HarmoniKt/HarmoniKt/commit/5c2e308ab6485fa61d7b31edf6ce99c130cef22e))
+* **deps:** update plugin multijvmtesting to v4 ([0dbdf09](https://github.com/HarmoniKt/HarmoniKt/commit/0dbdf0905de0a90929004343e75f0fd78f1caa09))
+* **deps:** update plugin multijvmtesting to v4.0.1 ([7647219](https://github.com/HarmoniKt/HarmoniKt/commit/7647219c0231b452781fd5fc175c5662ef99b5d7))
+
+### Bug Fixes
+
+* POIs and Marker API ([8b30cb2](https://github.com/HarmoniKt/HarmoniKt/commit/8b30cb22be64b5d5d726ce08008dae02f639d678))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v5 ([6fd82cc](https://github.com/HarmoniKt/HarmoniKt/commit/6fd82cc81a21fb25deafd765901710be06cf0b22))
+* **deps:** update actions/create-github-app-token action to v2.1.0 ([f603d9c](https://github.com/HarmoniKt/HarmoniKt/commit/f603d9c49243292bd9c1be07517df4bac0153a3c))
+* **deps:** update actions/create-github-app-token action to v2.1.1 ([9abbe39](https://github.com/HarmoniKt/HarmoniKt/commit/9abbe3954e669d52b40674b2a2da2d7535a0ca22))
+* **deps:** update danysk/action-checkout action to v0.2.23 ([63d9f9e](https://github.com/HarmoniKt/HarmoniKt/commit/63d9f9e5e8a042a347fb8d79c59b0924afa075e6))
+* **deps:** update danysk/action-checkout action to v0.2.24 ([fab4d11](https://github.com/HarmoniKt/HarmoniKt/commit/fab4d11b533a18038918fa276f4d296342d670fa))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4 ([c3d6112](https://github.com/HarmoniKt/HarmoniKt/commit/c3d61124eee9445e655c664ebddcdedcf67c7549))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.3 ([6957467](https://github.com/HarmoniKt/HarmoniKt/commit/69574671b93322e29bad499471aae7ae241a4dc2))
+
 ## [1.10.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.9.3...1.10.0) (2025-08-06)
 
 ### Features
