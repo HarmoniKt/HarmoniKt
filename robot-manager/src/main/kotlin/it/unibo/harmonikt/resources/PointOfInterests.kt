@@ -15,10 +15,10 @@ class PointOfInterests {
      *
      * Endpoint: `/pois/{id}`
      * @property parent reference to the parent PointOfInterests resource
-     * @property id identifier of the point of interest
+     * @property poiId identifier of the point of interest
      */
     @Resource("/{poiId}")
-    class Id(val parent: PointOfInterests, val id: Uuid) {
+    class Id(val parent: PointOfInterests, val poiId: Uuid) {
 
         /**
          * Represents the markers associated with a specific point of interest.
@@ -34,10 +34,10 @@ class PointOfInterests {
              * This nested resource allows for operations on a specific marker
              * by its unique identifier.
              * @param parent The parent Marker resource.
-             * @param id The unique identifier of the marker.
+             * @param markerId The unique identifier of the marker.
              */
-            @Resource("/{markerId}")
-            class Id(val parent: Markers, val id: Uuid) {
+            @Resource("{markerId}")
+            class Id(val parent: Markers, val markerId: Uuid) {
                 /**
                  * Represents the position of a specific marker.
                  *

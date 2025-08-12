@@ -34,7 +34,7 @@ interface PointOfInterestRepository {
      * @param id The unique identifier of the point of interest to retrieve.
      * @return The point of interest with the specified ID, or null if no such point exists.
      */
-    fun registerPointOfInterest(id: Uuid, name: String, latitude: Float, longitude: Float): Boolean
+    fun registerPointOfInterest(id: Uuid, name: String, latitude: Double, longitude: Double): Boolean
 
     /**
      * Deletes a point of interest from the repository.

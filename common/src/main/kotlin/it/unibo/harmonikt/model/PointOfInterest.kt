@@ -24,13 +24,13 @@ data class PointOfInterest(
      * Latitude of the point of interest.
      * This is a floating-point value representing the geographical latitude.
      */
-    val latitude: Float,
+    val latitude: Double,
 
     /**
      * Longitude of the point of interest.
      * This is a floating-point value representing the geographical longitude.
      */
-    val longitude: Float,
+    val longitude: Double,
 
     /**
      * The list of markers associated with this point of interest.

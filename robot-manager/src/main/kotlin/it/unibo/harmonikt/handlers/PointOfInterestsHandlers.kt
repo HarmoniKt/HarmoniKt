@@ -52,7 +52,7 @@ object PointOfInterestsHandlers {
         get<PointOfInterests.Id> { poiId ->
             pointOfInterest.getPointOfInterest(poiId).fold(
                 { error -> call.respond(HttpStatusCode.NotFound, error) },
-                { poi -> call.respondText("Point of Interest with ID ${poiId.id}: $poi") },
+                { poi -> call.respondText("Point of Interest with ID ${poiId.poiId}: $poi") },
             )
         }
 
@@ -60,7 +60,7 @@ object PointOfInterestsHandlers {
         delete<PointOfInterests.Id> { poiId ->
             pointOfInterest.deletePointOfInterest(poiId).fold(
                 { error -> call.respond(HttpStatusCode.NotFound, error) },
-                { poi -> call.respondText("Point of Interest with ID ${poiId.id} deleted successfully: $poi") },
+                { poi -> call.respondText("Point of Interest with ID ${poiId.poiId} deleted successfully: $poi") },
             )
         }
 
@@ -68,7 +68,9 @@ object PointOfInterestsHandlers {
         get<Markers> { marker ->
             pointOfInterest.getPointOfInterestMarkers(marker.parent).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
-                { markers -> call.respondText("Markers for Point of Interest with ID ${marker.parent.id}: $markers") },
+                { markers ->
+                    call.respondText("Markers for Point of Interest with ID ${marker.parent.poiId}: $markers")
+                },
             )
         }
 
@@ -79,7 +81,7 @@ object PointOfInterestsHandlers {
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
                 { markerId ->
                     call.respondText(
-                        "Marker with ID ${markerId.id} created for Point of Interest with ID ${marker.parent.id}",
+                        "Marker with ID ${markerId.id} created for Point of Interest with ID ${marker.parent.poiId}",
                     )
                 },
             )
@@ -91,11 +93,11 @@ object PointOfInterestsHandlers {
             pointOfInterest.getPointOfInterest(poiId).fold(
                 { error -> call.respond(HttpStatusCode.NotFound, error) },
                 {
-                    pointOfInterest.getMarkerInfo(poiId, marker).fold(
+                    pointOfInterest.getMarkerInfo(poiId, marker.markerId).fold(
                         { error -> call.respond(HttpStatusCode.NotFound, error) },
                         { markerInfo ->
                             call.respondText(
-                                "Marker with ID ${marker.id} for POI with ID ${poiId.id}: $markerInfo",
+                                "Marker with ID ${marker.markerId} for POI with ID ${poiId.poiId}: $markerInfo",
                             )
                         },
                     )
@@ -110,7 +112,7 @@ object PointOfInterestsHandlers {
                 { error -> call.respond(HttpStatusCode.NotFound, error) },
                 {
                     call.respondText(
-                        "Marker with ID ${marker.id} dissociated from POI with ID ${marker.parent.parent} successfully",
+                        "Marker with ID ${marker.markerId} dissociated from POI with ID ${marker.parent.parent}",
                     )
                 },
             )

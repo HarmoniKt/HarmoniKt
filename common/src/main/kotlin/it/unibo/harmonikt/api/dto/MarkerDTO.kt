@@ -50,13 +50,6 @@ data class MarkerDTO(val id: Uuid, val identifier: String? = null, val fiducial:
 @Serializable
 sealed interface MarkerRegistrationDTO {
     /**
-     * Unique identifier for the marker.
-     *
-     * This identifier is used to uniquely reference a marker in the system.
-     */
-    val id: Uuid
-
-    /**
      * Unique identifier for the point of interest associated with this marker.
      *
      * This identifier links the marker to a specific point of interest in the environment.
@@ -71,11 +64,8 @@ sealed interface MarkerRegistrationDTO {
      */
     @Serializable
     @SerialName("MIR")
-    data class MirMarkerRegistrationDTO(
-        override val id: Uuid,
-        override val associatedPointOfInterest: Uuid,
-        val identifier: String,
-    ) : MarkerRegistrationDTO
+    data class MirMarkerRegistrationDTO(override val associatedPointOfInterest: Uuid, val identifier: String) :
+        MarkerRegistrationDTO
 
     /**
      * Data Transfer Object (DTO) for a SPOT marker.
@@ -85,18 +75,15 @@ sealed interface MarkerRegistrationDTO {
      */
     @Serializable
     @SerialName("SPOT")
-    data class SpotMarkerRegistrationDTO(
-        override val id: Uuid,
-        override val associatedPointOfInterest: Uuid,
-        val fiducial: Int,
-    ) : MarkerRegistrationDTO
+    data class SpotMarkerRegistrationDTO(override val associatedPointOfInterest: Uuid, val fiducial: Int) :
+        MarkerRegistrationDTO
 
     /**
      * Converts this DTO to a Marker model object.
      *
      * @return The corresponding Marker model object.
      */
-    fun toMarker(): Marker = when (this) {
+    fun toMarker(id: Uuid): Marker = when (this) {
         is MirMarkerRegistrationDTO -> MirMarker(
             id = id,
             identifier = identifier,
@@ -122,14 +109,12 @@ sealed interface MarkerRegistrationDTO {
         fun validate(dto: MarkerRegistrationDTO): ValidationResult = when (dto) {
             is MirMarkerRegistrationDTO -> {
                 when {
-                    dto.id.toString().isBlank() -> ValidationResult.Invalid("Mir Marker ID must not be empty")
                     dto.identifier.isBlank() -> ValidationResult.Invalid("Mir Marker Identifier must not be empty")
                     else -> ValidationResult.Valid
                 }
             }
             is SpotMarkerRegistrationDTO -> {
                 when {
-                    dto.id.toString().isBlank() -> ValidationResult.Invalid("Spot Marker ID must not be empty")
                     dto.fiducial.toString().isBlank() -> ValidationResult.Invalid(
                         "Spot Marker Fiducial must not be empty",
                     )
@@ -146,12 +131,10 @@ sealed interface MarkerRegistrationDTO {
          */
         fun fromMarker(poi: Uuid, marker: Marker): MarkerRegistrationDTO = when (marker) {
             is MirMarker -> MirMarkerRegistrationDTO(
-                id = marker.id,
                 associatedPointOfInterest = poi,
                 identifier = marker.identifier,
             )
             is SpotMarker -> SpotMarkerRegistrationDTO(
-                id = marker.id,
                 associatedPointOfInterest = poi,
                 fiducial = marker.fiducial,
             )

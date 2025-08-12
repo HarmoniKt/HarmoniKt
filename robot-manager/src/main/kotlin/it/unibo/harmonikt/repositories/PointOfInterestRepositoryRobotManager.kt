@@ -19,10 +19,10 @@ class PointOfInterestRepositoryRobotManager : PointOfInterestRepository {
 
     override fun getPointOfInterestById(id: Uuid): PointOfInterest? = pointsOfInterest.find { it.id == id }
 
-    override fun registerPointOfInterest(id: Uuid, name: String, latitude: Float, longitude: Float): Boolean =
+    override fun registerPointOfInterest(id: Uuid, name: String, latitude: Double, longitude: Double): Boolean =
         pointsOfInterest.add(
             PointOfInterest(
-                id = Uuid.random(),
+                id = id,
                 name = name,
                 latitude = latitude,
                 longitude = longitude,

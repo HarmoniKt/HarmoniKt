@@ -54,7 +54,7 @@ private fun Application.module() {
     val pointOfInterestRepository = PointOfInterestRepositoryRobotManager()
     val robotRepository =
         if (System.getenv("MOCKED") == "true") MockRepositoryRobotManager() else RobotRepositoryRobotManager()
-    val pointOfInterestAPI = PointOfInterestAPIImpl(pointOfInterestRepository, client)
+    val pointOfInterestAPI = PointOfInterestAPIImpl(pointOfInterestRepository)
     val robotApi = RobotAPIImpl(robotRepository, client) // actionRepository,
 
     routing {

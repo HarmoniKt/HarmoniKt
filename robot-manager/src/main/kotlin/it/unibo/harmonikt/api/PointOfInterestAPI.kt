@@ -2,12 +2,12 @@ package it.unibo.harmonikt.api
 
 import arrow.core.Either
 import it.unibo.harmonikt.api.PointOfInterestAPIError.GenericPointOfInterestAPIError
-import it.unibo.harmonikt.api.dto.MarkerDTO
 import it.unibo.harmonikt.api.dto.MarkerIdDTO
 import it.unibo.harmonikt.api.dto.MarkerRegistrationDTO
 import it.unibo.harmonikt.api.dto.PointOfInterestDTO
 import it.unibo.harmonikt.api.dto.PointOfInterestIdDTO
 import it.unibo.harmonikt.api.dto.PointOfInterestRegistrationDTO
+import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.PointOfInterest
 import it.unibo.harmonikt.resources.PointOfInterests
 import it.unibo.harmonikt.resources.PointOfInterests.Id.Markers
@@ -105,9 +105,7 @@ interface PointOfInterestAPI {
      * @param poiId The unique identifier of the "Point of Interest" for which to retrieve markers.
      * @return A list of marker identifiers associated with the specified "Point of Interest".
      */
-    suspend fun getPointOfInterestMarkers(
-        poiId: PointOfInterests.Id,
-    ): Either<PointOfInterestAPIError, List<MarkerIdDTO>>
+    suspend fun getPointOfInterestMarkers(poiId: PointOfInterests.Id): Either<PointOfInterestAPIError, List<Marker>>
 
     /**
      * Registers a new marker for a specific "Point of Interest".
@@ -115,7 +113,7 @@ interface PointOfInterestAPI {
      * @param marker The marker registration details.
      * @return The registered marker information or an error if the registration fails.
      */
-    suspend fun getMarkerInfo(poiId: PointOfInterests.Id, markerId: Markers.Id): Either<MarkerAPIError, MarkerDTO>
+    suspend fun getMarkerInfo(poiId: PointOfInterests.Id, markerId: Uuid): Either<MarkerAPIError, Marker>
 
     /**
      * Registers a new marker for a specific "Point of Interest".
@@ -123,7 +121,7 @@ interface PointOfInterestAPI {
      * @param request The marker registration details.
      * @return The registered marker information or an error if the registration fails.
      */
-    suspend fun registerMarker(request: MarkerRegistrationDTO): Either<MarkerAPIError, MarkerDTO>
+    suspend fun registerMarker(request: MarkerRegistrationDTO): Either<MarkerAPIError, MarkerIdDTO>
 
     /**
      * Removes a marker from a specific "Point of Interest".

@@ -1,6 +1,7 @@
 package it.unibo.harmonikt.api.dto
 
 import io.ktor.server.plugins.requestvalidation.ValidationResult
+import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.PointOfInterest
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
@@ -12,43 +13,26 @@ import kotlin.uuid.Uuid
  * latitude, and longitude of the point of interest.
  */
 @Serializable
-sealed interface PointOfInterestRegistrationDTO {
+data class PointOfInterestRegistrationDTO(
 
     /**
      * Canonical name of the point of interest.
      * This name is used to uniquely identify the point of interest in the system.
      */
-    val canonicalName: String
+    val name: String,
 
     /**
      * Latitude coordinate of the point of interest.
      * This value represents the geographical latitude of the point of interest.
      */
-    val latitude: Float
+    val latitude: Double,
 
     /**
      * Longitude coordinate of the point of interest.
      * This value represents the geographical longitude of the point of interest.
      */
-    val longitude: Float
-
-    /**
-     * Companion object for validating point of interest registration DTOs
-     * and converting between DTOs and domain models.
-     */
-    companion object {
-        /**
-         * Validates the provided point of interest registration DTO.
-         *
-         * @param dto The PointOfInterestRegistrationDTO to validate.
-         * @return A ValidationResult indicating whether the DTO is valid.
-         */
-        fun validate(dto: PointOfInterestRegistrationDTO): ValidationResult = when {
-            dto.canonicalName.isBlank() -> ValidationResult.Invalid("Canonical name must not be blank")
-            else -> ValidationResult.Valid
-        }
-    }
-}
+    val longitude: Double,
+)
 
 /**
  * Data Transfer Object (DTO) for representing a point of interest in the environment.
@@ -68,9 +52,9 @@ sealed interface PointOfInterestRegistrationDTO {
 data class PointOfInterestDTO(
     val id: Uuid,
     val name: String,
-    val latitude: Float,
-    val longitude: Float,
-    val associatedMarkers: List<MarkerRegistrationDTO>,
+    val latitude: Double,
+    val longitude: Double,
+    val associatedMarkers: List<Marker>,
 ) {
     /**
      * Converts this DTO to a domain model PointOfInterest.
@@ -82,7 +66,7 @@ data class PointOfInterestDTO(
         name = name,
         latitude = latitude,
         longitude = longitude,
-        associatedMarkers = associatedMarkers.map { it.toMarker() },
+        associatedMarkers = associatedMarkers,
     )
 
     /**
@@ -117,9 +101,7 @@ data class PointOfInterestDTO(
             name = pointOfInterest.name,
             latitude = pointOfInterest.latitude,
             longitude = pointOfInterest.longitude,
-            associatedMarkers = pointOfInterest.associatedMarkers.map { marker ->
-                MarkerRegistrationDTO.fromMarker(pointOfInterest.id, marker)
-            },
+            associatedMarkers = pointOfInterest.associatedMarkers,
         )
     }
 }
