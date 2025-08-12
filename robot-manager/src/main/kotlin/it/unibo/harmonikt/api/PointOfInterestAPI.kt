@@ -127,8 +127,8 @@ interface PointOfInterestAPI {
      * Removes a marker from a specific "Point of Interest".
      *
      * @param poiId The unique identifier of the "Point of Interest" from which to remove the marker.
-     * @param markerId The unique identifier of the marker to remove.
+     * @param marker The unique identifier of the marker to remove.
      * @return The ID of the removed marker or an error if the removal fails.
      */
-    suspend fun removeMarker(poiId: PointOfInterests.Id, markerId: Markers.Id): Either<MarkerAPIError, MarkerIdDTO>
+    suspend fun removeMarker(poiId: PointOfInterests.Id, marker: Markers.Id): Either<MarkerAPIError, MarkerIdDTO>
 }

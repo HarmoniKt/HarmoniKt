@@ -83,13 +83,13 @@ sealed interface MarkerRegistrationDTO {
      *
      * @return The corresponding Marker model object.
      */
-    fun toMarker(id: Uuid): Marker = when (this) {
+    fun toMarker(id: MarkerIdDTO): Marker = when (this) {
         is MirMarkerRegistrationDTO -> MirMarker(
-            id = id,
+            id = id.toMarkerId(),
             identifier = identifier,
         )
         is SpotMarkerRegistrationDTO -> SpotMarker(
-            id = id,
+            id = id.toMarkerId(),
             fiducial = fiducial,
         )
     }
