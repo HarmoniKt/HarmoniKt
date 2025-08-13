@@ -1,3 +1,18 @@
+## [1.10.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.1...1.10.2) (2025-08-13)
+
+### Bug Fixes
+
+* remove useless marker parameter ([bb13c24](https://github.com/HarmoniKt/HarmoniKt/commit/bb13c24eb767c97804f74f9401741fdef3069b52))
+
+### Documentation
+
+* add missing documentation ([07acc67](https://github.com/HarmoniKt/HarmoniKt/commit/07acc67af3a77d715672546fac6acdbadb64e470))
+* add missing documentation ([5725cd2](https://github.com/HarmoniKt/HarmoniKt/commit/5725cd22fe5cb888d6941833aef5fc74c8f1e732))
+
+### Style improvements
+
+* improve readability ([4b8f4e7](https://github.com/HarmoniKt/HarmoniKt/commit/4b8f4e7ed7a7c2787024e0f42fd39179ee2ba1f9))
+
 ## [1.10.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.0...1.10.1) (2025-08-12)
 
 ### Dependency updates
