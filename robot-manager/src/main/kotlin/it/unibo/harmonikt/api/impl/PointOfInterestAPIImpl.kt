@@ -24,6 +24,9 @@ import it.unibo.harmonikt.resources.PointOfInterests
 import it.unibo.harmonikt.resources.PointOfInterests.Id.Markers
 import kotlin.uuid.Uuid
 
+/**
+ * Implementation of the PointOfInterestAPI interface.
+ */
 class PointOfInterestAPIImpl(private val pointOfInterestRepository: PointOfInterestRepository) :
     PointOfInterestAPI {
 
