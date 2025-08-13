@@ -83,17 +83,19 @@ class PointOfInterestAPIImpl(private val pointOfInterestRepository: PointOfInter
             marker
         }.mapLeft { error -> GenericMarkerAPIError(error.message) }
 
-    override suspend fun registerMarker(request: MarkerRegistrationDTO): Either<MarkerAPIError, MarkerIdDTO> =
-        Either.catch {
-            val point = pointOfInterestRepository.getPointOfInterestById(request.associatedPointOfInterest)
-                ?: return Either.Left(
-                    GenericMarkerAPIError(PointOfInterestNotFound(request.associatedPointOfInterest).toString()),
-                )
-            val markerId = MarkerIdDTO(Uuid.random())
-            val associated = pointOfInterestRepository.associateMarker(point.id, request.toMarker(markerId))
-            if (!associated) return Either.Left(MarkerAssociationFailed(markerId.id, point.id))
-            markerId
-        }.mapLeft { error -> GenericMarkerAPIError(error.message) }
+    override suspend fun registerMarker(
+        associatedPoi: PointOfInterests.Id,
+        registration: MarkerRegistrationDTO,
+    ): Either<MarkerAPIError, MarkerIdDTO> = Either.catch {
+        val point = pointOfInterestRepository.getPointOfInterestById(associatedPoi.poiId)
+            ?: return Either.Left(
+                GenericMarkerAPIError(PointOfInterestNotFound(associatedPoi.poiId).toString()),
+            )
+        val markerId = MarkerIdDTO(Uuid.random())
+        val associated = pointOfInterestRepository.associateMarker(point.id, registration.toMarker(markerId))
+        if (!associated) return Either.Left(MarkerAssociationFailed(markerId.id, point.id))
+        markerId
+    }.mapLeft { error -> GenericMarkerAPIError(error.message) }
 
     override suspend fun removeMarker(
         poiId: PointOfInterests.Id,

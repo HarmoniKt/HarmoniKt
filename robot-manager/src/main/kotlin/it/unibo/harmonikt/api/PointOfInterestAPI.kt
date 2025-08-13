@@ -118,10 +118,13 @@ interface PointOfInterestAPI {
     /**
      * Registers a new marker for a specific "Point of Interest".
      *
-     * @param request The marker registration details.
+     * @param registration The marker registration details.
      * @return The registered marker information or an error if the registration fails.
      */
-    suspend fun registerMarker(request: MarkerRegistrationDTO): Either<MarkerAPIError, MarkerIdDTO>
+    suspend fun registerMarker(
+        associatedPoi: PointOfInterests.Id,
+        registration: MarkerRegistrationDTO,
+    ): Either<MarkerAPIError, MarkerIdDTO>
 
     /**
      * Removes a marker from a specific "Point of Interest".

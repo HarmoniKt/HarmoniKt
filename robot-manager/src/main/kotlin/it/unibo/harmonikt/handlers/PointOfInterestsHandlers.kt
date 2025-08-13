@@ -77,7 +77,7 @@ object PointOfInterestsHandlers {
         // POST /pois/{poiId}/markers - Add a new marker to a point of interest
         post<Markers> { marker ->
             val request = call.receive<MarkerRegistrationDTO>()
-            pointOfInterest.registerMarker(request).fold(
+            pointOfInterest.registerMarker(marker.parent, request).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
                 { markerId ->
                     call.respondText(
