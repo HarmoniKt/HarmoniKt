@@ -1,3 +1,12 @@
+## [1.10.3](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.2...1.10.3) (2025-08-14)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.2.10 ([3e4ef3e](https://github.com/HarmoniKt/HarmoniKt/commit/3e4ef3e42f7edb8a0d4dffc35a68e959eccea5a0))
+* **deps:** update plugin kotlin-qa to v0.93.1 ([3ac3437](https://github.com/HarmoniKt/HarmoniKt/commit/3ac343731004c09198d049eb46a32c497e065033))
+* **deps:** update plugin multijvmtesting to v4.0.2 ([a8164d4](https://github.com/HarmoniKt/HarmoniKt/commit/a8164d42320d761556d046461bafee16a553b217))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.29 ([07426cc](https://github.com/HarmoniKt/HarmoniKt/commit/07426cc56273b26509029030d728a6869977fd9a))
+
 ## [1.10.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.1...1.10.2) (2025-08-13)
 
 ### Bug Fixes
