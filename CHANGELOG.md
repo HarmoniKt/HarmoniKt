@@ -1,3 +1,30 @@
+## [1.11.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.3...1.11.0) (2025-09-02)
+
+### Features
+
+* add interface for robot service ([09dd5a1](https://github.com/HarmoniKt/HarmoniKt/commit/09dd5a1726d0aa21c68e36d02155f3b958c61479))
+
+### Dependency updates
+
+* **deps:** update dependency org.mockito:mockito-core to v5.19.0 ([0d5e9c6](https://github.com/HarmoniKt/HarmoniKt/commit/0d5e9c6cb58044dd46d83ab895598f047de65839))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.140 ([a3054e9](https://github.com/HarmoniKt/HarmoniKt/commit/a3054e9bef6b15a003dd260d2046a8766cdd2e34))
+* **deps:** update node.js to 22.19 ([0879591](https://github.com/HarmoniKt/HarmoniKt/commit/0879591010952def6507a15b6037c01b878ae1dc))
+* **deps:** update plugin com.gradle.develocity to v4.1.1 ([c8e68e2](https://github.com/HarmoniKt/HarmoniKt/commit/c8e68e2952d3429d75f83b816e6e8252406dd23c))
+* **deps:** update plugin gitsemver to v6.0.1 ([170a42e](https://github.com/HarmoniKt/HarmoniKt/commit/170a42e36e41dad59738a8716cfcde6b62654392))
+* **deps:** update plugin gitsemver to v6.0.2 ([2586a53](https://github.com/HarmoniKt/HarmoniKt/commit/2586a5355126202247e0b3fae9a69ec589ac1109))
+* **deps:** update plugin gitsemver to v7 ([5a942b9](https://github.com/HarmoniKt/HarmoniKt/commit/5a942b98d7f9603b41e8a46e77a1a4c245d645e9))
+* **deps:** update plugin gitsemver to v7.0.2 ([00449a2](https://github.com/HarmoniKt/HarmoniKt/commit/00449a238e843abdd42a6d5a8900adcd9b4f7875))
+* **deps:** update plugin kotlin-qa to v0.93.2 ([897c7c4](https://github.com/HarmoniKt/HarmoniKt/commit/897c7c45ecd2e6080c3668403541d259b941803c))
+* **deps:** update plugin kotlin-qa to v0.93.3 ([67fce8a](https://github.com/HarmoniKt/HarmoniKt/commit/67fce8ae2413a6bd45346ca4920e7578d7ecb7aa))
+* **deps:** update plugin kotlin-qa to v0.94.0 ([a6995cc](https://github.com/HarmoniKt/HarmoniKt/commit/a6995ccf8204ad4c726f971c6deeb1a8cefd88e5))
+* **deps:** update plugin multijvmtesting to v4.1.0 ([36319f2](https://github.com/HarmoniKt/HarmoniKt/commit/36319f2c0945f57f057f16135d1c4ed9c5ec0518))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.30 ([1d3075e](https://github.com/HarmoniKt/HarmoniKt/commit/1d3075e01aadb48f4d2ff7f4c93380437df76e2f))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.4 ([e93b3dd](https://github.com/HarmoniKt/HarmoniKt/commit/e93b3ddd4dcf07905b37bc2aa1e18d24afe47e96))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.5 ([4a7ce8b](https://github.com/HarmoniKt/HarmoniKt/commit/4a7ce8b479f13478f3a9fc0d3406b5e68cc0333e))
+
 ## [1.10.3](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.2...1.10.3) (2025-08-14)
 
 ### Dependency updates
