@@ -6,5 +6,6 @@ ktor {
 
 dependencies {
     implementation(rootProject.libs.bundles.ktor.server)
+    implementation(rootProject.libs.ktor.client.apache)
     implementation(project(":common"))
 }
