@@ -33,7 +33,7 @@ class MockRepositoryRobotManager : RobotRepository {
         RobotInfo(robotId, robot.second, robot.first)
     }
 
-    override fun getRobotById(id: RobotId): RobotType? = registeredRobots[id]?.first
+    override fun getRobotById(id: RobotId): RobotInfo? = getRobots().firstOrNull { it.id == id }
 
     override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean {
         TODO("Not yet implemented")

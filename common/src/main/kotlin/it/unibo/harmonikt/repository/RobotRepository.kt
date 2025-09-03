@@ -38,7 +38,7 @@ interface RobotRepository {
      *
      * @param id the unique identifier of the robot
      */
-    fun getRobotById(id: RobotId): RobotType?
+    fun getRobotById(id: RobotId): RobotInfo?
 
     /**
      * Updates the position of the robot with the given id.

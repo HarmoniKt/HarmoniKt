@@ -51,7 +51,7 @@ class FakeMirRobotRepository : MirRobotRepository {
 
     override fun getRobots(): List<RobotInfo> = TODO()
 
-    override fun getRobotById(id: RobotId): RobotType? = TODO()
+    override fun getRobotById(id: RobotId): RobotInfo? = TODO()
 
     override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean = TODO()
 
