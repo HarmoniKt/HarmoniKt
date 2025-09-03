@@ -12,5 +12,5 @@ interface RobotService {
      * Moves the robot to a target position.
      * @return True if the action was successful, False otherwise.
      */
-    fun moveToTarget(robotId: RobotId, pointOfInterest: PointOfInterest): Boolean
+    suspend fun moveToTarget(robotId: RobotId, pointOfInterest: PointOfInterest): Boolean
 }
