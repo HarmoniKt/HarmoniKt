@@ -42,7 +42,7 @@ class RobotAPIImpl(
 
     override suspend fun getRobotById(robotId: Robots.Id): Either<RobotAPIError, RobotStatusDTO> = Either.catch {
         robotRepository.getRobotById(robotId.robotId)?.let {
-            when (it) {
+            when (it.type) {
                 MIR -> client.get("http://mir-service/robots/${robotId.robotId}").body<RobotStatusDTO>()
                 SPOT -> client.get("http://spot-service/robots/${robotId.robotId}").body<RobotStatusDTO>()
             }
@@ -73,7 +73,7 @@ class RobotAPIImpl(
 
     override suspend fun deleteRobot(robotId: Robots.Id): Either<RobotAPIError, RobotIdDTO> = Either.catch {
         robotRepository.getRobotById(robotId.robotId)?.let {
-            when (it) {
+            when (it.type) {
                 MIR -> client.delete("http://mir-service/robots/${robotId.robotId}")
                 SPOT -> client.delete("http://spot-service/robots/${robotId.robotId}")
             }
@@ -85,7 +85,7 @@ class RobotAPIImpl(
     override suspend fun createRobotAction(robotId: RobotId, action: Action): Either<RobotAPIError, Action> =
         Either.catch {
             robotRepository.getRobotById(robotId)?.let {
-                when (it) {
+                when (it.type) {
                     MIR -> client.post("http://mir-service/robots/$robotId/actions") {
                         when (action) {
                             is Action.MoveToTarget -> action.target.associatedMarkers.forEach { marker ->
