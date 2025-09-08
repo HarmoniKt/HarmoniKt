@@ -22,11 +22,11 @@ import kotlin.uuid.Uuid
  * This interface extends the generic RobotRepository to handle Mir-specific robots.
  */
 interface MirRobotRepository {
-    fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId
+    suspend fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId
 
-    fun deleteRobot(robot: RobotId): Boolean
+    suspend fun deleteRobot(robot: RobotId): Boolean
 
-    fun getRobots(): List<RobotInfo>
+    suspend fun getRobots(): List<RobotInfo>
 
     suspend fun getRobotById(id: RobotId): Robot?
 }
@@ -38,7 +38,7 @@ interface MirRobotRepository {
 class MirRobotRepositoryImpl(val client: HttpClient) : MirRobotRepository {
     private val robots: MutableList<MirRobot> = mutableListOf<MirRobot>()
 
-    override fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId {
+    override suspend fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId {
         val robotId = Uuid.random()
         val newRobot = MirRobot(
             id = robotId,
@@ -50,11 +50,11 @@ class MirRobotRepositoryImpl(val client: HttpClient) : MirRobotRepository {
         return robotId
     }
 
-    override fun deleteRobot(robot: RobotId): Boolean = robots.find { it.id == robot }.let { r ->
+    override suspend fun deleteRobot(robot: RobotId): Boolean = robots.find { it.id == robot }.let { r ->
         return if (r != null) robots.remove(r) else false
     }
 
-    override fun getRobots(): List<RobotInfo> = robots.map { mir ->
+    override suspend fun getRobots(): List<RobotInfo> = robots.map { mir ->
         RobotInfo(
             id = mir.id,
             canonicalName = mir.name,

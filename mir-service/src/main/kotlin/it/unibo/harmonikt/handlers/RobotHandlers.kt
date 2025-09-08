@@ -1,10 +1,11 @@
 package it.unibo.harmonikt.handlers
 
+import io.ktor.server.request.receive
 import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
 import io.ktor.server.resources.post
-import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
+import it.unibo.harmonikt.api.dto.RobotRegistrationDTO.MirRobotRegistrationDTO
 import it.unibo.harmonikt.repository.MirRobotRepository
 import it.unibo.harmonikt.resources.MirRobots
 
@@ -18,21 +19,25 @@ object RobotHandlers {
      * @param repository The MirRobotRepository instance to handle robot data.
      */
     fun Routing.setupRobotHandlers(repository: MirRobotRepository) {
-        get<MirRobots> { robot ->
-            repository.equals(10)
-            call.respondText("Robot resource accessed: $robot")
+        get<MirRobots> {
+            repository.getRobots()
         }
-        post<MirRobots> { robot ->
-            call.respondText("Robot resource created with POST: $robot")
+
+        post<MirRobots> {
+            val request = call.receive<MirRobotRegistrationDTO>()
+            repository.createRobot(request.canonicalName, request.apiToken, request.host)
         }
-        delete<MirRobots> { robot ->
-            call.respondText("Robot resource deleted: $robot")
+
+        delete<MirRobots.Id> { robot ->
+            repository.deleteRobot(robot.id)
         }
-        get<MirRobots.Id> { robotId ->
-            call.respondText("Robot resource accessed with ID: ${robotId.id}")
+
+        get<MirRobots.Id> { robot ->
+            repository.getRobotById(robot.id)
         }
-        post<MirRobots.Id.Move> { moveRequest ->
-            call.respondText("Robot move command received for ID: ${moveRequest.parent.id}")
-        }
+
+//        post<MirRobots.Id.Move> { moveRequest ->
+//            call.respondText("Robot move command received for ID: ${moveRequest.parent.id}")
+//        }
     }
 }

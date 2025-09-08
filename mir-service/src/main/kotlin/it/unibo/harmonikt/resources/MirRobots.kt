@@ -2,6 +2,7 @@ package it.unibo.harmonikt.resources
 
 import io.ktor.resources.Resource
 import it.unibo.harmonikt.model.Marker
+import kotlin.uuid.Uuid
 
 /**
  * Represents the MirRobots resource in the Mir service.
@@ -21,7 +22,7 @@ class MirRobots {
      * @param id The unique identifier of the robot.
      */
     @Resource("{id}")
-    class Id(val parent: MirRobots, val id: String) {
+    class Id(val parent: MirRobots, val id: Uuid) {
         /**
          * Represents the position of a specific robot.
          *
