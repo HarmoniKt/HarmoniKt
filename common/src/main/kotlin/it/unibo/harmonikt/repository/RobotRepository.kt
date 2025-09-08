@@ -39,22 +39,4 @@ interface RobotRepository {
      * @param id the unique identifier of the robot
      */
     fun getRobotById(id: RobotId): RobotInfo?
-
-    /**
-     * Updates the position of the robot with the given id.
-     *
-     * @param id the unique identifier of the robot
-     * @param position the new position to set
-     * @return true if the update was successful, false otherwise
-     */
-    fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean
-
-    /**
-     * Updates the state of the robot with the given id.
-     *
-     * @param id the unique identifier of the robot
-     * @param state the new state to set
-     * @return true if the update was successful, false otherwise
-     */
-    fun updateRobotState(id: RobotId, state: RobotState): Boolean
 }

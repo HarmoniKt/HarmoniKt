@@ -1,9 +1,8 @@
 package it.unibo.harmonikt.repositories.mock
 
+import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
-import it.unibo.harmonikt.model.RobotPosition
-import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.RobotRepository
 
@@ -34,12 +33,4 @@ class MockRepositoryRobotManager : RobotRepository {
     }
 
     override fun getRobotById(id: RobotId): RobotInfo? = getRobots().firstOrNull { it.id == id }
-
-    override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun updateRobotState(id: RobotId, state: RobotState): Boolean {
-        TODO("Not yet implemented")
-    }
 }
