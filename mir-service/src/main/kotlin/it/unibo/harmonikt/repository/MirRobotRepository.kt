@@ -22,12 +22,33 @@ import kotlin.uuid.Uuid
  * This interface extends the generic RobotRepository to handle Mir-specific robots.
  */
 interface MirRobotRepository {
+    /**
+     * Creates a new Mir robot with the given canonical name, API token, and host.
+     * @param canonicalName The canonical name of the robot.
+     * @param apiToken The API token for the robot.
+     * @param host The host address of the robot.
+     * @return The unique identifier of the created robot.
+     */
     suspend fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId
 
+    /**
+     * Deletes the specified Mir robot.
+     * @param robot The unique identifier of the robot to delete.
+     * @return True if the robot was deleted, false otherwise.
+     */
     suspend fun deleteRobot(robot: RobotId): Boolean
 
+    /**
+     * Retrieves a list of all Mir robots.
+     * @return A list of robot information objects.
+     */
     suspend fun getRobots(): List<RobotInfo>
 
+    /**
+     * Retrieves a Mir robot by its unique identifier.
+     * @param id The unique identifier of the robot.
+     * @return The robot object if found, or null otherwise.
+     */
     suspend fun getRobotById(id: RobotId): Robot?
 }
 
@@ -35,7 +56,17 @@ interface MirRobotRepository {
  * Fake implementation of MirRobotRepository for testing purposes.
  * Stores robots in memory.
  */
-class MirRobotRepositoryImpl(val client: HttpClient) : MirRobotRepository {
+
+/**
+ * Implementation of MirRobotRepository using an in-memory list and an HTTP client.
+ * @property client The HTTP client used for network operations.
+ */
+class MirRobotRepositoryImpl(
+    /**
+     * The HTTP client used for network operations with Mir robots.
+     */
+    val client: HttpClient,
+) : MirRobotRepository {
     private val robots: MutableList<MirRobot> = mutableListOf<MirRobot>()
 
     override suspend fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId {
