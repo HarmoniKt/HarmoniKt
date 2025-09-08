@@ -1,3 +1,23 @@
+## [1.12.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.11.0...1.12.0) (2025-09-08)
+
+### Features
+
+* finish MIR service implementation ([7bd9f31](https://github.com/HarmoniKt/HarmoniKt/commit/7bd9f31b508fb0b9f91e6f8ee77f6e2b43a1b8af))
+* implement MIR robot repository ([67d2857](https://github.com/HarmoniKt/HarmoniKt/commit/67d2857f3dae29671bc3aa4bda9216d8c01eaaee))
+
+### Dependency updates
+
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.0 ([697b9e1](https://github.com/HarmoniKt/HarmoniKt/commit/697b9e1f66282d3f522eb2595864a9beb4a74b4d))
+
+### Bug Fixes
+
+* docs ([e13c146](https://github.com/HarmoniKt/HarmoniKt/commit/e13c1460d8af25ba78bab33d8cf0055b13138e3b))
+* refactoring error ([0a34dee](https://github.com/HarmoniKt/HarmoniKt/commit/0a34dee912b30d2cd50518428b9219e565c18e9a))
+
+### Refactoring
+
+* remove unused methods ([807ce20](https://github.com/HarmoniKt/HarmoniKt/commit/807ce206a368b7a0d9e987825079c9b0630cc641))
+
 ## [1.11.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.10.3...1.11.0) (2025-09-02)
 
 ### Features
