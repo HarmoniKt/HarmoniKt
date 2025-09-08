@@ -1,5 +1,6 @@
 package it.unibo.harmonikt
 
+import io.ktor.client.HttpClient
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -14,8 +15,10 @@ import io.ktor.server.routing.routing
 import it.unibo.harmonikt.handlers.MarkerHandlers.setupMarkerHandlers
 import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repository.FakeMirMarkerRepository
-import it.unibo.harmonikt.repository.FakeMirRobotRepository
+import it.unibo.harmonikt.repository.MirRobotRepositoryImpl
 import it.unibo.harmonikt.utils.ConsulRegisterService
+import it.unibo.harmonikt.utils.KtorSetup.commonKtorSetup
+import it.unibo.harmonikt.utils.KtorSetup.ktorClientSetup
 import org.slf4j.event.Level
 import java.net.InetAddress
 
@@ -48,6 +51,8 @@ fun main() {
  * Sets up routing for the various API endpoints provided by the service.
  */
 private fun Application.module() {
+    commonKtorSetup()
+    val client = ktorClientSetup()
     install(Resources)
     install(ContentNegotiation) {
         json()
@@ -58,27 +63,9 @@ private fun Application.module() {
     }
 
     val markerRepository = FakeMirMarkerRepository()
-    val mirRobotRepository = FakeMirRobotRepository()
+    val mirRobotRepository = MirRobotRepositoryImpl(client)
 
     routing {
-        // Marker management endpoints
-//        route("/marker") {
-//            // Get all markers
-//            get(handleGetMarkers)
-//            // Create a new marker
-//            post(handleCreateMarkers)
-//            // Delete a marker
-//            delete(handleDeleteMarkers)
-//        }
-//
-//        // Mir management endpoints
-//        route("/robot"){
-//            post(handleRegisterRobot)
-//            get(handleGetAllRobots)
-//            get("available", handleGetAvailableRobots)
-//            delete("{id}", handleUnregisterRobot)
-//        }
-
         // Health check endpoint
         get("/") {
             call.respondText("Hello, world from MIR Service!")

@@ -2,58 +2,83 @@
 
 package it.unibo.harmonikt.repository
 
-import it.unibo.harmonikt.model.BatteryLevel
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.http.headers
+import it.unibo.harmonikt.MirRobot
+import it.unibo.harmonikt.MirStatus
+import it.unibo.harmonikt.MirStatusDTO
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
-import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
+import it.unibo.harmonikt.toDomain
 import kotlin.uuid.Uuid
 
 /**
  * Repository interface for managing MirRobot entities.
  * This interface extends the generic RobotRepository to handle Mir-specific robots.
  */
-interface MirRobotRepository : RobotRepository
+interface MirRobotRepository {
+    fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId
+
+    fun deleteRobot(robot: RobotId): Boolean
+
+    fun getRobots(): List<RobotInfo>
+
+    suspend fun getRobotById(id: RobotId): Robot?
+}
 
 /**
  * Fake implementation of MirRobotRepository for testing purposes.
  * Stores robots in memory.
  */
-class FakeMirRobotRepository : MirRobotRepository {
-    private val robots = mutableListOf(
-        Robot(
-            id = Uuid.random(),
-            name = "Mir 1",
-            batteryLevel = BatteryLevel(90.0),
-            currentPosition = RobotPosition(15.0, 25.0),
-            currentState = RobotState.IDLE,
-            type = RobotType.MIR,
-        ),
-        Robot(
-            id = Uuid.random(),
-            name = "Mir 2",
-            batteryLevel = BatteryLevel(60.0),
-            currentPosition = RobotPosition(35.0, 45.0),
-            currentState = RobotState.ON_MISSION,
-            type = RobotType.MIR,
-        ),
-    )
+class MirRobotRepositoryImpl(val client: HttpClient) : MirRobotRepository {
+    private val robots: MutableList<MirRobot> = mutableListOf<MirRobot>()
 
-    override fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean {
-        TODO("Not yet implemented")
+    override fun createRobot(canonicalName: String, apiToken: String, host: String): RobotId {
+        val robotId = Uuid.random()
+        val newRobot = MirRobot(
+            id = robotId,
+            name = canonicalName,
+            apiToken = apiToken,
+            host = host,
+        )
+        robots.add(newRobot)
+        return robotId
     }
 
-    override fun deleteRobot(robot: RobotId): Boolean {
-        TODO("Not yet implemented")
+    override fun deleteRobot(robot: RobotId): Boolean = robots.find { it.id == robot }.let { r ->
+        return if (r != null) robots.remove(r) else false
     }
 
-    override fun getRobots(): List<RobotInfo> = TODO()
+    override fun getRobots(): List<RobotInfo> = robots.map { mir ->
+        RobotInfo(
+            id = mir.id,
+            canonicalName = mir.name,
+            type = RobotType.MIR,
+        )
+    }
 
-    override fun getRobotById(id: RobotId): RobotInfo? = TODO()
-
-    override fun updateRobotPosition(id: RobotId, position: RobotPosition): Boolean = TODO()
-
-    override fun updateRobotState(id: RobotId, state: RobotState): Boolean = TODO()
+    override suspend fun getRobotById(id: RobotId): Robot? {
+        val mirRobot = robots.find { it.id == id }
+        return when {
+            mirRobot != null -> {
+                val mir: MirStatus = client.get("https://${mirRobot.host}/status") {
+                    headers { append("Authorization", "Bearer ${mirRobot.apiToken}") }
+                }.body<MirStatusDTO>().toDomain()
+                Robot(
+                    id = mirRobot.id,
+                    name = mirRobot.name,
+                    batteryLevel = mir.batteryPercentage,
+                    currentPosition = RobotPosition(mir.position.x, mir.position.y),
+                    currentState = mir.state,
+                    type = RobotType.MIR,
+                )
+            }
+            else -> return null
+        }
+    }
 }
