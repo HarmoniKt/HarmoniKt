@@ -14,6 +14,7 @@ develocity {
 }
 
 gitHooks {
+    repoRoot = rootDir
     preCommit {
         tasks("ktlintCheck")
     }
