@@ -1,25 +1,20 @@
 package it.unibo.harmonikt
 
-import io.ktor.client.HttpClient
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
-import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.server.plugins.calllogging.CallLogging
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.resources.Resources
-import io.ktor.server.response.respondText
+import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import it.unibo.harmonikt.handlers.MarkerHandlers.setupMarkerHandlers
 import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repository.FakeMirMarkerRepository
-import it.unibo.harmonikt.repository.MirRobotRepositoryImpl
+import it.unibo.harmonikt.repository.impl.MirRobotRepositoryImpl
+import it.unibo.harmonikt.repository.impl.MockMirRobotRepositoryImpl
 import it.unibo.harmonikt.utils.ConsulRegisterService
 import it.unibo.harmonikt.utils.KtorSetup.commonKtorSetup
 import it.unibo.harmonikt.utils.KtorSetup.ktorClientSetup
-import org.slf4j.event.Level
 import java.net.InetAddress
 
 /**
@@ -53,14 +48,14 @@ fun main() {
 private fun Application.module() {
     commonKtorSetup()
     val client = ktorClientSetup()
-
     val markerRepository = FakeMirMarkerRepository()
-    val mirRobotRepository = MirRobotRepositoryImpl(client)
+    val mirRobotRepository =
+        if (System.getenv("MOCKED") == "true") MockMirRobotRepositoryImpl() else MirRobotRepositoryImpl(client)
 
     routing {
         // Health check endpoint
         get("/") {
-            call.respondText("Hello, world from MIR Service!")
+            call.respond(HttpStatusCode.OK)
         }
         setupRobotHandlers(mirRobotRepository)
         setupMarkerHandlers(markerRepository)
