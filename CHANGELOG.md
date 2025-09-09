@@ -1,3 +1,41 @@
+## [1.13.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.12.0...1.13.0) (2025-09-09)
+
+### Features
+
+* add abstract base class for mir robot repository and implement mocked one ([613494d](https://github.com/HarmoniKt/HarmoniKt/commit/613494ddb06ca743e1b0cd3c53591c884e43cc0b))
+* implement missing methods in robot repository robot manager ([2879dad](https://github.com/HarmoniKt/HarmoniKt/commit/2879dad601344a1bc4267d5e966f14028f5e9bf6))
+* mir robot handler ([da12632](https://github.com/HarmoniKt/HarmoniKt/commit/da126323c8372a6971651c2838af20853fcf2ba2))
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.141 ([666a8c5](https://github.com/HarmoniKt/HarmoniKt/commit/666a8c51ac282b211deb723962539ad994d8cc20))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.142 ([e9b4bab](https://github.com/HarmoniKt/HarmoniKt/commit/e9b4bab1cff634ada4548f16d087a5090430baf1))
+
+### Bug Fixes
+
+* Dockerfiles for all services to enable proper build and fat JAR generation ([a4ccb1c](https://github.com/HarmoniKt/HarmoniKt/commit/a4ccb1cf17c449be43bfa848be37e36555d97d4c))
+* remove duplicate plugin install ([73b2c48](https://github.com/HarmoniKt/HarmoniKt/commit/73b2c486c5b4c65ef72f9ffabfa531ef2cba1efe))
+* remove duplicate plugin install ([9001dd4](https://github.com/HarmoniKt/HarmoniKt/commit/9001dd4d3b81994772f0ef9df98fafea9d262099))
+* remove hardcoded markers ([a32b098](https://github.com/HarmoniKt/HarmoniKt/commit/a32b0984b01fcaacb222e600b2c190275e87d22f))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v5 ([4a8193c](https://github.com/HarmoniKt/HarmoniKt/commit/4a8193c07b19160d883ed07aaac92879153d9613))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.6 ([d799ec3](https://github.com/HarmoniKt/HarmoniKt/commit/d799ec3f453bc7b21b8b55354747ffd3d321767d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.7 ([86c5e96](https://github.com/HarmoniKt/HarmoniKt/commit/86c5e96f6a090de117b0eceec586a3ae12ad33dc))
+
+### General maintenance
+
+* add dockerignore ([d3537c5](https://github.com/HarmoniKt/HarmoniKt/commit/d3537c5fa0c52439a4cda9dc5bb63af74b112913))
+* add mocked env variable to mir service ([bb486fc](https://github.com/HarmoniKt/HarmoniKt/commit/bb486fc683ea34f9c5e4e67063859c2c949f8c1a))
+* add mocked env variable to mir service ([c34d8f2](https://github.com/HarmoniKt/HarmoniKt/commit/c34d8f22a81564eb4f8b48d3a522b0090a3e9ff5))
+* add reporoot to githooks ([c8364b4](https://github.com/HarmoniKt/HarmoniKt/commit/c8364b444f57f666e97b487e89032c1135cfaec9))
+
+### Refactoring
+
+* change return type to nullable for robot creation ([d3cf7af](https://github.com/HarmoniKt/HarmoniKt/commit/d3cf7af8ddecd1ef23af4674527c109cd0343482))
+* mir model with more parameters ([71043b9](https://github.com/HarmoniKt/HarmoniKt/commit/71043b936e5c481b40135cae9ab60d63fe3d95c0))
+
 ## [1.12.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.11.0...1.12.0) (2025-09-08)
 
 ### Features
