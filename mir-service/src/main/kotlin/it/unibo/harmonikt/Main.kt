@@ -32,7 +32,7 @@ fun main() {
     logger.info("Starting MIR service...")
     val server = embeddedServer(
         Netty,
-        port = 8090,
+        port = 8080,
         host = "0.0.0.0",
         module = Application::module,
     )
