@@ -14,11 +14,7 @@ interface MirMarkerRepository : MarkerRepository<MirMarker>
  * Stores markers in memory.
  */
 class FakeMirMarkerRepository : MirMarkerRepository {
-    private val markers = mutableListOf(
-        MirMarker(id = Uuid.random(), identifier = "Waypoint 1"),
-        MirMarker(id = Uuid.random(), identifier = "Waypoint 2"),
-        MirMarker(id = Uuid.random(), identifier = "Waypoint 3"),
-    )
+    private val markers = mutableListOf<MirMarker>()
 
     override fun getMarkers(): List<MirMarker> = markers
 
