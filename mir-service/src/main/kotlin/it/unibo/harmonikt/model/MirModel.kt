@@ -1,9 +1,5 @@
-package it.unibo.harmonikt
+package it.unibo.harmonikt.model
 
-import it.unibo.harmonikt.model.BatteryLevel
-import it.unibo.harmonikt.model.CanonicalName
-import it.unibo.harmonikt.model.RobotId
-import it.unibo.harmonikt.model.RobotState
 import kotlinx.serialization.Serializable
 
 /**
@@ -77,6 +73,6 @@ fun MirStatusDTO.toDomain(): MirInfo = MirInfo(
         1 -> RobotState.IDLE
         3 -> RobotState.ON_MISSION
         4 -> RobotState.RECHARGING
-        else -> RobotState.IDLE // fallback, puoi fare anche null o un DEFAULT
+        else -> RobotState.IDLE
     },
 )

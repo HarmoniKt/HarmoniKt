@@ -4,16 +4,16 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.headers
-import it.unibo.harmonikt.MirInfo
-import it.unibo.harmonikt.MirRobot
-import it.unibo.harmonikt.MirStatusDTO
+import it.unibo.harmonikt.model.MirInfo
+import it.unibo.harmonikt.model.MirRobot
+import it.unibo.harmonikt.model.MirStatusDTO
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotType
+import it.unibo.harmonikt.model.toDomain
 import it.unibo.harmonikt.repository.MirRobotRepository
-import it.unibo.harmonikt.toDomain
 import kotlin.uuid.Uuid
 
 /**
