@@ -2,6 +2,7 @@
 
 package it.unibo.harmonikt.repositories
 
+import it.unibo.harmonikt.model.BatteryLevel
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
@@ -9,47 +10,38 @@ import it.unibo.harmonikt.model.RobotPosition
 import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.RobotRepository
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Implementation of the RobotRepository interface for the Robot Manager service.
  * This class provides access to robot data in the Robot Manager service.
  */
 class RobotRepositoryRobotManager : RobotRepository {
+    private val robots: MutableMap<RobotId, Robot> = ConcurrentHashMap()
+
     override fun registerRobot(robot: RobotId, type: RobotType, canonicalName: String): Boolean {
-        TODO("Not yet implemented")
+        if (robots.containsKey(robot)) return false
+        val newRobot = Robot(
+            id = robot,
+            name = canonicalName,
+            batteryLevel = BatteryLevel(100.0),
+            currentPosition = RobotPosition(0.0, 0.0),
+            currentState = RobotState.IDLE,
+            type = type,
+        )
+        robots[robot] = newRobot
+        return true
     }
 
-    override fun deleteRobot(robot: RobotId): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun deleteRobot(robot: RobotId): Boolean = robots.remove(robot) != null
 
-    /**
-     * Returns the list of all robots.
-     */
-    override fun getRobots(): List<RobotInfo> = TODO()
+    override fun getRobots(): List<RobotInfo> = robots.values.map { it.toInfo() }
 
-    /**
-     * Returns the robot with the given id, or null if not found.
-     *
-     * @param id the unique identifier of the robot
-     */
-    override fun getRobotById(id: RobotId): RobotInfo? = TODO()
+    override fun getRobotById(id: RobotId): RobotInfo? = robots[id]?.toInfo()
 
-    /**
-     * Adds a new robot to the repository.
-     *
-     * @param robot the robot to add
-     * @return true if the robot was added successfully, false otherwise
-     */
-    fun addRobot(robot: Robot) {
-        TODO()
-    }
-
-    /**
-     * Removes a robot from the repository.
-     *
-     * @param id the unique identifier of the robot to remove
-     * @return true if the robot was removed successfully, false otherwise
-     */
-    fun removeRobot(id: RobotId): Boolean = TODO()
+    private fun Robot.toInfo(): RobotInfo = RobotInfo(
+        id = this.id,
+        canonicalName = this.name,
+        type = this.type,
+    )
 }
