@@ -1,23 +1,21 @@
+# Stage 1: Gradle cache dependencies
 FROM gradle:latest AS cache
-RUN mkdir -p /home/gradle/cache_home
-ENV GRADLE_USER_HOME=/home/gradle/cache_home
-COPY build.gradle.* gradle.properties /home/gradle/app/
-COPY gradle /home/gradle/app/gradle
 WORKDIR /home/gradle/app
-RUN gradle clean build -i --stacktrace
+COPY settings.gradle.kts build.gradle.* gradle.properties /home/gradle/app/
+COPY gradle /home/gradle/app/gradle
+RUN gradle dependencies --no-daemon || return 0
 
 # Stage 2: Build Application
 FROM gradle:latest AS build
-COPY --from=cache /home/gradle/cache_home /home/gradle/.gradle
-COPY --chown=gradle:gradle . /home/gradle/
-WORKDIR /home/gradle
-# Build the fat JAR, Gradle also supports shadow
-# and boot JAR by default.
+WORKDIR /home/gradle/app
+COPY --from=cache /home/gradle/.gradle /home/gradle/.gradle
+COPY --chown=gradle:gradle . .
+RUN git config --global --add safe.directory /home/gradle/app
 RUN gradle :robot-manager:buildFatJar --no-daemon
 
 # Stage 3: Create the Runtime Image
 FROM amazoncorretto:24 AS runtime
 EXPOSE 8080
 RUN mkdir /app
-COPY --from=build /home/gradle/robot-manager/build/libs/robot-manager.jar /app/robot-manager.jar
+COPY --from=build /home/gradle/app/robot-manager/build/libs/robot-manager.jar /app/robot-manager.jar
 ENTRYPOINT ["java","-jar","/app/robot-manager.jar"]
