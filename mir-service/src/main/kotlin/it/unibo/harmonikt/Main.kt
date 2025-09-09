@@ -32,7 +32,7 @@ fun main() {
     logger.info("Starting MIR service...")
     val server = embeddedServer(
         Netty,
-        port = 8080,
+        port = 8090,
         host = "0.0.0.0",
         module = Application::module,
     )
@@ -53,14 +53,6 @@ fun main() {
 private fun Application.module() {
     commonKtorSetup()
     val client = ktorClientSetup()
-    install(Resources)
-    install(ContentNegotiation) {
-        json()
-    }
-    install(CallLogging) {
-        level = Level.INFO
-        // Log all requests
-    }
 
     val markerRepository = FakeMirMarkerRepository()
     val mirRobotRepository = MirRobotRepositoryImpl(client)
