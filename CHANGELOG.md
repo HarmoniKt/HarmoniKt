@@ -1,3 +1,13 @@
+## [1.13.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.13.0...1.13.1) (2025-09-10)
+
+### Dependency updates
+
+* **core-deps:** update kotlin to v2.2.20 ([ad2d86c](https://github.com/HarmoniKt/HarmoniKt/commit/ad2d86c79d69afca905707fd5517fdc55bf3e9eb))
+
+### Refactoring
+
+* move mir model into proper package ([0b1336a](https://github.com/HarmoniKt/HarmoniKt/commit/0b1336abf3ef0fd8a8bec6a80121cdcfef553c00))
+
 ## [1.13.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.12.0...1.13.0) (2025-09-09)
 
 ### Features
