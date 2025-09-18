@@ -19,7 +19,7 @@ def register_consul_service(
     consul_url: str | None = None,
     service_name: str = "spot-service",
     address: str | None = None,
-    port: int = 8000,
+    port: int = 8080,
     service_id: str | None = None,
     token: str | None = None,
 ):

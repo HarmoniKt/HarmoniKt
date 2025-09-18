@@ -93,7 +93,7 @@ services:
       dockerfile: Dockerfile
     # Only for development purposes
     ports:
-      - "8084:8000"
+      - "8084:8080"
     environment:
       - CONSUL_URL=http://consul:8500
       - MOCKED=true
@@ -101,7 +101,7 @@ services:
       consul:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
       interval: 10s
       timeout: 5s
       retries: 5
