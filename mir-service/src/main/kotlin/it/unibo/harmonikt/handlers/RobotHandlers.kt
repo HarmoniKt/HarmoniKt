@@ -7,6 +7,8 @@ import io.ktor.server.resources.get
 import io.ktor.server.resources.post
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
+import it.unibo.harmonikt.api.dto.MarkerRegistrationDTO
+import it.unibo.harmonikt.api.dto.RobotActionDTO.MoveToTargetDTO.MirMoveToTargetDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO.MirRobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
@@ -79,8 +81,9 @@ object RobotHandlers {
         // POST /robots/{robotId}/actions - Send an action to a robot
         post<MirRobots.Id.Move> { move ->
             val robot = repository.getRobotById(move.parent.id)
+            val request = call.receive<MirMoveToTargetDTO>()
             robot?.let {
-                service.moveToTarget(it.id, move.target)
+                service.moveToTarget(it.id, request.target)
             }
         }
     }
