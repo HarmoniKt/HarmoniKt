@@ -73,6 +73,15 @@ class SpotRobotRepositoryImpl(RobotRepository):
 
         return spot_robot_status, position
 
+    def __translate_state(self, state: int) -> RobotState:
+        if state == 3:
+            return RobotState.IDLE
+        elif state == 2 or state == 4:
+            return RobotState.ON_MISSION
+        elif state == 0 or state == 1:
+            return RobotState.RECHARGING
+            return RobotState.UNKNOWN
+
     def get_robots(self) -> list[Robot]:
         # We can also query all robots from the Spot SDK if needed.
         return [
@@ -97,9 +106,9 @@ class SpotRobotRepositoryImpl(RobotRepository):
         robot = Robot(
             id=robot_id,
             canonical_name=spot_robot.canonical_name,
-            battery_level=BatteryLevel(value=spot_robot_status.battery_percentage),
-            current_position=RobotPosition(x=position.x, y=position.y),
-            current_state=RobotState(spot_robot_status["behavior_state"]["state"]),
+            battery_level=BatteryLevel(value=spot_robot_status.battery_states[0].charge_percentage.value),
+            current_position=RobotPosition(x=position[0], y=position[1]),
+            current_state=RobotState(self.__translate_state(spot_robot_status.behavior_state.state)),
         )
         return robot
 
