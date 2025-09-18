@@ -10,6 +10,7 @@ import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO.MirRobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
+import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.MirRobotRepository
@@ -72,6 +73,11 @@ object RobotHandlers {
             } else {
                 call.respond(HttpStatusCode.NotFound, "Robot with id ${r.id} not found")
             }
+        }
+
+        // POST /robots/{robotId}/actions - Send an action to a robot
+        post<MirRobots.Id.Move> { action ->
+
         }
     }
 }

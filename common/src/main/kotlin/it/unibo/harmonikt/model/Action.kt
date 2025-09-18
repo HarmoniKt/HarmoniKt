@@ -8,19 +8,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 sealed interface Action {
-    // Commented implementations are preserved for future development
-    /**
-     * Represents a continuous action with a temporal component.
-     * Currently not implemented.
-     */
-//    data class ContinuousAction(val temp: Int) : Action
-//
-    /**
-     * Represents a discrete, non-continuous action.
-     * Currently not implemented.
-     */
-//    data class DiscreteAction(val temp: Int) : Action
-
     /**
      * Represents an action to move a robot to a specific target location.
      *
