@@ -9,7 +9,8 @@ from fastapi import APIRouter, HTTPException, status
 from typing import List, Dict
 from uuid import UUID
 from pydantic import BaseModel
-from typing import Union
+
+import logging
 
 from app.repositories.spot_robot_repository import RobotRepository
 from app.api.robot_api import (
@@ -75,26 +76,27 @@ def setup_robot_handlers(repository: RobotRepository, service: RobotService):
         return {"message": f"Robot with ID {robot_id} deleted successfully"}
 
     @router.post("/robots/{robot_id}/actions", status_code=status.HTTP_201_CREATED)
-    async def create_marker(robot_id: UUID, action: ActionDTO):
+    async def create_marker(robot_id: UUID, action: MoveToTargetDTO):
         """Create a new action for a robot"""
         try:
             if isinstance(action, MoveToTargetDTO):
+                logging.warning(action)
                 service.move_to_target(
                     robot_id=robot_id,
                     fiducial=action.fiducial,
                 )
             else:
                 raise HTTPException(status_code=400, detail="Unsupported action type")
-            return {"message": f"Creation for robot {robot_id}"}
+            return {"message": f"Robot {robot_id} completed action successfully"}
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))
 
     return router
 
 
-type ActionDTO = Union[MoveToTargetDTO]
+# type ActionDTO = Union[MoveToTargetDTO]
 
 
 class MoveToTargetDTO(BaseModel):
-    type: str = "MoveToTarget"
+    # type: str = "MoveToTarget"
     fiducial: int

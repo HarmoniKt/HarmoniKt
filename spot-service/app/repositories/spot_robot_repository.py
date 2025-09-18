@@ -40,6 +40,10 @@ class RobotRepository(ABC):
         """Returns the Spot robot delegate by its ID, or None if not found."""
         raise NotImplementedError("This method should be implemented by subclasses.")
 
+    def get_spot_robot_by_id(self, robot_id: UUID) -> Optional[SpotRobot]:
+        """Returns the Spot robot by its ID, or None if not found."""
+        raise NotImplementedError("This method should be implemented by subclasses.")
+
     @abstractmethod
     def create_robot(
         self, username: str, password: str, address: str, canonical_name: str
@@ -106,9 +110,13 @@ class SpotRobotRepositoryImpl(RobotRepository):
         robot = Robot(
             id=robot_id,
             canonical_name=spot_robot.canonical_name,
-            battery_level=BatteryLevel(value=spot_robot_status.battery_states[0].charge_percentage.value),
+            battery_level=BatteryLevel(
+                value=spot_robot_status.battery_states[0].charge_percentage.value
+            ),
             current_position=RobotPosition(x=position[0], y=position[1]),
-            current_state=RobotState(self.__translate_state(spot_robot_status.behavior_state.state)),
+            current_state=RobotState(
+                self.__translate_state(spot_robot_status.behavior_state.state)
+            ),
         )
         return robot
 
@@ -117,6 +125,9 @@ class SpotRobotRepositoryImpl(RobotRepository):
         if spot_robot is None:
             return None
         return spot_robot.delegate
+
+    def get_spot_robot_by_id(self, robot_id: UUID) -> Optional[SpotRobot]:
+        return self.spot_robots.get(robot_id)
 
     def create_robot(
         self, username: str, password: str, address: str, canonical_name: str
@@ -163,6 +174,9 @@ class FakeSpotRobotRepositoryImpl(RobotRepository):
         return self.spot_robots.get(robot_id)
 
     def get_spot_robot_delegate_by_id(self, robot_id: UUID) -> Optional[BosdynRobot]:
+        return None
+
+    def get_spot_robot_by_id(self, robot_id: UUID) -> Optional[SpotRobot]:
         return None
 
     def create_robot(
@@ -304,6 +318,9 @@ class MockSpotRobotRepositoryImpl(RobotRepository):
         return robot
 
     def get_spot_robot_delegate_by_id(self, robot_id: UUID) -> Optional[BosdynRobot]:
+        return None
+
+    def get_spot_robot_by_id(self, robot_id: UUID) -> Optional[SpotRobot]:
         return None
 
     def create_robot(
