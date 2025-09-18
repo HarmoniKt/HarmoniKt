@@ -2,6 +2,7 @@ package it.unibo.harmonikt.resources
 
 import io.ktor.resources.Resource
 import it.unibo.harmonikt.model.Marker
+import it.unibo.harmonikt.model.PointOfInterest
 import kotlin.uuid.Uuid
 
 /**
@@ -43,6 +44,6 @@ class MirRobots {
          * @param target The target marker where the robot should be moved.
          */
         @Resource("move")
-        class Move(val parent: Id, val target: Marker.MirMarker)
+        class Move(val parent: Id, val target: PointOfInterest)
     }
 }
