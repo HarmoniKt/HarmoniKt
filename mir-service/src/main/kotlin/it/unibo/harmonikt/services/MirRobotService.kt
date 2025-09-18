@@ -43,16 +43,13 @@ import kotlinx.serialization.json.JsonPrimitive
 
 class MirRobotService(private val robotRepository: MirRobotRepository) : RobotService {
 
-    override suspend fun moveToTarget(robotId: RobotId, pointOfInterest: PointOfInterest): Boolean {
+    override suspend fun moveToTarget(robotId: RobotId, marker: Marker): Boolean {
         val robot = robotRepository.getRobotById(robotId)
         robot?.let {
-            pointOfInterest
-                .associatedMarkers
-                .filterIsInstance<Marker.MirMarker>()
-                .firstOrNull()
-                ?.let {
-                    moveTo(robot.name, it.identifier, "<username>", "<password>")
-                }
+            when(marker) {
+                is Marker.MirMarker -> moveTo(robot.name, marker.identifier, "<username>", "<password>")
+                is Marker.SpotMarker -> return false
+            }
             return true
         }
         return false
