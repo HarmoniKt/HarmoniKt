@@ -15,6 +15,7 @@ import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.MirRobotRepository
 import it.unibo.harmonikt.resources.MirRobots
+import it.unibo.harmonikt.services.MirRobotService
 
 /**
  * Handles HTTP requests related to robots in the MIR service.
@@ -25,7 +26,7 @@ object RobotHandlers {
      *
      * @param repository The MirRobotRepository instance to handle robot data.
      */
-    fun Routing.setupRobotHandlers(repository: MirRobotRepository) {
+    fun Routing.setupRobotHandlers(repository: MirRobotRepository, service: MirRobotService) {
         // GET /robots - Retrieve all active robots
         get<MirRobots> {
             val robots = repository.getRobots()
@@ -76,8 +77,11 @@ object RobotHandlers {
         }
 
         // POST /robots/{robotId}/actions - Send an action to a robot
-        post<MirRobots.Id.Move> { action ->
-
+        post<MirRobots.Id.Move> { move ->
+            val robot = repository.getRobotById(move.parent.id)
+            robot?.let {
+                service.moveToTarget(it.id, move.target)
+            }
         }
     }
 }
