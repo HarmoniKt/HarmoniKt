@@ -12,6 +12,7 @@ import it.unibo.harmonikt.handlers.RobotHandlers.setupRobotHandlers
 import it.unibo.harmonikt.repository.FakeMirMarkerRepository
 import it.unibo.harmonikt.repository.impl.MirRobotRepositoryImpl
 import it.unibo.harmonikt.repository.impl.MockMirRobotRepositoryImpl
+import it.unibo.harmonikt.services.MirRobotService
 import it.unibo.harmonikt.utils.ConsulRegisterService
 import it.unibo.harmonikt.utils.KtorSetup.commonKtorSetup
 import it.unibo.harmonikt.utils.KtorSetup.ktorClientSetup
@@ -51,13 +52,15 @@ private fun Application.module() {
     val markerRepository = FakeMirMarkerRepository()
     val mirRobotRepository =
         if (System.getenv("MOCKED") == "true") MockMirRobotRepositoryImpl() else MirRobotRepositoryImpl(client)
+    val mirRobotService = MirRobotService(mirRobotRepository)
+
 
     routing {
         // Health check endpoint
         get("/") {
             call.respond(HttpStatusCode.OK)
         }
-        setupRobotHandlers(mirRobotRepository)
+        setupRobotHandlers(mirRobotRepository, mirRobotService)
         setupMarkerHandlers(markerRepository)
     }
 }
