@@ -1,3 +1,26 @@
+## [1.13.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.13.1...1.13.2) (2025-09-18)
+
+### Dependency updates
+
+* **deps:** update dependency io.ktor.plugin to v3.3.0 ([e608c1f](https://github.com/HarmoniKt/HarmoniKt/commit/e608c1f86afeb87eb980b00618a7dfbce0625fea))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.143 ([8e02079](https://github.com/HarmoniKt/HarmoniKt/commit/8e02079154574912cb638d03d8ebd7b97b07cb18))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.144 ([9798bb8](https://github.com/HarmoniKt/HarmoniKt/commit/9798bb8e2b0ae59769fcfd435c63be5b4b5c5c13))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.145 ([28d0e5b](https://github.com/HarmoniKt/HarmoniKt/commit/28d0e5b88d3278bb593f3cb2cadb0cbdefafea04))
+* **deps:** update plugin com.gradle.develocity to v4.2 ([01f7128](https://github.com/HarmoniKt/HarmoniKt/commit/01f7128fbddf915599806294003626b8cf182523))
+* **deps:** update plugin gitsemver to v7.0.3 ([85782f4](https://github.com/HarmoniKt/HarmoniKt/commit/85782f4462e650047e48ce345cc617d75fc3c169))
+* **deps:** update plugin kotlin-qa to v0.94.1 ([2c5f942](https://github.com/HarmoniKt/HarmoniKt/commit/2c5f942dfde43f680a9b55c8f63601a1c97c1bce))
+* **deps:** update plugin kotlin-qa to v0.95.0 ([ab1f0d5](https://github.com/HarmoniKt/HarmoniKt/commit/ab1f0d56338d3bb9a64ed11904bf290de0f453ee))
+* **deps:** update plugin multijvmtesting to v4.1.1 ([b4b4900](https://github.com/HarmoniKt/HarmoniKt/commit/b4b4900a69787833dea20318800bffe91e301a65))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.1 ([06820ad](https://github.com/HarmoniKt/HarmoniKt/commit/06820ad53bb163a4cb869f9673d531ec491123b4))
+
+### Bug Fixes
+
+* robot state integration ([b7192d4](https://github.com/HarmoniKt/HarmoniKt/commit/b7192d494dd646eca2aa8af99f077d1905c91738))
+
+### Build and continuous integration
+
+* **deps:** update actions/create-github-app-token action to v2.1.4 ([55c8fd0](https://github.com/HarmoniKt/HarmoniKt/commit/55c8fd0afc8bfb3c747c1acfeefff91c7315fc08))
+
 ## [1.13.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.13.0...1.13.1) (2025-09-10)
 
 ### Dependency updates
