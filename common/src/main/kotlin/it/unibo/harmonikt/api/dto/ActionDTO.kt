@@ -124,36 +124,34 @@ sealed interface ActionRegistrationDTO {
  * specific details and parameters.
  */
 @Serializable
-sealed interface RobotActionDTO {
+sealed interface RobotActionDTO
     /**
      * Data Transfer Object (DTO) for a robot action.
      *
      * This class encapsulates the information needed for a robot to perform an action,
      * such as moving to a target location.
      */
+@Serializable
+sealed interface MoveToTargetDTO : RobotActionDTO {
+
+    val target: Uuid
+    /**
+     * Converts this DTO to a domain model Action.
+     *
+     * @param target The point of interest that the robot should interact with.
+     * @return An Action domain model representing this DTO.
+     */
     @Serializable
-//    @SerialName("MoveToTarget")
-    sealed interface MoveToTargetDTO : RobotActionDTO {
+    @SerialName("SpotToTarget")
+    data class SpotMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
 
-        val target: Uuid
-        /**
-         * Converts this DTO to a domain model Action.
-         *
-         * @param target The point of interest that the robot should interact with.
-         * @return An Action domain model representing this DTO.
-         */
-        @Serializable
-        @SerialName("SpotToTarget")
-        data class SpotMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
-
-        /**
-         * Converts this DTO to a domain model Action.
-         *
-         * @param target The point of interest that the robot should interact with.
-         * @return An Action domain model representing this DTO.
-         */
-        @Serializable
-        @SerialName("MirToTarget")
-        data class MirMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
-    }
+    /**
+     * Converts this DTO to a domain model Action.
+     *
+     * @param target The point of interest that the robot should interact with.
+     * @return An Action domain model representing this DTO.
+     */
+    @Serializable
+    @SerialName("MirToTarget")
+    data class MirMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
 }

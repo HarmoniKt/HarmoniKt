@@ -12,14 +12,12 @@ import io.ktor.http.contentType
 import it.unibo.harmonikt.api.RobotAPI
 import it.unibo.harmonikt.api.RobotAPIError
 import it.unibo.harmonikt.api.RobotAPIError.GenericRobotAPIError
+import it.unibo.harmonikt.api.dto.MoveToTargetDTO
 import it.unibo.harmonikt.api.dto.RobotActionDTO
-import it.unibo.harmonikt.api.dto.RobotActionDTO.MoveToTargetDTO.MirMoveToTargetDTO
-import it.unibo.harmonikt.api.dto.RobotActionDTO.MoveToTargetDTO.SpotMoveToTargetDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
 import it.unibo.harmonikt.model.Action
-import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotType.MIR
@@ -88,12 +86,13 @@ class RobotAPIImpl(
         Either.catch {
             robotRepository.getRobotById(robotId)?.let {
                 when (it.type) {
-                    MIR -> client.post("http://mir-service/robots/$robotId/actions") {
+                    MIR -> client.post("http://mir-service/robots/$robotId/move") {
                         println("action for mir $action")
                         when (action) {
-                            is MirMoveToTargetDTO -> {
+                            is MoveToTargetDTO.MirMoveToTargetDTO -> {
+                                contentType(ContentType.Application.Json)
                                 setBody(
-                                    MirMoveToTargetDTO(
+                                    MoveToTargetDTO.MirMoveToTargetDTO(
                                         target = action.target,
                                     ),
                                 )
@@ -103,9 +102,10 @@ class RobotAPIImpl(
                     }.body<Action>()
                     SPOT -> client.post("http://spot-service/robots/$robotId/actions") {
                         when (action) {
-                            is SpotMoveToTargetDTO -> {
+                            is MoveToTargetDTO.SpotMoveToTargetDTO -> {
+                                contentType(ContentType.Application.Json)
                                 setBody(
-                                    SpotMoveToTargetDTO(
+                                    MoveToTargetDTO.SpotMoveToTargetDTO(
                                         target = action.target,
                                     ),
                                 )
