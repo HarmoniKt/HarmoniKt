@@ -8,6 +8,7 @@ import io.ktor.server.resources.post
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import it.unibo.harmonikt.api.RobotAPI
+import it.unibo.harmonikt.api.dto.RobotActionDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.resources.Robots
@@ -60,7 +61,8 @@ object RobotHandlers {
 
         // POST /robots/{robotId}/actions - Create a new action for a robot
         post<Robots.Id.Actions> { actions ->
-            robot.createRobotAction(actions.parent.robotId, call.receive<Action>()).fold(
+            println("quiii???? $actions")
+            robot.createRobotAction(actions.parent.robotId, call.receive<RobotActionDTO>()).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
                 { action -> call.respond(action) },
             )

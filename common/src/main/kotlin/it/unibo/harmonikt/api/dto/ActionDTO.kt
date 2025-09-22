@@ -6,6 +6,7 @@ import it.unibo.harmonikt.model.Marker.MirMarker
 import it.unibo.harmonikt.model.Marker.SpotMarker
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.uuid.Uuid
 
 /**
  * Data Transfer Object (DTO) for representing an action that can be performed by a robot.
@@ -131,7 +132,10 @@ sealed interface RobotActionDTO {
      * such as moving to a target location.
      */
     @Serializable
+//    @SerialName("MoveToTarget")
     sealed interface MoveToTargetDTO : RobotActionDTO {
+
+        val target: Uuid
         /**
          * Converts this DTO to a domain model Action.
          *
@@ -139,7 +143,8 @@ sealed interface RobotActionDTO {
          * @return An Action domain model representing this DTO.
          */
         @Serializable
-        data class SpotMoveToTargetDTO(val target: SpotMarker) : MoveToTargetDTO
+        @SerialName("SpotToTarget")
+        data class SpotMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
 
         /**
          * Converts this DTO to a domain model Action.
@@ -148,6 +153,7 @@ sealed interface RobotActionDTO {
          * @return An Action domain model representing this DTO.
          */
         @Serializable
-        data class MirMoveToTargetDTO(val target: MirMarker) : MoveToTargetDTO
+        @SerialName("MirToTarget")
+        data class MirMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
     }
 }

@@ -11,6 +11,8 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import it.unibo.harmonikt.api.RobotAPI
 import it.unibo.harmonikt.api.RobotAPIError
+import it.unibo.harmonikt.api.RobotAPIError.GenericRobotAPIError
+import it.unibo.harmonikt.api.dto.RobotActionDTO
 import it.unibo.harmonikt.api.dto.RobotActionDTO.MoveToTargetDTO.MirMoveToTargetDTO
 import it.unibo.harmonikt.api.dto.RobotActionDTO.MoveToTargetDTO.SpotMoveToTargetDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
@@ -82,36 +84,33 @@ class RobotAPIImpl(
         } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId.robotId))
     }.mapLeft { error -> RobotAPIError.RobotNotFound(robotId.robotId) }
 
-    override suspend fun createRobotAction(robotId: RobotId, action: Action): Either<RobotAPIError, Action> =
+    override suspend fun createRobotAction(robotId: RobotId, action: RobotActionDTO): Either<RobotAPIError, Action> =
         Either.catch {
             robotRepository.getRobotById(robotId)?.let {
                 when (it.type) {
                     MIR -> client.post("http://mir-service/robots/$robotId/actions") {
+                        println("action for mir $action")
                         when (action) {
-                            is Action.MoveToTarget -> action.target.associatedMarkers.forEach { marker ->
-                                if (marker is Marker.MirMarker) {
-                                    setBody(
-                                        MirMoveToTargetDTO(
-                                            target = marker,
-                                        ),
-                                    )
-                                    contentType(ContentType.Application.Json)
-                                }
+                            is MirMoveToTargetDTO -> {
+                                setBody(
+                                    MirMoveToTargetDTO(
+                                        target = action.target,
+                                    ),
+                                )
                             }
+                            else -> GenericRobotAPIError("Unsupported action type for MIR robot")
                         }
                     }.body<Action>()
                     SPOT -> client.post("http://spot-service/robots/$robotId/actions") {
                         when (action) {
-                            is Action.MoveToTarget -> action.target.associatedMarkers.forEach { marker ->
-                                if (marker is Marker.SpotMarker) {
-                                    setBody(
-                                        SpotMoveToTargetDTO(
-                                            target = marker,
-                                        ),
-                                    )
-                                    contentType(ContentType.Application.Json)
-                                }
+                            is SpotMoveToTargetDTO -> {
+                                setBody(
+                                    SpotMoveToTargetDTO(
+                                        target = action.target,
+                                    ),
+                                )
                             }
+                            else -> GenericRobotAPIError("Unsupported action type for SPOT robot")
                         }
                     }.body<Action>()
                 }
