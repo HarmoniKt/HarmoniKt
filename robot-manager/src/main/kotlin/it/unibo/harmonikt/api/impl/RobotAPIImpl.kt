@@ -18,10 +18,12 @@ import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
 import it.unibo.harmonikt.model.Action
+import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotType.MIR
 import it.unibo.harmonikt.model.RobotType.SPOT
+import it.unibo.harmonikt.repositories.PointOfInterestRepositoryRobotManager
 import it.unibo.harmonikt.repository.RobotRepository
 import it.unibo.harmonikt.resources.Robots
 
@@ -34,6 +36,7 @@ import it.unibo.harmonikt.resources.Robots
  */
 class RobotAPIImpl(
     private val robotRepository: RobotRepository,
+    private val poisRepository: PointOfInterestRepositoryRobotManager,
 //    private val actionRepository: ActionRepository,
     private val client: HttpClient,
 ) : RobotAPI {
@@ -90,12 +93,19 @@ class RobotAPIImpl(
                         println("action for mir $action")
                         when (action) {
                             is MoveToTargetDTO.MirMoveToTargetDTO -> {
-                                contentType(ContentType.Application.Json)
-                                setBody(
-                                    MoveToTargetDTO.MirMoveToTargetDTO(
-                                        target = action.target,
-                                    ),
-                                )
+                                poisRepository.getPointOfInterestById(action.target)?.let { poi ->
+                                    poi
+                                        .associatedMarkers
+                                        .filterIsInstance<Marker.MirMarker>()
+                                        .firstOrNull()?.let { marker ->
+                                            contentType(ContentType.Application.Json)
+                                            setBody(
+                                                MoveToTargetDTO.MirMoveToTargetDTO(
+                                                    target = marker.id,
+                                                ),
+                                            )
+                                        }
+                                }
                             }
                             else -> GenericRobotAPIError("Unsupported action type for MIR robot")
                         }

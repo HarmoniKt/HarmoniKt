@@ -55,7 +55,7 @@ private fun Application.module() {
     val robotRepository =
         if (System.getenv("MOCKED") == "true") MockRepositoryRobotManager() else RobotRepositoryRobotManager()
     val pointOfInterestAPI = PointOfInterestAPIImpl(pointOfInterestRepository)
-    val robotApi = RobotAPIImpl(robotRepository, client) // actionRepository,
+    val robotApi = RobotAPIImpl(robotRepository, pointOfInterestRepository, client) // actionRepository,
 
     routing {
         swaggerUI(path = "/swagger", swaggerFile = "openapi/harmonikt.yml") {}
