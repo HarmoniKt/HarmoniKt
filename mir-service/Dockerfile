@@ -14,7 +14,7 @@ RUN git config --global --add safe.directory /home/gradle/app
 RUN gradle :mir-service:buildFatJar --no-daemon
 
 # Stage 3: Runtime image
-FROM amazoncorretto:24 AS runtime
+FROM amazoncorretto:25 AS runtime
 WORKDIR /app
 EXPOSE 8080
 COPY --from=build /home/gradle/app/mir-service/build/libs/mir-service.jar /app/mir-service.jar
