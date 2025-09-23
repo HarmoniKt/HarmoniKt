@@ -14,7 +14,7 @@ RUN git config --global --add safe.directory /home/gradle/app
 RUN gradle :map-manager:buildFatJar --no-daemon
 
 # Stage 3: Create the Runtime Image
-FROM amazoncorretto:24 AS runtime
+FROM amazoncorretto:25 AS runtime
 EXPOSE 8080
 RUN mkdir /app
 COPY --from=build /home/gradle/app/map-manager/build/libs/map-manager.jar /app/map-manager.jar
