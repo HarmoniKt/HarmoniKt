@@ -32,7 +32,6 @@ class MirRobots {
          * identified by its unique MirMarker.
          *
          * @param parent The parent Id resource of MirRobots.
-         * @param target The target marker where the robot should be moved.
          */
         @Resource("/move")
         class Move(val parent: Id)
