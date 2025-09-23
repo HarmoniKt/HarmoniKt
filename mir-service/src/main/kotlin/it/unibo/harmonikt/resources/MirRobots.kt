@@ -22,17 +22,8 @@ class MirRobots {
      * @param parent The parent MirRobots resource.
      * @param id The unique identifier of the robot.
      */
-    @Resource("{id}")
+    @Resource("/{id}")
     class Id(val parent: MirRobots, val id: Uuid) {
-        /**
-         * Represents the position of a specific robot.
-         *
-         * This nested resource allows for operations related to the position
-         * of a specific robot identified by its ID.
-         * @param parent The parent Id resource of MirRobots.
-         */
-        @Resource("position")
-        class Position(val parent: Id)
 
         /**
          * Represents the action of moving a robot to a specific target marker.
@@ -43,7 +34,7 @@ class MirRobots {
          * @param parent The parent Id resource of MirRobots.
          * @param target The target marker where the robot should be moved.
          */
-        @Resource("move")
-        class Move(val parent: Id, val target: PointOfInterest)
+        @Resource("/move")
+        class Move(val parent: Id)
     }
 }

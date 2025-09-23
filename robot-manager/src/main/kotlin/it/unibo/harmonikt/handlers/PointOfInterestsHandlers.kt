@@ -35,7 +35,7 @@ object PointOfInterestsHandlers {
         get<PointOfInterests> {
             pointOfInterest.getAllPointsOfInterest().fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
-                { pois -> call.respondText("Points of Interests resource accessed: $pois") },
+                { pois -> call.respond(pois) },
             )
         }
 
@@ -44,7 +44,7 @@ object PointOfInterestsHandlers {
             val request = call.receive<PointOfInterestRegistrationDTO>()
             pointOfInterest.registerPointOfInterest(request).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
-                { poi -> call.respondText("Point of Interests resource created: $poi") },
+                { poi -> call.respond(poi) },
             )
         }
 
@@ -52,7 +52,7 @@ object PointOfInterestsHandlers {
         get<PointOfInterests.Id> { poiId ->
             pointOfInterest.getPointOfInterest(poiId).fold(
                 { error -> call.respond(HttpStatusCode.NotFound, error) },
-                { poi -> call.respondText("Point of Interest with ID ${poiId.poiId}: $poi") },
+                { poi -> call.respond(poiId) },
             )
         }
 
@@ -60,7 +60,7 @@ object PointOfInterestsHandlers {
         delete<PointOfInterests.Id> { poiId ->
             pointOfInterest.deletePointOfInterest(poiId).fold(
                 { error -> call.respond(HttpStatusCode.NotFound, error) },
-                { poi -> call.respondText("Point of Interest with ID ${poiId.poiId} deleted successfully: $poi") },
+                { poi -> call.respond(poi) },
             )
         }
 
@@ -68,9 +68,7 @@ object PointOfInterestsHandlers {
         get<Markers> { marker ->
             pointOfInterest.getPointOfInterestMarkers(marker.parent).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
-                { markers ->
-                    call.respondText("Markers for Point of Interest with ID ${marker.parent.poiId}: $markers")
-                },
+                { markers -> call.respond(markers) },
             )
         }
 
@@ -79,11 +77,7 @@ object PointOfInterestsHandlers {
             val request = call.receive<MarkerRegistrationDTO>()
             pointOfInterest.registerMarker(marker.parent, request).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
-                { markerId ->
-                    call.respondText(
-                        "Marker with ID ${markerId.id} created for Point of Interest with ID ${marker.parent.poiId}",
-                    )
-                },
+                { markerId -> call.respond(markerId) },
             )
         }
 
@@ -95,11 +89,7 @@ object PointOfInterestsHandlers {
                 {
                     pointOfInterest.getMarkerInfo(poiId, marker.markerId).fold(
                         { error -> call.respond(HttpStatusCode.NotFound, error) },
-                        { markerInfo ->
-                            call.respondText(
-                                "Marker with ID ${marker.markerId} for POI with ID ${poiId.poiId}: $markerInfo",
-                            )
-                        },
+                        { markerInfo -> call.respond(markerInfo) },
                     )
                 },
             )
@@ -110,11 +100,7 @@ object PointOfInterestsHandlers {
             val poiId: PointOfInterests.Id = marker.parent.parent
             pointOfInterest.removeMarker(poiId, marker).fold(
                 { error -> call.respond(HttpStatusCode.NotFound, error) },
-                {
-                    call.respondText(
-                        "Marker with ID ${marker.markerId} dissociated from POI with ID ${marker.parent.parent}",
-                    )
-                },
+                { call.respond(it) },
             )
         }
     }
