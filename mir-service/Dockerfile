@@ -1,12 +1,12 @@
 # Stage 1: Gradle cache dependencies
-FROM gradle:latest AS cache
+FROM gradle:8.14.3-jdk24-corretto AS cache
 WORKDIR /home/gradle/app
 COPY settings.gradle.kts build.gradle.* gradle.properties /home/gradle/app/
 COPY gradle /home/gradle/app/gradle
-RUN gradle dependencies --no-daemon || return 0
+RUN gradle dependencies --no-daemon || true
 
 # Stage 2: Build Application
-FROM gradle:latest AS build
+FROM gradle:8.14.3-jdk24-corretto AS build
 WORKDIR /home/gradle/app
 COPY --from=cache /home/gradle/.gradle /home/gradle/.gradle
 COPY --chown=gradle:gradle . .
