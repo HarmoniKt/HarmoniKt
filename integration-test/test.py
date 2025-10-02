@@ -188,10 +188,8 @@ def measure_mir_get_state_with_sdk() -> dict[int, float]:
 def measure_mir_get_state_with_harmonikt() -> dict[int, float]:
     results: dict[int, float] = {}
 
-    mir_id = register_robots_in_harmonikt()
+    mir_id = register_robots_in_harmonikt()['mir_robot_id']
 
-    print(mir_id)
-    
     try:
 
         for i in range(ITERATION_COUNT):
@@ -209,7 +207,7 @@ def measure_mir_get_state_with_harmonikt() -> dict[int, float]:
 harmonikt_url = "http://localhost"
 ITERATION_COUNT = 100
 
-TEST = 'mir-harmonikt'  # 'spot-sdk' or 'spot-harmonikt' or 'mir-sdk' or 'mir-harmonikt'
+TEST = 'mir-sdk'  # 'spot-sdk' or 'spot-harmonikt' or 'mir-sdk' or 'mir-harmonikt'
 
 if __name__ == '__main__':
 
