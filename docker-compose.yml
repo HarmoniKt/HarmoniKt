@@ -96,7 +96,7 @@ services:
       - "8084:8080"
     environment:
       - CONSUL_URL=http://consul:8500
-      - MOCKED=true
+#      - MOCKED=true
     depends_on:
       consul:
         condition: service_healthy
@@ -115,7 +115,7 @@ services:
       - "8085:8080"
     environment:
       - CONSUL_URL=http://consul:8500
-      - MOCKED=true
+#      - MOCKED=true
     depends_on:
       consul:
         condition: service_healthy

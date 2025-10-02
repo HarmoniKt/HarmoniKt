@@ -1,6 +1,7 @@
 package it.unibo.harmonikt.model
 
 import kotlinx.serialization.Serializable
+import kotlin.uuid.Uuid
 
 /**
  * Represents a robot in the system.
@@ -51,7 +52,7 @@ data class MirPosition(val x: Double, val y: Double)
  * @property stateText The textual description of the robot's current state, providing a more descriptive status.
  */
 @Serializable
-data class MirStatusDTO(
+data class MirInfoDTO(
     val id: RobotId,
     val canonicalName: CanonicalName,
     val position: MirPosition,
@@ -60,19 +61,65 @@ data class MirStatusDTO(
     val stateText: String,
 )
 
+
 /**
  * Converts a MirStatusDTO to a MirStatus domain object.
  * @return The corresponding MirStatus domain object.
  */
-fun MirStatusDTO.toDomain(): MirInfo = MirInfo(
+fun MirStatusDTO.toDomain(canonicalName: String, id: Uuid): MirInfo = MirInfo(
     id = id,
     canonicalName = canonicalName,
     currentPosition = MirPosition(position.x, position.y),
-    batteryLevel = batteryLevel,
-    state = when (stateId) {
-        1 -> RobotState.IDLE
-        3 -> RobotState.ON_MISSION
-        4 -> RobotState.RECHARGING
+    batteryLevel = BatteryLevel(battery_percentage),
+    state = when (state_text) {
+        "Ready" -> RobotState.IDLE
+        "Executing" -> RobotState.ON_MISSION
+        "Recharging" -> RobotState.RECHARGING
         else -> RobotState.IDLE
     },
+)
+
+@Serializable
+data class MirStatusDTO(
+    val allowed_methods: String?, // can refine if you know type
+    val battery_percentage: Double,
+    val battery_time_remaining: Long,
+    val distance_to_next_target: Double,
+    val errors: List<String?>,
+    val footprint: String,
+    val joystick_low_speed_mode_enabled: Boolean,
+    val joystick_web_session_id: String,
+    val map_id: String,
+    val mission_queue_id: String?,
+    val mission_queue_url: String?,
+    val mission_text: String,
+    val mode_id: Int,
+    val mode_key_state: String,
+    val mode_text: String,
+    val moved: Double,
+    val position: Position,
+    val robot_model: String,
+    val robot_name: String,
+    val safety_system_muted: Boolean,
+    val serial_number: String,
+    val session_id: String,
+    val state_id: Int,
+    val state_text: String,
+    val unloaded_map_changes: Boolean,
+    val uptime: Int,
+    val user_prompt: String?,
+    val velocity: Velocity
+)
+
+@Serializable
+data class Position(
+    val orientation: Double,
+    val x: Double,
+    val y: Double
+)
+
+@Serializable
+data class Velocity(
+    val angular: Double,
+    val linear: Double
 )

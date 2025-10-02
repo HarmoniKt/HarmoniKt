@@ -41,6 +41,7 @@ object RobotHandlers {
                 request.apiToken,
                 request.host,
             )
+            println("Robot created with id: $robotId, request: $request")
             if (robotId != null) {
                 call.respond(HttpStatusCode.Created, RobotIdDTO(robotId))
             } else {
@@ -57,6 +58,7 @@ object RobotHandlers {
                 call.respond(HttpStatusCode.NotFound, "Delete failed for robot with id ${robot.id}, possibly not found")
             }
         }
+
 
         // GET /robots/{robotId} - Retrieve information about a robot
         get<MirRobots.Id> { r ->
@@ -81,7 +83,11 @@ object RobotHandlers {
             val robot = repository.getRobotById(move.parent.id)
             val request = call.receive<MirMoveToMarkerDTO>()
             robot?.let {
-                service.moveToTarget(it.id, request.identifier)
+                val result = service.moveToTarget(it.id, request.identifier)
+                when {
+                    result -> call.respond(HttpStatusCode.OK, "Action execution: $result")
+                    else -> call.respond(HttpStatusCode.InternalServerError, "Action not created")
+                }
             }
         }
     }

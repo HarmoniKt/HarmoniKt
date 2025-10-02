@@ -50,8 +50,8 @@ private fun Application.module() {
     commonKtorSetup()
     val client = ktorClientSetup()
     val markerRepository = FakeMirMarkerRepository()
-    val mirRobotRepository =
-        if (System.getenv("MOCKED") == "true") MockMirRobotRepositoryImpl() else MirRobotRepositoryImpl(client)
+    val mirRobotRepository = MirRobotRepositoryImpl(client)
+//        if (System.getenv("MOCKED") == "true") MockMirRobotRepositoryImpl() else MirRobotRepositoryImpl(client)
     val mirRobotService = MirRobotService(client, mirRobotRepository)
 
     routing {

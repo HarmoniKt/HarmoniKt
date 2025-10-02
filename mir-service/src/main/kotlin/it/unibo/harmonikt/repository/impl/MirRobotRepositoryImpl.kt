@@ -3,6 +3,8 @@ package it.unibo.harmonikt.repository.impl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.http.HttpHeaders
 import io.ktor.http.headers
 import it.unibo.harmonikt.model.MirInfo
 import it.unibo.harmonikt.model.MirRobot
@@ -11,9 +13,11 @@ import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotPosition
+import it.unibo.harmonikt.model.RobotState
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.model.toDomain
 import it.unibo.harmonikt.repository.MirRobotRepository
+import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 import kotlin.uuid.Uuid
 
 /**
@@ -23,9 +27,10 @@ import kotlin.uuid.Uuid
 class MirRobotRepositoryImpl(private val client: HttpClient) : AbstractMirRobotRepository() {
     override suspend fun getRobotById(id: RobotId): Robot? {
         val mirRobot = robots.find { it.id == id } ?: return null
-        val mir: MirInfo = client.get("https://${mirRobot.host}/status") {
-            headers { append("Authorization", "Bearer ${mirRobot.apiToken}") }
-        }.body<MirStatusDTO>().toDomain()
+        val mir = client.get("http://${mirRobot.host}/api/v2.0.0/status") {
+            header(HttpHeaders.Authorization, "Basic ${mirRobot.apiToken}")
+            header(HttpHeaders.ContentType, "application/json")
+        }.body<MirStatusDTO>().toDomain(mirRobot.name, mirRobot.id)
         return Robot(
             id = mirRobot.id,
             name = mirRobot.name,
