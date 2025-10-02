@@ -1,3 +1,27 @@
+## [1.15.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.15.0...1.15.1) (2025-10-02)
+
+### Dependency updates
+
+* **deps:** update amazoncorretto docker tag to v25 ([b015112](https://github.com/HarmoniKt/HarmoniKt/commit/b015112cfc966f4d5748c684e695785577bddb8d))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.5.19 ([5ef049f](https://github.com/HarmoniKt/HarmoniKt/commit/5ef049fd29993b168dbdc826d1c6f12e74971fcd))
+* **deps:** update dependency org.mockito:mockito-core to v5.20.0 ([c65c304](https://github.com/HarmoniKt/HarmoniKt/commit/c65c304f93dd33f54a9c240761900c429355487b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.147 ([cbdeb16](https://github.com/HarmoniKt/HarmoniKt/commit/cbdeb163b5b9e19d7926cb2e59724e31a7f19f77))
+* **deps:** update node.js to 22.20 ([229fea6](https://github.com/HarmoniKt/HarmoniKt/commit/229fea632728dd27c99e082e45b55b857993e684))
+* **deps:** update plugin com.gradle.develocity to v4.2.1 ([15b6bdc](https://github.com/HarmoniKt/HarmoniKt/commit/15b6bdc95a15288512dac3b50306deb5af851b40))
+* **deps:** update plugin gitsemver to v7.0.4 ([1376431](https://github.com/HarmoniKt/HarmoniKt/commit/13764310120b5ac0e2ecf02d6f06dab201e43569))
+* **deps:** update plugin multijvmtesting to v4.1.2 ([319fd54](https://github.com/HarmoniKt/HarmoniKt/commit/319fd54d1d07e9a17e4437ba1f410660143bb3e3))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.2 ([3cd5289](https://github.com/HarmoniKt/HarmoniKt/commit/3cd528921cd56b577fa9b4d787f35bd6947389ce))
+
+### Bug Fixes
+
+* correct body parameter name ([eb128de](https://github.com/HarmoniKt/HarmoniKt/commit/eb128deddf1767f6fe3818d9aafe571c8659c47c))
+* dockerfiles and integration script ([e87aec9](https://github.com/HarmoniKt/HarmoniKt/commit/e87aec9d97488d6f6df0ebb08e212a8b4cd9898c))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.10 ([d00d93b](https://github.com/HarmoniKt/HarmoniKt/commit/d00d93bf98b3eab34b3ecab00137faf57ff4b690))
+* **deps:** update dependency macos github actions runner to v15 ([d5b298a](https://github.com/HarmoniKt/HarmoniKt/commit/d5b298a5f7c0608ab85eb985de227413de9c27b1))
+
 ## [1.15.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.14.0...1.15.0) (2025-10-02)
 
 ### Features
