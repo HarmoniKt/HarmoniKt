@@ -1,3 +1,40 @@
+## [1.14.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.13.2...1.14.0) (2025-10-02)
+
+### Features
+
+* add action handler ([bb66fb5](https://github.com/HarmoniKt/HarmoniKt/commit/bb66fb5f08ed0d8449a2f7782f2bb4ef0e53608f))
+* add placeholder action ([1c552bb](https://github.com/HarmoniKt/HarmoniKt/commit/1c552bb2c0c6b2861c55f35f9bc9079a72dd1015))
+* implement handler for mir movement ([f58822b](https://github.com/HarmoniKt/HarmoniKt/commit/f58822bb4dfc323c496d90a50bbf18b8bf76830a))
+* mir to target implementation ([a91dc39](https://github.com/HarmoniKt/HarmoniKt/commit/a91dc394708874d6a3134ec83ec89c806aa05aba))
+* **mir-service:** finish mocked move to targer ([eee1e9d](https://github.com/HarmoniKt/HarmoniKt/commit/eee1e9dbf3f16a0ef7ce8a8233e33248f3743f2b))
+
+### Dependency updates
+
+* **deps:** add apache client dependency to mir-service subproject ([7a264f9](https://github.com/HarmoniKt/HarmoniKt/commit/7a264f91b53d3d256f8ba35b7a2599f0084b6706))
+
+### Bug Fixes
+
+* add missing parameter ([000b957](https://github.com/HarmoniKt/HarmoniKt/commit/000b95742ed427fd329666f19c26965e80718de1))
+* add suspend to function signature ([e4ac8fa](https://github.com/HarmoniKt/HarmoniKt/commit/e4ac8fa4e3cf5232330515e9caac000b22328e99))
+* fix target ([656cbc8](https://github.com/HarmoniKt/HarmoniKt/commit/656cbc8f681d9e392777a4fa13529ffcf9fde4ed))
+* getting marker id and not poi id ([a478049](https://github.com/HarmoniKt/HarmoniKt/commit/a478049c362ed3db4d9b54d543be60d50114a973))
+* **mir-service:** fix get robot name ([b637246](https://github.com/HarmoniKt/HarmoniKt/commit/b6372461489305ee1af9c74b86f172747b16b1b2))
+* **mir:** action path ([ed0c754](https://github.com/HarmoniKt/HarmoniKt/commit/ed0c75491a2162a6b2a01eba4462fbc2c209210f))
+* robot action integration ([43c7a6e](https://github.com/HarmoniKt/HarmoniKt/commit/43c7a6e7b8a2dbe95621c303e4deb7a845a98959))
+* **spot:** deployment ([f9b42a6](https://github.com/HarmoniKt/HarmoniKt/commit/f9b42a6796416d75f689a9cc335c43b8a5dae068))
+
+### General maintenance
+
+* remove useless old parameter from doc ([1315ce5](https://github.com/HarmoniKt/HarmoniKt/commit/1315ce5490e8657295a4be91901ab93ae1aa6144))
+
+### Style improvements
+
+* adapt to ktilint ([9b4181c](https://github.com/HarmoniKt/HarmoniKt/commit/9b4181cdf3bbd53b2c1f20871facf6408e6a666d))
+
+### Refactoring
+
+* change action route ([de3a85a](https://github.com/HarmoniKt/HarmoniKt/commit/de3a85a7f00bbaae1b3bd5c202933ba64401f835))
+
 ## [1.13.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.13.1...1.13.2) (2025-09-18)
 
 ### Dependency updates
