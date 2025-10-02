@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.14.0...1.15.0) (2025-10-02)
+
+### Features
+
+* add integration script ([501ca90](https://github.com/HarmoniKt/HarmoniKt/commit/501ca90e6a97fb69c5dddb89f518cd34e6b94cdf))
+
 ## [1.14.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.13.2...1.14.0) (2025-10-02)
 
 ### Features
