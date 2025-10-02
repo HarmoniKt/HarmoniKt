@@ -14,7 +14,7 @@ echo "Created POI with ID: $POI_ID"
 MIR_MARKER_ID=$(http POST localhost/pois/$POI_ID/markers identifier=10 type=MIR | jq -r '.id')
 echo "Created MIR Marker with ID: $MIR_MARKER_ID"
 
-# SPOT_MARKER_ID=$(http POST localhost/pois/$POI_ID/markers identifier=529 type=SPOT | jq -r '.id')
+# SPOT_MARKER_ID=$(http POST localhost/pois/$POI_ID/markers fiducial=529 type=SPOT | jq -r '.id')
 # echo "Created SPOT Marker with ID: $SPOT_MARKER_ID"
 
 # echo "Sending robot to POI: $POI_ID"
