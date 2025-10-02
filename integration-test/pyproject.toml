@@ -1,0 +1,8 @@
+[project]
+name = "integration-test"
+version = "0.1.0"
+description = "Integration tests for HarmoniKt"
+requires-python = ">=3.13"
+dependencies = [
+    "bosdyn-client>=5.0.1",
+]

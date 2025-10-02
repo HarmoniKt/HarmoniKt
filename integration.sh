@@ -29,8 +29,12 @@ echo "Created MIR Marker with ID: $MIR_MARKER_WILAB1_ID"
 MIR_MARKER_WILAB2_ID=$(http POST $LOCALHOST/pois/$WILAB2_POI_ID/markers identifier="8fdcc3db-94aa-11f0-85bf-000e8eacb545" type=MIR | jq -r '.id')
 echo "Created MIR Marker with ID: $MIR_MARKER_WILAB2_ID"
 
-#SPOT_MARKER_ID=$(http POST $LOCALHOST/pois/$SERVER_POI_ID/markers fiducial=529 type=SPOT | jq -r '.id')
-#echo "Created SPOT Marker with ID: $SPOT_MARKER_ID"
+# SPOT_MARKER_ID=$(http POST $LOCALHOST/pois/$SERVER_POI_ID/markers fiducial=529 type=SPOT | jq -r '.id')
+# echo "Created SPOT Marker with ID: $SPOT_MARKER_ID"
+
+echo "Sending robot to POI: $SERVER_POI_ID"
+http POST $LOCALHOST/robots/$MIR_ROBOT_ID/actions type=MirToTarget targetPOI=$SERVER_POI_ID
+echo "Sent robot"
 
 echo "Sending robot to POI: $SERVER_POI_ID"
 http POST $LOCALHOST/robots/$MIR_ROBOT_ID/actions type=MirToTarget targetPOI=$SERVER_POI_ID
