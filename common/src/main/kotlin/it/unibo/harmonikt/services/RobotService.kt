@@ -1,8 +1,6 @@
 package it.unibo.harmonikt.services
 
-import it.unibo.harmonikt.model.Marker
 import it.unibo.harmonikt.model.RobotId
-import kotlin.uuid.Uuid
 
 /**
  * Service interface for interacting with a specific robot.

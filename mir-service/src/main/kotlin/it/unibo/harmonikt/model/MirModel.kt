@@ -61,7 +61,6 @@ data class MirInfoDTO(
     val stateText: String,
 )
 
-
 /**
  * Converts a MirStatusDTO to a MirStatus domain object.
  * @return The corresponding MirStatus domain object.
@@ -108,18 +107,11 @@ data class MirStatusDTO(
     val unloaded_map_changes: Boolean,
     val uptime: Int,
     val user_prompt: String?,
-    val velocity: Velocity
+    val velocity: Velocity,
 )
 
 @Serializable
-data class Position(
-    val orientation: Double,
-    val x: Double,
-    val y: Double
-)
+data class Position(val orientation: Double, val x: Double, val y: Double)
 
 @Serializable
-data class Velocity(
-    val angular: Double,
-    val linear: Double
-)
+data class Velocity(val angular: Double, val linear: Double)

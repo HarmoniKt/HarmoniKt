@@ -11,6 +11,7 @@ import it.unibo.harmonikt.api.dto.MirMoveToMarkerDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO.MirRobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
+import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotType
 import it.unibo.harmonikt.repository.MirRobotRepository
@@ -41,7 +42,6 @@ object RobotHandlers {
                 request.apiToken,
                 request.host,
             )
-            println("Robot created with id: $robotId, request: $request")
             if (robotId != null) {
                 call.respond(HttpStatusCode.Created, RobotIdDTO(robotId))
             } else {
@@ -58,7 +58,6 @@ object RobotHandlers {
                 call.respond(HttpStatusCode.NotFound, "Delete failed for robot with id ${robot.id}, possibly not found")
             }
         }
-
 
         // GET /robots/{robotId} - Retrieve information about a robot
         get<MirRobots.Id> { r ->
@@ -82,11 +81,12 @@ object RobotHandlers {
         post<MirRobots.Id.Move> { move ->
             val robot = repository.getRobotById(move.parent.id)
             val request = call.receive<MirMoveToMarkerDTO>()
+            Action
             robot?.let {
                 val result = service.moveToTarget(it.id, request.identifier)
                 when {
-                    result -> call.respond(HttpStatusCode.OK, "Action execution: $result")
-                    else -> call.respond(HttpStatusCode.InternalServerError, "Action not created")
+                    result -> call.respond(HttpStatusCode.OK, "Action in execution")
+                    else -> call.respond(HttpStatusCode.NotAcceptable, "Action not created, probably not valid target")
                 }
             }
         }

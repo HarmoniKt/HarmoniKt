@@ -32,9 +32,11 @@ object KtorSetup {
     fun Application.commonKtorSetup() {
         install(Resources)
         install(ContentNegotiationServer) {
-            json(Json {
-                ignoreUnknownKeys = true
-            })
+            json(
+                Json {
+                    ignoreUnknownKeys = true
+                },
+            )
         }
         install(RequestValidation) {
             validate<RobotRegistrationDTO>(RobotRegistrationDTO::validate)

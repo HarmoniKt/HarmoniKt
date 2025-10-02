@@ -3,11 +3,8 @@ package it.unibo.harmonikt.api
 import arrow.core.Either
 import it.unibo.harmonikt.api.dto.RobotActionDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
-import it.unibo.harmonikt.api.dto.RobotInfoDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
-import it.unibo.harmonikt.model.Action
-import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.resources.Robots
@@ -111,5 +108,5 @@ interface RobotAPI {
      * @param action The command to execute.
      * @return The ID of the newly created action, or null if the robot was not found.
      */
-    suspend fun createRobotAction(robotId: RobotId, action: RobotActionDTO): Either<RobotAPIError, Action>
+    suspend fun createRobotAction(robotId: RobotId, action: RobotActionDTO): Either<RobotAPIError, Boolean>
 }

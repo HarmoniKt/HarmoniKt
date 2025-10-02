@@ -23,14 +23,14 @@ class MirRobotService(private val client: HttpClient, private val robotRepositor
     override suspend fun moveToTarget(robotId: RobotId, markerIdentifier: String): Boolean {
         val robot = robotRepository.getMirRobotById(robotId)
         if (robot != null) {
-            client.post("http://${robot.host}/api/v2.0.0/mission_queue") {
+            val request = client.post("http://${robot.host}/api/v2.0.0/mission_queue") {
                 header(HttpHeaders.Authorization, "Basic ${robot.apiToken}")
                 header(HttpHeaders.ContentType, "application/json")
                 setBody(
                     """{"mission_id": "$markerIdentifier"}""",
                 )
             }
-            return true
+            return request.status.value in 200..299
         } else {
             return false
         }

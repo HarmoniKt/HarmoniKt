@@ -21,7 +21,6 @@ import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
 import it.unibo.harmonikt.api.dto.SpotMoveToFiducialDTO
-import it.unibo.harmonikt.model.Action
 import it.unibo.harmonikt.model.Marker.MirMarker
 import it.unibo.harmonikt.model.Marker.SpotMarker
 import it.unibo.harmonikt.model.RobotId
@@ -90,12 +89,11 @@ class RobotAPIImpl(
         } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId.robotId))
     }.mapLeft { error -> RobotAPIError.RobotNotFound(robotId.robotId) }
 
-    override suspend fun createRobotAction(robotId: RobotId, action: RobotActionDTO): Either<RobotAPIError, Action> =
+    override suspend fun createRobotAction(robotId: RobotId, action: RobotActionDTO): Either<RobotAPIError, Boolean> =
         Either.catch {
             robotRepository.getRobotById(robotId)?.let {
                 when (it.type) {
                     MIR -> client.post("http://mir-service/robots/$robotId/move") {
-                        println("action for mir $action")
                         when (action) {
                             is MirMoveToPOIDTO -> {
                                 val poi = poisRepository.getPointOfInterestById(action.targetPOI)
@@ -112,7 +110,7 @@ class RobotAPIImpl(
                             }
                             else -> GenericRobotAPIError("Unsupported action type for MIR robot")
                         }
-                    }.body<Action>()
+                    }.body<Boolean>()
                     SPOT -> client.post("http://spot-service/robots/$robotId/actions") {
                         when (action) {
                             is SpotMoveToTargetDTO -> {
@@ -130,7 +128,7 @@ class RobotAPIImpl(
                             }
                             else -> GenericRobotAPIError("Unsupported action type for SPOT robot")
                         }
-                    }.body<Action>()
+                    }.body<Boolean>()
                 }
             } ?: return Either.Left(RobotAPIError.RobotNotFound(robotId))
         }.mapLeft { error -> RobotAPIError.ActionFailed(error.message) }
