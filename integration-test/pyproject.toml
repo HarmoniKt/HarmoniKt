@@ -6,3 +6,8 @@ requires-python = ">=3.13"
 dependencies = [
     "bosdyn-client>=5.0.1",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.13.2",
+]
