@@ -1024,3 +1024,30 @@ java.util.concurrent.RejectedExecutionException: event executor terminated
 2025-10-02 12:40:22.361 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
 2025-10-02 12:40:22.398 [main] INFO  io.ktor.server.Application - Application started in 0.764 seconds.
 2025-10-02 12:40:22.485 [DefaultDispatcher-worker-1] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2025-10-02 12:42:59.219 [main] INFO  it.unibo.harmonikt.mir-service - Starting MIR service...
+2025-10-02 12:42:59.681 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:42:59.867 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:42:59.934 [main] INFO  io.ktor.server.Application - Application started in 0.68 seconds.
+2025-10-02 12:43:27.270 [main] INFO  it.unibo.harmonikt.mir-service - Starting MIR service...
+2025-10-02 12:43:27.791 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:43:27.958 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:43:27.991 [main] INFO  io.ktor.server.Application - Application started in 0.682 seconds.
+2025-10-02 12:43:28.091 [DefaultDispatcher-worker-1] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2025-10-02 12:44:01.495 [main] INFO  it.unibo.harmonikt.mir-service - Starting MIR service...
+2025-10-02 12:44:02.211 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:02.531 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:02.595 [main] INFO  io.ktor.server.Application - Application started in 1.042 seconds.
+2025-10-02 12:44:19.694 [main] INFO  it.unibo.harmonikt.mir-service - Starting MIR service...
+2025-10-02 12:44:20.295 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:20.450 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:20.502 [main] INFO  io.ktor.server.Application - Application started in 0.773 seconds.
+2025-10-02 12:44:20.588 [DefaultDispatcher-worker-1] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2025-10-02 12:44:35.140 [main] INFO  it.unibo.harmonikt.mir-service - Starting MIR service...
+2025-10-02 12:44:35.898 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:36.029 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:36.062 [main] INFO  io.ktor.server.Application - Application started in 0.879 seconds.
+2025-10-02 12:44:56.735 [main] INFO  it.unibo.harmonikt.mir-service - Starting MIR service...
+2025-10-02 12:44:57.500 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:57.680 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:57.730 [main] INFO  io.ktor.server.Application - Application started in 0.922 seconds.
+2025-10-02 12:44:57.913 [DefaultDispatcher-worker-1] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080

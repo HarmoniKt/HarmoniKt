@@ -123,12 +123,13 @@ sealed interface ActionRegistrationDTO {
  */
 @Serializable
 sealed interface RobotActionDTO
-    /**
-     * Data Transfer Object (DTO) for a robot action.
-     *
-     * This class encapsulates the information needed for a robot to perform an action,
-     * such as moving to a target location.
-     */
+
+/**
+ * Data Transfer Object (DTO) for a robot action.
+ *
+ * This class encapsulates the information needed for a robot to perform an action,
+ * such as moving to a target location.
+ */
 @Serializable
 sealed interface MoveToTargetDTO : RobotActionDTO {
 
@@ -136,6 +137,7 @@ sealed interface MoveToTargetDTO : RobotActionDTO {
      * The point of interest that the robot should interact with.
      */
     val targetPOI: Uuid
+
     /**
      * Converts this DTO to a domain model Action.
      *
@@ -157,9 +159,21 @@ sealed interface MoveToTargetDTO : RobotActionDTO {
     data class MirMoveToPOIDTO(override val targetPOI: Uuid) : MoveToTargetDTO
 }
 
+/**
+ * Data Transfer Object (DTO) for a robot action to move to a marker.
+ * This class encapsulates the information needed for a robot to perform an action,
+ * such as moving to a target location identified by a marker.
+ * @property identifier The unique identifier of the marker the robot should move to.
+ */
 @Serializable
 @SerialName("MirActionToTarget")
 data class MirMoveToMarkerDTO(val identifier: String)
 
+/**
+ * Data Transfer Object (DTO) for a robot action to move to a fiducial.
+ * This class encapsulates the information needed for a robot to perform an action,
+ * such as moving to a target location identified by a fiducial.
+ * @property fiducial The fiducial number the robot should move to.
+ */
 @Serializable
 data class SpotMoveToFiducialDTO(val fiducial: Int)

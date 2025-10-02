@@ -437,3 +437,30 @@ java.util.concurrent.RejectedExecutionException: event executor terminated
 2025-10-02 12:40:24.019 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
 2025-10-02 12:40:24.152 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
 2025-10-02 12:40:24.193 [main] INFO  io.ktor.server.Application - Application started in 0.584 seconds.
+2025-10-02 12:42:54.331 [main] INFO  it.unibo.harmonikt.robot-manager - Starting Robot Manager service...
+2025-10-02 12:42:54.908 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:42:55.116 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:42:55.164 [main] INFO  io.ktor.server.Application - Application started in 0.782 seconds.
+2025-10-02 12:42:55.282 [DefaultDispatcher-worker-1] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2025-10-02 12:43:27.641 [main] INFO  it.unibo.harmonikt.robot-manager - Starting Robot Manager service...
+2025-10-02 12:43:28.151 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:43:28.276 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:43:28.313 [main] INFO  io.ktor.server.Application - Application started in 0.626 seconds.
+2025-10-02 12:44:00.387 [main] INFO  it.unibo.harmonikt.robot-manager - Starting Robot Manager service...
+2025-10-02 12:44:01.246 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:01.475 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:01.547 [main] INFO  io.ktor.server.Application - Application started in 1.079 seconds.
+2025-10-02 12:44:01.674 [DefaultDispatcher-worker-1] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2025-10-02 12:44:20.455 [main] INFO  it.unibo.harmonikt.robot-manager - Starting Robot Manager service...
+2025-10-02 12:44:20.905 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:21.069 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:21.114 [main] INFO  io.ktor.server.Application - Application started in 0.614 seconds.
+2025-10-02 12:44:33.264 [main] INFO  it.unibo.harmonikt.robot-manager - Starting Robot Manager service...
+2025-10-02 12:44:33.852 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:34.015 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:34.061 [main] INFO  io.ktor.server.Application - Application started in 0.751 seconds.
+2025-10-02 12:44:34.154 [DefaultDispatcher-worker-1] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2025-10-02 12:44:58.195 [main] INFO  it.unibo.harmonikt.robot-manager - Starting Robot Manager service...
+2025-10-02 12:44:58.614 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2025-10-02 12:44:58.746 [main] INFO  i.unibo.harmonikt.utils.ConsulPlugin - Installing ConsulPlugin with Consul URL: http://localhost:8500
+2025-10-02 12:44:58.778 [main] INFO  io.ktor.server.Application - Application started in 0.548 seconds.

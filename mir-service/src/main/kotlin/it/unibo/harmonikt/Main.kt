@@ -54,7 +54,6 @@ private fun Application.module() {
         if (System.getenv("MOCKED") == "true") MockMirRobotRepositoryImpl() else MirRobotRepositoryImpl(client)
     val mirRobotService = MirRobotService(client, mirRobotRepository)
 
-
     routing {
         // Health check endpoint
         get("/") {

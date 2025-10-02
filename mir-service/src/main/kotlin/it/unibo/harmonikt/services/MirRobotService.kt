@@ -8,7 +8,17 @@ import io.ktor.http.HttpHeaders
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.repository.impl.AbstractMirRobotRepository
 
-class MirRobotService(private val client: HttpClient, private val robotRepository: AbstractMirRobotRepository) : RobotService {
+/**
+ * Service class for managing Mir robots and their actions.
+ *
+ * This class provides methods to interact with Mir robots, such as moving them to target locations.
+ * It uses an HTTP client to communicate with the robots' APIs and a repository to manage robot data.
+ *
+ * @property client The HTTP client used for making requests to the robots.
+ * @property robotRepository The repository for managing Mir robot data.
+ */
+class MirRobotService(private val client: HttpClient, private val robotRepository: AbstractMirRobotRepository) :
+    RobotService {
 
     override suspend fun moveToTarget(robotId: RobotId, markerIdentifier: String): Boolean {
         val robot = robotRepository.getMirRobotById(robotId)
@@ -17,10 +27,12 @@ class MirRobotService(private val client: HttpClient, private val robotRepositor
                 header(HttpHeaders.Authorization, "Basic ${robot.apiToken}")
                 header(HttpHeaders.ContentType, "application/json")
                 setBody(
-                    """{"mission_id": "$markerIdentifier"}"""
+                    """{"mission_id": "$markerIdentifier"}""",
                 )
             }
             return true
-        } else return false
+        } else {
+            return false
+        }
     }
 }

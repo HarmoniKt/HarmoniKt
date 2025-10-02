@@ -41,5 +41,10 @@ interface MirRobotRepository {
      */
     suspend fun getRobotById(id: RobotId): Robot?
 
+    /**
+     * Retrieves a Mir robot by its unique identifier.
+     * @param id The unique identifier of the robot.
+     * @return The Mir robot object if found, or null otherwise.
+     */
     fun getMirRobotById(id: RobotId): MirRobot?
 }

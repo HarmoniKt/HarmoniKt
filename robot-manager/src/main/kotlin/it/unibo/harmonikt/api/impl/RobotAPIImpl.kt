@@ -99,7 +99,9 @@ class RobotAPIImpl(
                         when (action) {
                             is MirMoveToPOIDTO -> {
                                 val poi = poisRepository.getPointOfInterestById(action.targetPOI)
-                                    ?: return Either.Left(GenericRobotAPIError(PointOfInterestNotFound(action.targetPOI).toString()))
+                                    ?: return Either.Left(
+                                        GenericRobotAPIError(PointOfInterestNotFound(action.targetPOI).toString()),
+                                    )
                                 val mirMarker = poi.associatedMarkers.first { it is MirMarker } as MirMarker
                                 contentType(ContentType.Application.Json)
                                 setBody(
@@ -115,7 +117,9 @@ class RobotAPIImpl(
                         when (action) {
                             is SpotMoveToTargetDTO -> {
                                 val poi = poisRepository.getPointOfInterestById(action.targetPOI)
-                                    ?: return Either.Left(GenericRobotAPIError(PointOfInterestNotFound(action.targetPOI).toString()))
+                                    ?: return Either.Left(
+                                        GenericRobotAPIError(PointOfInterestNotFound(action.targetPOI).toString()),
+                                    )
                                 val spotMarker = poi.associatedMarkers.first { it is SpotMarker } as SpotMarker
                                 contentType(ContentType.Application.Json)
                                 setBody(
