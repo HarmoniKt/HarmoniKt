@@ -61,7 +61,6 @@ object RobotHandlers {
 
         // POST /robots/{robotId}/actions - Create a new action for a robot
         post<Robots.Id.Actions> { actions ->
-            println("quiii???? $actions")
             robot.createRobotAction(actions.parent.robotId, call.receive<RobotActionDTO>()).fold(
                 { error -> call.respond(HttpStatusCode.InternalServerError, error) },
                 { action -> call.respond(action) },

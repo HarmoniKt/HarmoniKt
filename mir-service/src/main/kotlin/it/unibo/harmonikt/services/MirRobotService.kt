@@ -1,26 +1,26 @@
 package it.unibo.harmonikt.services
 
+import io.ktor.client.HttpClient
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.HttpHeaders
 import it.unibo.harmonikt.model.RobotId
-import it.unibo.harmonikt.repository.MirRobotRepository
-import kotlin.uuid.Uuid
+import it.unibo.harmonikt.repository.impl.AbstractMirRobotRepository
 
-class MirRobotService(private val robotRepository: MirRobotRepository) : RobotService {
+class MirRobotService(private val client: HttpClient, private val robotRepository: AbstractMirRobotRepository) : RobotService {
 
-    override suspend fun moveToTarget(robotId: RobotId, marker: Uuid): Boolean {
-        val robot = robotRepository.getRobotById(robotId)
-        robot?.let {
-            println("Moving robot ${robot.name} to marker $marker")
-//            when(marker) {
-//                is Marker.MirMarker -> print("lessgo")//moveTo(robot.name, marker.identifier, "<username>", "<password>")
-//                is Marker.SpotMarker -> return false
-//            }
+    override suspend fun moveToTarget(robotId: RobotId, markerIdentifier: String): Boolean {
+        val robot = robotRepository.getMirRobotById(robotId)
+        if (robot != null) {
+            client.post("http://${robot.host}/api/v2.0.0/mission_queue") {
+                header(HttpHeaders.Authorization, "Basic ${robot.apiToken}")
+                header(HttpHeaders.ContentType, "application/json")
+                setBody(
+                    """{"mission_id": "$markerIdentifier"}"""
+                )
+            }
             return true
-        }
-        return false
-    }
-
-    companion object {
-        suspend fun moveTo(mirUrl: String, targetId: String) {
-        }
+        } else return false
     }
 }

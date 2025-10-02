@@ -2,8 +2,6 @@ package it.unibo.harmonikt.api.dto
 
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 import it.unibo.harmonikt.model.Action
-import it.unibo.harmonikt.model.Marker.MirMarker
-import it.unibo.harmonikt.model.Marker.SpotMarker
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.Uuid
@@ -134,24 +132,34 @@ sealed interface RobotActionDTO
 @Serializable
 sealed interface MoveToTargetDTO : RobotActionDTO {
 
-    val target: Uuid
+    /**
+     * The point of interest that the robot should interact with.
+     */
+    val targetPOI: Uuid
     /**
      * Converts this DTO to a domain model Action.
      *
-     * @param target The point of interest that the robot should interact with.
+     * @param targetPOI The point of interest that the robot should interact with.
      * @return An Action domain model representing this DTO.
      */
     @Serializable
     @SerialName("SpotToTarget")
-    data class SpotMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
+    data class SpotMoveToTargetDTO(override val targetPOI: Uuid) : MoveToTargetDTO
 
     /**
      * Converts this DTO to a domain model Action.
      *
-     * @param target The point of interest that the robot should interact with.
+     * @param targetPOI The point of interest that the robot should interact with.
      * @return An Action domain model representing this DTO.
      */
     @Serializable
     @SerialName("MirToTarget")
-    data class MirMoveToTargetDTO(override val target: Uuid) : MoveToTargetDTO
+    data class MirMoveToPOIDTO(override val targetPOI: Uuid) : MoveToTargetDTO
 }
+
+@Serializable
+@SerialName("MirActionToTarget")
+data class MirMoveToMarkerDTO(val identifier: String)
+
+@Serializable
+data class SpotMoveToFiducialDTO(val fiducial: Int)

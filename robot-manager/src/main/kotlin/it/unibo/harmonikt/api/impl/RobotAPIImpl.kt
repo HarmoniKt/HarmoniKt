@@ -9,16 +9,21 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import it.unibo.harmonikt.api.PointOfInterestAPIError.PointOfInterestNotFound
 import it.unibo.harmonikt.api.RobotAPI
 import it.unibo.harmonikt.api.RobotAPIError
 import it.unibo.harmonikt.api.RobotAPIError.GenericRobotAPIError
-import it.unibo.harmonikt.api.dto.MoveToTargetDTO
+import it.unibo.harmonikt.api.dto.MirMoveToMarkerDTO
+import it.unibo.harmonikt.api.dto.MoveToTargetDTO.MirMoveToPOIDTO
+import it.unibo.harmonikt.api.dto.MoveToTargetDTO.SpotMoveToTargetDTO
 import it.unibo.harmonikt.api.dto.RobotActionDTO
 import it.unibo.harmonikt.api.dto.RobotIdDTO
 import it.unibo.harmonikt.api.dto.RobotRegistrationDTO
 import it.unibo.harmonikt.api.dto.RobotStatusDTO
+import it.unibo.harmonikt.api.dto.SpotMoveToFiducialDTO
 import it.unibo.harmonikt.model.Action
-import it.unibo.harmonikt.model.Marker
+import it.unibo.harmonikt.model.Marker.MirMarker
+import it.unibo.harmonikt.model.Marker.SpotMarker
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
 import it.unibo.harmonikt.model.RobotType.MIR
@@ -92,31 +97,30 @@ class RobotAPIImpl(
                     MIR -> client.post("http://mir-service/robots/$robotId/move") {
                         println("action for mir $action")
                         when (action) {
-                            is MoveToTargetDTO.MirMoveToTargetDTO -> {
-                                poisRepository.getPointOfInterestById(action.target)?.let { poi ->
-                                    poi
-                                        .associatedMarkers
-                                        .filterIsInstance<Marker.MirMarker>()
-                                        .firstOrNull()?.let { marker ->
-                                            contentType(ContentType.Application.Json)
-                                            setBody(
-                                                MoveToTargetDTO.MirMoveToTargetDTO(
-                                                    target = marker.id,
-                                                ),
-                                            )
-                                        }
-                                }
+                            is MirMoveToPOIDTO -> {
+                                val poi = poisRepository.getPointOfInterestById(action.targetPOI)
+                                    ?: return Either.Left(GenericRobotAPIError(PointOfInterestNotFound(action.targetPOI).toString()))
+                                val mirMarker = poi.associatedMarkers.first { it is MirMarker } as MirMarker
+                                contentType(ContentType.Application.Json)
+                                setBody(
+                                    MirMoveToMarkerDTO(
+                                        identifier = mirMarker.identifier,
+                                    ),
+                                )
                             }
                             else -> GenericRobotAPIError("Unsupported action type for MIR robot")
                         }
                     }.body<Action>()
                     SPOT -> client.post("http://spot-service/robots/$robotId/actions") {
                         when (action) {
-                            is MoveToTargetDTO.SpotMoveToTargetDTO -> {
+                            is SpotMoveToTargetDTO -> {
+                                val poi = poisRepository.getPointOfInterestById(action.targetPOI)
+                                    ?: return Either.Left(GenericRobotAPIError(PointOfInterestNotFound(action.targetPOI).toString()))
+                                val spotMarker = poi.associatedMarkers.first { it is SpotMarker } as SpotMarker
                                 contentType(ContentType.Application.Json)
                                 setBody(
-                                    MoveToTargetDTO.SpotMoveToTargetDTO(
-                                        target = action.target,
+                                    SpotMoveToFiducialDTO(
+                                        fiducial = spotMarker.fiducial,
                                     ),
                                 )
                             }

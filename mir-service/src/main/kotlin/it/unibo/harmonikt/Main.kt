@@ -52,7 +52,7 @@ private fun Application.module() {
     val markerRepository = FakeMirMarkerRepository()
     val mirRobotRepository =
         if (System.getenv("MOCKED") == "true") MockMirRobotRepositoryImpl() else MirRobotRepositoryImpl(client)
-    val mirRobotService = MirRobotService(mirRobotRepository)
+    val mirRobotService = MirRobotService(client, mirRobotRepository)
 
 
     routing {

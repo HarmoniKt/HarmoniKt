@@ -60,6 +60,8 @@ abstract class AbstractMirRobotRepository : MirRobotRepository {
         return if (robots.add(newRobot)) robotId else null
     }
 
+    override fun getMirRobotById(id: RobotId): MirRobot? = robots.find { it.id == id }
+
     override suspend fun deleteRobot(robot: RobotId): Boolean =
         robots.find { it.id == robot }?.let { robots.remove(it) } ?: false
 

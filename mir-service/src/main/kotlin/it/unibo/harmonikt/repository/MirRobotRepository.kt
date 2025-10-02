@@ -2,6 +2,7 @@
 
 package it.unibo.harmonikt.repository
 
+import it.unibo.harmonikt.model.MirRobot
 import it.unibo.harmonikt.model.Robot
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.model.RobotInfo
@@ -39,4 +40,6 @@ interface MirRobotRepository {
      * @return The robot object if found, or null otherwise.
      */
     suspend fun getRobotById(id: RobotId): Robot?
+
+    fun getMirRobotById(id: RobotId): MirRobot?
 }
