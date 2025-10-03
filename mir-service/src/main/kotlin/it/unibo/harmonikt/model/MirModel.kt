@@ -69,8 +69,8 @@ fun MirStatusDTO.toDomain(canonicalName: String, id: Uuid): MirInfo = MirInfo(
     id = id,
     canonicalName = canonicalName,
     currentPosition = MirPosition(position.x, position.y),
-    batteryLevel = BatteryLevel(battery_percentage),
-    state = when (state_text) {
+    batteryLevel = BatteryLevel(batteryPercentage),
+    state = when (stateText) {
         "Ready" -> RobotState.IDLE
         "Executing" -> RobotState.ON_MISSION
         "Recharging" -> RobotState.RECHARGING
@@ -78,40 +78,83 @@ fun MirStatusDTO.toDomain(canonicalName: String, id: Uuid): MirInfo = MirInfo(
     },
 )
 
+/**
+ * Represents the detailed status of a MiR robot as provided by its API.
+ * This data transfer object encapsulates various attributes related to the robot's current state and capabilities.
+ * @property allowedMethods A string representing the methods allowed for the robot.
+ * @property batteryPercentage The current battery percentage of the robot.
+ * @property batteryTimeRemaining The estimated time remaining for the battery in seconds.
+ * @property distanceToNextTarget The distance to the next target in meters.
+ * @property errors A list of error messages currently affecting the robot.
+ * @property footprint The footprint of the robot, typically representing its physical dimensions.
+ * @property joystickLowSpeedModeEnabled A boolean indicating if the low-speed mode for the joystick is enabled.
+ * @property joystickWebSessionId The session ID for the joystick web interface.
+ * @property mapId The identifier of the current map the robot is operating on.
+ * @property missionQueueId The identifier of the current mission queue, if any.
+ * @property missionQueueUrl The URL of the current mission queue, if any.
+ * @property missionText A textual description of the current mission.
+ * @property modeId The identifier of the current mode the robot is in.
+ * @property modeKeyState The key state of the current mode.
+ * @property modeText A textual description of the current mode.
+ * @property moved The distance the robot has moved in meters.
+ * @property position The current position of the robot, including orientation and coordinates.
+ * @property robotModel The model of the robot.
+ * @property robotName The name of the robot.
+ * @property safetySystemMuted A boolean indicating if the safety system is muted.
+ * @property serialNumber The serial number of the robot.
+ * @property sessionId The current session ID for the robot.
+ * @property stateId The identifier of the current state the robot is in.
+ * @property stateText A textual description of the current state.
+ * @property unloadedMapChanges A boolean indicating if there are unloaded map changes.
+ * @property uptime The uptime of the robot in seconds.
+ * @property userPrompt A prompt message for the user, if any.
+ * @property velocity The current velocity of the robot, including linear and angular components.
+ */
 @Serializable
 data class MirStatusDTO(
-    val allowed_methods: String?, // can refine if you know type
-    val battery_percentage: Double,
-    val battery_time_remaining: Long,
-    val distance_to_next_target: Double,
+    val allowedMethods: String?, // can refine if you know type
+    val batteryPercentage: Double,
+    val batteryTimeRemaining: Long,
+    val distanceToNextTarget: Double,
     val errors: List<String?>,
     val footprint: String,
-    val joystick_low_speed_mode_enabled: Boolean,
-    val joystick_web_session_id: String,
-    val map_id: String,
-    val mission_queue_id: String?,
-    val mission_queue_url: String?,
-    val mission_text: String,
-    val mode_id: Int,
-    val mode_key_state: String,
-    val mode_text: String,
+    val joystickLowSpeedModeEnabled: Boolean,
+    val joystickWebSessionId: String,
+    val mapId: String,
+    val missionQueueId: String?,
+    val missionQueueUrl: String?,
+    val missionText: String,
+    val modeId: Int,
+    val modeKeyState: String,
+    val modeText: String,
     val moved: Double,
     val position: Position,
-    val robot_model: String,
-    val robot_name: String,
-    val safety_system_muted: Boolean,
-    val serial_number: String,
-    val session_id: String,
-    val state_id: Int,
-    val state_text: String,
-    val unloaded_map_changes: Boolean,
+    val robotModel: String,
+    val robotName: String,
+    val safetySystemMuted: Boolean,
+    val serialNumber: String,
+    val sessionId: String,
+    val stateId: Int,
+    val stateText: String,
+    val unloadedMapChanges: Boolean,
     val uptime: Int,
-    val user_prompt: String?,
+    val userPrompt: String?,
     val velocity: Velocity,
 )
 
+/**
+ * Represents the position of a robot, including its orientation and coordinates.
+ * @property orientation The orientation of the robot in degrees.
+ * @property x The X coordinate of the robot.
+ * @property y The Y coordinate of the robot.
+ */
 @Serializable
 data class Position(val orientation: Double, val x: Double, val y: Double)
 
+/**
+ * Represents the velocity of a robot, including its angular and linear components.
+ * @property angular The angular velocity of the robot in degrees per second.
+ * @property linear The linear velocity of the robot in meters per second.
+ */
 @Serializable
 data class Velocity(val angular: Double, val linear: Double)

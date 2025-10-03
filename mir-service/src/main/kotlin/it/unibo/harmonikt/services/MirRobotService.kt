@@ -5,6 +5,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
 import it.unibo.harmonikt.model.RobotId
 import it.unibo.harmonikt.repository.impl.AbstractMirRobotRepository
 
@@ -30,7 +31,7 @@ class MirRobotService(private val client: HttpClient, private val robotRepositor
                     """{"mission_id": "$markerIdentifier"}""",
                 )
             }
-            return request.status.value in 200..299
+            return request.status.value in HttpStatusCode.OK.value..HttpStatusCode.PartialContent.value
         } else {
             return false
         }
