@@ -1,3 +1,32 @@
+## [1.16.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.15.1...1.16.0) (2025-10-03)
+
+### Features
+
+* add tests results ([e325c1f](https://github.com/HarmoniKt/HarmoniKt/commit/e325c1fabf45e6704a6c95cb8ae8111e2de160c0))
+* integrated MIR ([409aa7e](https://github.com/HarmoniKt/HarmoniKt/commit/409aa7e243e3527c4c1efbb99bb20419c6b91135))
+* project for integration testing ([b2bc9e3](https://github.com/HarmoniKt/HarmoniKt/commit/b2bc9e34884bf6b053052cf31eb9da0868ce70f5))
+
+### Dependency updates
+
+* **deps:** update gradle to v9 ([9a3f5df](https://github.com/HarmoniKt/HarmoniKt/commit/9a3f5dfc802e8a8985ab84cd52471bdd9fe8e2b2))
+* **deps:** update gradle to v9.1.0 ([d374b41](https://github.com/HarmoniKt/HarmoniKt/commit/d374b414c0d23c6e8461cd7e94174c58568e6b8e))
+* **deps:** update plugin multijvmtesting to v4.2.0 ([a4d5030](https://github.com/HarmoniKt/HarmoniKt/commit/a4d50300e3e052068e85e8db6d5cb5d729a5c607))
+
+### Bug Fixes
+
+* minor changes ([d62f2ec](https://github.com/HarmoniKt/HarmoniKt/commit/d62f2ec3e8398067ab6ef61f2023fc55d0c188b3))
+* port on robot manager ([b827850](https://github.com/HarmoniKt/HarmoniKt/commit/b8278506e3157c83fd3caf59a74e197f596e934f))
+* remove launcher script ([41e89de](https://github.com/HarmoniKt/HarmoniKt/commit/41e89deae2546829ca0595b55cfe49d47af1f0f8))
+
+### General maintenance
+
+* changes names ([f78060e](https://github.com/HarmoniKt/HarmoniKt/commit/f78060ed6365167c04b4c3e18b3be1ce65d74bc5))
+
+### Style improvements
+
+* adapt to ktilint ([6cd1f85](https://github.com/HarmoniKt/HarmoniKt/commit/6cd1f85306d13c5c532bc66f2b6ef2851d8042c0))
+* move wilab in order ([ee87bcf](https://github.com/HarmoniKt/HarmoniKt/commit/ee87bcfb372b2796597453dfb4a088a8011e0ba0))
+
 ## [1.15.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.15.0...1.15.1) (2025-10-02)
 
 ### Dependency updates
