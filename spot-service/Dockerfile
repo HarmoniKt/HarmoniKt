@@ -1,4 +1,4 @@
-FROM python:3.13
+FROM python:3.14
 RUN pip install --upgrade pip && pip install uv
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
