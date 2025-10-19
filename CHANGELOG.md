@@ -1,3 +1,20 @@
+## [1.16.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.16.0...1.16.1) (2025-10-19)
+
+### Dependency updates
+
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.5.20 ([d220411](https://github.com/HarmoniKt/HarmoniKt/commit/d2204115fd53f26f831c8f830057419bc1f5013a))
+* **deps:** update dependency io.ktor.plugin to v3.3.1 ([9cb6b8a](https://github.com/HarmoniKt/HarmoniKt/commit/9cb6b8a1b89f11ab9dbe42f3c738210641d29be7))
+* **deps:** update plugin com.gradle.develocity to v4.2.2 ([210d672](https://github.com/HarmoniKt/HarmoniKt/commit/210d6724c4c84610075b0ed3ea3de7b3c10632ee))
+* **deps:** update python docker tag to v3.14 ([bd202a7](https://github.com/HarmoniKt/HarmoniKt/commit/bd202a75a1038e33ba0fe92dd75298c41bd98269))
+
+### Documentation
+
+* **deps:** update plugin dokka to v2.1.0 ([112e918](https://github.com/HarmoniKt/HarmoniKt/commit/112e918cb3e74b78f5ef08b0c98ac1ee22154bc0))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6 ([6879e2d](https://github.com/HarmoniKt/HarmoniKt/commit/6879e2dcfbbdd9bf39cf7540a3ed41451f3b6f0b))
+
 ## [1.16.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.15.1...1.16.0) (2025-10-03)
 
 ### Features
