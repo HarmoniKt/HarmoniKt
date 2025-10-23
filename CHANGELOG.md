@@ -1,3 +1,12 @@
+## [1.16.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.16.1...1.16.2) (2025-10-23)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.2.21 ([5692572](https://github.com/HarmoniKt/HarmoniKt/commit/56925724d54e996bca74c0f03982dad834d1a0b1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.148 ([6262c84](https://github.com/HarmoniKt/HarmoniKt/commit/6262c8434092475071cb714b6da7ffb7819e7d31))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.149 ([5a1cf13](https://github.com/HarmoniKt/HarmoniKt/commit/5a1cf138b89ec4745c7688ecd3d6964cc119f4cb))
+* **deps:** update node.js to 22.21 ([f33ac59](https://github.com/HarmoniKt/HarmoniKt/commit/f33ac59857a44dc334130daa23a93a196bac801e))
+
 ## [1.16.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.16.0...1.16.1) (2025-10-19)
 
 ### Dependency updates
