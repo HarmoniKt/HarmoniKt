@@ -1,3 +1,49 @@
+## [1.17.0](https://github.com/HarmoniKt/HarmoniKt/compare/1.16.2...1.17.0) (2025-11-21)
+
+### Features
+
+* add integration script ([8006195](https://github.com/HarmoniKt/HarmoniKt/commit/80061957433ce7335dd3b43be12de0a56cf44889))
+
+### Dependency updates
+
+* **deps:** update arrow-kt monorepo to v2.2.0 ([ec93d93](https://github.com/HarmoniKt/HarmoniKt/commit/ec93d9316c94b74a5d67cb034442f623316e5f68))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.5.21 ([c3c8b3f](https://github.com/HarmoniKt/HarmoniKt/commit/c3c8b3f7b7c0153856c02046d62dd293ca6e5418))
+* **deps:** update dependency io.ktor.plugin to v3.3.2 ([c12a02f](https://github.com/HarmoniKt/HarmoniKt/commit/c12a02fc19895470c73b093be8c2476c03745578))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.150 ([635c0d0](https://github.com/HarmoniKt/HarmoniKt/commit/635c0d00a220078588e91e17a9eadf4cf545c04e))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.152 ([2933457](https://github.com/HarmoniKt/HarmoniKt/commit/29334577d1e5fb191a5766cd930c3ad6da630a12))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.153 ([51e0cb8](https://github.com/HarmoniKt/HarmoniKt/commit/51e0cb8df92799492ffa416afce9939b7025a6eb))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.154 ([3b9b9a9](https://github.com/HarmoniKt/HarmoniKt/commit/3b9b9a9945748a3c17584351f874758e4264870e))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.155 ([a427f7e](https://github.com/HarmoniKt/HarmoniKt/commit/a427f7e11f6d5547aead6c1a872f0ff3390eb4b4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.156 ([b35d30d](https://github.com/HarmoniKt/HarmoniKt/commit/b35d30da023cb744ba99d7b85849d65e95db1da8))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.157 ([b42afe8](https://github.com/HarmoniKt/HarmoniKt/commit/b42afe88d8f181b3cc347313d891c30db3f9954e))
+* **deps:** update gradle to v9.2.0 ([be78672](https://github.com/HarmoniKt/HarmoniKt/commit/be78672f0b48e6f69f528091f0d4ceeca70cce37))
+* **deps:** update gradle to v9.2.1 ([c00dff5](https://github.com/HarmoniKt/HarmoniKt/commit/c00dff5e939563a355ce80bfcd5669cb4f0d2606))
+* **deps:** update node.js to v24 ([260ed05](https://github.com/HarmoniKt/HarmoniKt/commit/260ed057700fabec7252e55db71209d30c461265))
+* **deps:** update plugin gitsemver to v7.0.5 ([5b1c372](https://github.com/HarmoniKt/HarmoniKt/commit/5b1c372daf0310c07a738960d5c75ec1f1e61677))
+* **deps:** update plugin gitsemver to v7.0.6 ([1c7a581](https://github.com/HarmoniKt/HarmoniKt/commit/1c7a581f08307959eecf665f82b44a3c58e6e58d))
+* **deps:** update plugin gitsemver to v7.0.7 ([dff91a6](https://github.com/HarmoniKt/HarmoniKt/commit/dff91a6c421c5bcd1e219d6db8e61fa660aca455))
+* **deps:** update plugin kotlin-qa to v0.96.0 ([84d0e70](https://github.com/HarmoniKt/HarmoniKt/commit/84d0e700e31a5743e04f905b2f7b4201ffe8a8b2))
+* **deps:** update plugin kotlin-qa to v0.97.0 ([4246b97](https://github.com/HarmoniKt/HarmoniKt/commit/4246b973750841793855822c2decf9c4464ab498))
+* **deps:** update plugin multijvmtesting to v4.3.0 ([09dc1b3](https://github.com/HarmoniKt/HarmoniKt/commit/09dc1b3e8b55744ff10615be2a337c2975f62254))
+* **deps:** update plugin multijvmtesting to v4.3.1 ([a09db53](https://github.com/HarmoniKt/HarmoniKt/commit/a09db53376e3e4e2013988a772127d10157e68d3))
+* **deps:** update plugin multijvmtesting to v4.3.2 ([27b2103](https://github.com/HarmoniKt/HarmoniKt/commit/27b2103a3b4c34791f78dc598a4fa0d0fe1e3c77))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.3 ([b3ca56f](https://github.com/HarmoniKt/HarmoniKt/commit/b3ca56f807bb6f92f5c397510006c61b3ced951c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.4 ([cae1e98](https://github.com/HarmoniKt/HarmoniKt/commit/cae1e98b1a9a993f32382e91c350d47f3e1441be))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.5 ([6aa0a32](https://github.com/HarmoniKt/HarmoniKt/commit/6aa0a32552c9b8494e64f8800b2789652bf98b41))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v5.0.1 ([4283042](https://github.com/HarmoniKt/HarmoniKt/commit/4283042ba59850dde1733e0224ac1edff9bc48bc))
+* **deps:** update actions/checkout action to v6 ([4800715](https://github.com/HarmoniKt/HarmoniKt/commit/4800715a0e148559d688c28a013719c7b3d6efff))
+* **deps:** update danysk/action-checkout action to v0.2.25 ([bc7634b](https://github.com/HarmoniKt/HarmoniKt/commit/bc7634bc6d7af88f1ec3808a88dbff8f22e9ec47))
+* **deps:** update danysk/action-checkout action to v0.2.26 ([b685fae](https://github.com/HarmoniKt/HarmoniKt/commit/b685fae04cc09d9a9b462283059f32ae519bf74a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.11 ([5e29b8f](https://github.com/HarmoniKt/HarmoniKt/commit/5e29b8f4cb65366f8ee14441ee1ff1d6b8374b61))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.12 ([d5400bc](https://github.com/HarmoniKt/HarmoniKt/commit/d5400bc2e561817986f7b381c72c4ee78b4da2ab))
+
+### General maintenance
+
+* add MIT license to the project ([c88f6fc](https://github.com/HarmoniKt/HarmoniKt/commit/c88f6fc8e69c79b9443799ba6e391208a987557a))
+
 ## [1.16.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.16.1...1.16.2) (2025-10-23)
 
 ### Dependency updates
