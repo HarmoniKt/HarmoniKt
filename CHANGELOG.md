@@ -1,3 +1,37 @@
+## [1.17.2](https://github.com/HarmoniKt/HarmoniKt/compare/1.17.1...1.17.2) (2026-05-05)
+
+### Dependency updates
+
+* **deps:** update dependency com.netflix.eureka:eureka-client to v2.0.6 ([c721d5e](https://github.com/HarmoniKt/HarmoniKt/commit/c721d5eb4ccc11910fbba84a5cbd71cb94a6e99a))
+* **deps:** update dependency pillow to v12.2.0 [security] ([f13451f](https://github.com/HarmoniKt/HarmoniKt/commit/f13451f637dd70b340edbfe5fa059acd94b1155e))
+* **deps:** update dependency requests to v2.33.0 [security] ([cef363c](https://github.com/HarmoniKt/HarmoniKt/commit/cef363c4a82a3d9b3a56e6cf1fae5b95fbbd7684))
+* **deps:** update gradle to v9.5.0 ([73ddc97](https://github.com/HarmoniKt/HarmoniKt/commit/73ddc97d22df321eb4b0f22d50b7117a32395174))
+* **deps:** update node.js to 24.15 ([1d3a902](https://github.com/HarmoniKt/HarmoniKt/commit/1d3a902b50d09f415d8c38d4dec399fea71db1f3))
+* **deps:** update plugin com.gradle.develocity to v4.4.1 ([5dc12a5](https://github.com/HarmoniKt/HarmoniKt/commit/5dc12a517768ec34f40c0557aaa359917d509d34))
+* **deps:** update plugin gitsemver to v7.0.16 ([6a04d4f](https://github.com/HarmoniKt/HarmoniKt/commit/6a04d4fa28760dcd40ff77cc93333aae46a98498))
+* **deps:** update plugin gitsemver to v7.0.18 ([44096e0](https://github.com/HarmoniKt/HarmoniKt/commit/44096e0369ffe396e2034a527ab4578b5398687f))
+* **deps:** update plugin multijvmtesting to v4.3.3 ([ff27b57](https://github.com/HarmoniKt/HarmoniKt/commit/ff27b579cdccb9fca28e2817dc25f57517600d4c))
+* **deps:** update plugin multijvmtesting to v4.3.4 ([c9ec200](https://github.com/HarmoniKt/HarmoniKt/commit/c9ec200f5b78919d97d6cb258c842138dbc960d4))
+* **deps:** update plugin multijvmtesting to v4.3.5 ([20280a2](https://github.com/HarmoniKt/HarmoniKt/commit/20280a25898371d13a9e5dbe28d4361480531d31))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.13 ([9671104](https://github.com/HarmoniKt/HarmoniKt/commit/9671104bd9e4da80b8f37db3092509c7253fe839))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.14 ([df08838](https://github.com/HarmoniKt/HarmoniKt/commit/df08838a790dbbf94b25088a387126714e9bdef9))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.15 ([ef14cb2](https://github.com/HarmoniKt/HarmoniKt/commit/ef14cb271350ee27cee42819b55c40dd426b169a))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.16 ([c6c3ad8](https://github.com/HarmoniKt/HarmoniKt/commit/c6c3ad8061370995de982ce158527ffae617e9a2))
+
+### Bug Fixes
+
+* remove map manager from docker compose ([5bece50](https://github.com/HarmoniKt/HarmoniKt/commit/5bece5094051494950f3e5651efb5f685585c34d))
+
+### Build and continuous integration
+
+* **deps:** update actions/create-github-app-token action to v3.1.0 ([de51774](https://github.com/HarmoniKt/HarmoniKt/commit/de51774034c40ffcaa1b84cc24126ef29116563c))
+* **deps:** update actions/create-github-app-token action to v3.1.1 ([86fabd1](https://github.com/HarmoniKt/HarmoniKt/commit/86fabd1f121242ef9de650f37db99d329a769497))
+* **deps:** update actions/setup-node action to v6.4.0 ([d6db439](https://github.com/HarmoniKt/HarmoniKt/commit/d6db4398d6fb2edcdda2cb3b8606a6d2dab6133f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.29 ([f99b074](https://github.com/HarmoniKt/HarmoniKt/commit/f99b0741fa47c0f61f89d01e928a308a2f2123b6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.30 ([3f410ef](https://github.com/HarmoniKt/HarmoniKt/commit/3f410ef867e0f6ff40004d629012cfad045e8f4c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.31 ([77145dd](https://github.com/HarmoniKt/HarmoniKt/commit/77145ddbb0d370abea128f08cab4b5511ff16918))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.32 ([6063f0b](https://github.com/HarmoniKt/HarmoniKt/commit/6063f0b3092f9dff88248cf5bf4f38de3e078ef4))
+
 ## [1.17.1](https://github.com/HarmoniKt/HarmoniKt/compare/1.17.0...1.17.1) (2026-03-26)
 
 ### Dependency updates
