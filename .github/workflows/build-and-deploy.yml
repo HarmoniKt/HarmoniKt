@@ -68,7 +68,7 @@ jobs:
           should-deploy: true
           github-token: ${{ github.token }}
   success:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs:
       - release
       - build
