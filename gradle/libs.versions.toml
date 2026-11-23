@@ -1,5 +1,5 @@
 [versions]
-arrow = "2.3.0"
+arrow = "2.3.0.1"
 consul-client = "1.5.3"
 kotlin = "2.4.20"
 mockito = "5.24.0"
